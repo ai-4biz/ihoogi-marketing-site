@@ -1,0 +1,16 @@
+# local backups
+*.bak-*
+*.bak
+*.bak.html
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# local env / tooling
+.env
+.env.*
+.vercel
+node_modules/
