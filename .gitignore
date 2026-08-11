@@ -2,6 +2,10 @@
 *.bak-*
 *.bak
 *.bak.html
+assets/media/_bak/
+
+# Drive download staging
+_drive_dl/
 
 # OS / editor
 .DS_Store
