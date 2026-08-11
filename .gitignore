@@ -6,15 +6,16 @@ assets/media/_bak/
 
 # Drive download staging
 _drive_dl/
-
 # OS / editor
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
-
 # local env / tooling
 .env
 .env.*
 .vercel
 node_modules/
+# local crop workspaces
+_crop_preview/
+assets/img/preview/

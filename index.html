@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>iHoogi — בינת לידים לשיווק ומכירות חכמים יותר</title>
-<meta content="iHoogi הופך את המידע שמגיע עם כל ליד להחלטה עסקית טובה יותר — עוד לפני השיחה הראשונה. בינת לידים לשיווק ומכירות." name="description"/>
+<meta content="iHoogi הופכת את המידע שמגיע עם כל ליד להחלטה עסקית טובה יותר — עוד לפני השיחה הראשונה. בינת לידים לשיווק ומכירות." name="description"/>
 <meta content="iHoogi — דעו עם מי אתם מדברים לפני השיחה הראשונה" property="og:title"/>
 <meta content="בינת לידים לשיווק ומכירות חכמים יותר." property="og:description"/>
 <meta content="assets/img/hero_key_visual.jpg" property="og:image"/>
@@ -42,7 +42,7 @@
   --cold:#60778E;        --cold-soft:#EEF3F6;
   --unknown:#6B7280;     --unknown-soft:#F3F4F6;
   /* radius */
-  --r-xs:8px; --r-sm:12px; --r:14px; --r-lg:16px; --r-xl:22px; --pill:999px;
+  --r-xs:8px; --r-sm:12px; --r:16px; --r-lg:18px; --r-xl:24px; --pill:999px;
   /* shadow (soft, teal-tinted) */
   --sh-sm:0 1px 2px rgba(16,40,38,.06), 0 1px 3px rgba(16,40,38,.05);
   --sh:0 6px 18px rgba(12,90,82,.08), 0 2px 6px rgba(12,90,82,.06);
@@ -67,7 +67,7 @@ p{margin:0}
 ::selection{background:var(--turquoise);color:#fff}
 
 .wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:22px}
-.section{padding-block:clamp(44px,6vw,80px)}
+.section{padding-block:clamp(56px,8vw,104px)}
 .eyebrow{
   font-family:var(--display);font-weight:600;font-size:.82rem;letter-spacing:.06em;
   color:var(--action);display:inline-flex;align-items:center;gap:9px;margin-bottom:16px;
@@ -125,17 +125,14 @@ header.nav.scrolled{border-color:var(--line);box-shadow:0 1px 0 rgba(16,40,38,.0
 .hero h1{font-size:clamp(2.15rem,4.9vw,3.7rem);font-weight:800;color:var(--ink)}
 .hero h1 .mark{color:var(--action)}
 .hero .sub{font-family:var(--display);font-weight:600;color:var(--brand-strong);
-  font-size:clamp(1.05rem,1.8vw,1.28rem);margin-top:14px;white-space:pre-line}
-.hero .process{margin-top:18px;font-family:var(--display);font-weight:600;
-  font-size:clamp(.88rem,1.4vw,1rem);color:var(--ink-2);letter-spacing:.01em;line-height:1.55;max-width:54ch}
-.hero-grid{padding-block:clamp(36px,5.5vw,68px) !important}
-.hero h1{font-size:clamp(2rem,4.4vw,3.25rem) !important}
+  font-size:clamp(1.1rem,2vw,1.4rem);margin-top:14px}
+.hero p.desc{margin-top:20px;color:var(--ink-2);font-size:1.08rem;max-width:52ch}
 .hero .cta-row{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
 .hero .trust{margin-top:26px;display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}
 .hero .trust span{display:inline-flex;align-items:center;gap:7px}
 .hero .trust svg{color:var(--turquoise)}
 .hero-visual{position:relative}
-.hero-visual .frame{border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg);
+.hero-visual .frame{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);
   border:1px solid rgba(255,255,255,.6);background:#fff}
 .hero-visual .frame img{width:100%;height:auto}
 /* floating temperature chip on hero */
@@ -170,7 +167,7 @@ header.nav.scrolled{border-color:var(--line);box-shadow:0 1px 0 rgba(16,40,38,.0
 
 /* ---------- problem (before/after) ---------- */
 .compare{display:grid;grid-template-columns:1fr auto 1fr;gap:22px;align-items:stretch;margin-top:40px}
-.panel{border-radius:var(--r);padding:26px;border:1px solid var(--line)}
+.panel{border-radius:var(--r-lg);padding:26px;border:1px solid var(--line)}
 .panel.old{background:var(--soft-2)}
 .panel.new{background:linear-gradient(180deg,var(--teal-wash),#fff);border-color:rgba(18,181,168,.28)}
 .panel .tag{font-size:.8rem;font-weight:600;font-family:var(--display);letter-spacing:.03em;margin-bottom:16px;
@@ -204,7 +201,7 @@ header.nav.scrolled{border-color:var(--line);box-shadow:0 1px 0 rgba(16,40,38,.0
 .video-band.dark .lead{color:rgba(255,255,255,.82)}
 .video-band.dark .eyebrow{color:#7fe3d8}
 .video-band.dark .eyebrow::before{background:#7fe3d8}
-.player{position:relative;max-width:340px;margin-inline:auto;border-radius:var(--r);overflow:hidden;
+.player{position:relative;max-width:340px;margin-inline:auto;border-radius:var(--r-lg);overflow:hidden;
   box-shadow:var(--sh-lg);background:#000;aspect-ratio:9/16}
 .player video{width:100%;height:100%;object-fit:cover;display:block;background:#000}
 .player .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:pointer}
@@ -221,7 +218,7 @@ header.nav.scrolled{border-color:var(--line);box-shadow:0 1px 0 rgba(16,40,38,.0
 
 /* ---------- product intelligence (4 groups) ---------- */
 .pi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:44px}
-.pi{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:transform .18s,box-shadow .18s,border-color .18s}
+.pi{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;transition:transform .18s,box-shadow .18s,border-color .18s}
 .pi:hover{transform:translateY(-3px);box-shadow:var(--sh);border-color:rgba(18,181,168,.3)}
 .pi .cap{font-family:var(--display);font-weight:600;font-size:.78rem;color:var(--action);letter-spacing:.04em;margin-bottom:8px}
 .pi h3{font-size:1.24rem;font-weight:700;margin-bottom:14px}
@@ -233,7 +230,7 @@ header.nav.scrolled{border-color:var(--line);box-shadow:0 1px 0 rgba(16,40,38,.0
 .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,58px);align-items:center}
 .split.rev{direction:ltr} /* just to flip visual order; content stays rtl */
 .split.rev>*{direction:rtl}
-.shot{border-radius:var(--r);overflow:hidden;box-shadow:var(--sh-lg);border:1px solid var(--line);background:#fff}
+.shot{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);border:1px solid var(--line);background:#fff}
 .shot img{width:100%;height:auto}
 .shot .cap{padding:12px 16px;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line-2);
   display:flex;align-items:center;gap:8px}
@@ -243,7 +240,7 @@ header.nav.scrolled{border-color:var(--line);box-shadow:0 1px 0 rgba(16,40,38,.0
 
 /* ---------- marketing intelligence (quantity vs quality) ---------- */
 .qq{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
-.qq .card{border-radius:var(--r);padding:24px;border:1px solid var(--line)}
+.qq .card{border-radius:var(--r-lg);padding:28px;border:1px solid var(--line)}
 .qq .q1{background:var(--soft-2)}
 .qq .q2{background:linear-gradient(180deg,var(--teal-wash),#fff);border-color:rgba(18,181,168,.28)}
 .qq h3{font-size:1.1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:9px}
@@ -285,15 +282,35 @@ header.nav.scrolled{border-color:var(--line);box-shadow:0 1px 0 rgba(16,40,38,.0
 .loop-mobile{display:none}
 
 /* ---------- gallery ---------- */
-.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
+.gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:44px}
 .g-item{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-sm);
   background:#fff;position:relative}
 .g-item img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
 .g-item .gc{position:absolute;inset-inline:0;inset-block-end:0;padding:12px 14px;font-size:.86rem;font-weight:600;
   color:#fff;background:linear-gradient(0deg,rgba(6,40,37,.82),rgba(6,40,37,0))}
-.g-item.wide{grid-column:span 2}
+.g-item.wide{grid-column:span 3}
 .g-item.tall img{aspect-ratio:3/4}
-.g-item.span1{grid-column:span 1}
+.g-item.span2{grid-column:span 2}
+
+
+/* ---------- founder mini + proof ---------- */
+.founder-mini{display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:center;max-width:720px;margin:0 auto;padding:22px 24px;background:var(--soft);border:1px solid rgba(18,181,168,.18);border-radius:18px}
+.founder-mini img{width:120px;height:120px;object-fit:cover;border-radius:50%;border:3px solid #fff;box-shadow:0 8px 24px rgba(15,45,60,.12)}
+.founder-mini .eyebrow{margin-bottom:6px}
+.founder-mini h3{font-size:1.25rem;font-weight:800;margin:0 0 6px}
+.founder-mini p{margin:0;color:var(--ink-2);font-size:.98rem;max-width:48ch}
+.founder-mini .play-mini{display:inline-flex;align-items:center;gap:8px;margin-top:12px;color:var(--action);font-weight:700;font-size:.92rem;cursor:pointer;background:none;border:0;padding:0;font-family:inherit}
+.founder-mini .play-mini svg{flex:0 0 auto}
+.proof{max-width:860px;margin:0 auto;text-align:center}
+.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
+.proof-item{text-align:start}
+.proof-item blockquote{font-size:1.05rem}
+@media(max-width:720px){.proof-grid{grid-template-columns:1fr}}
+.proof blockquote{margin:0;font-size:1.2rem;line-height:1.55;font-weight:600;color:var(--ink);quotes:none}
+.proof blockquote::before{content:"\201C";color:var(--turquoise);font-size:1.6em;line-height:0;vertical-align:-.25em;margin-inline-end:4px}
+.proof .who{margin-top:14px;color:var(--muted);font-size:.92rem}
+.finalcta .micro{justify-content:center;margin-top:18px}
+@media(max-width:640px){.founder-mini{grid-template-columns:1fr;text-align:center}.founder-mini img{margin-inline:auto}}
 
 /* ---------- how to start (6 steps) ---------- */
 .start6{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
@@ -307,27 +324,12 @@ header.nav.scrolled{border-color:var(--line);box-shadow:0 1px 0 rgba(16,40,38,.0
 .sstep .pub{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .sstep .pub span{font-size:.76rem;background:var(--soft-2);border:1px solid var(--line);border-radius:var(--pill);padding:3px 9px;color:var(--ink-2)}
 
-/* ---------- CRM trust strip ---------- */
-.crm-strip{background:var(--soft);padding-block:28px;border-block:1px solid var(--line)}
-.crm-strip .inner{max-width:820px;margin-inline:auto;text-align:center}
-.crm-strip .badge{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(18,181,168,.28);
-  border-radius:var(--r);padding:16px 22px;box-shadow:var(--sh-sm);font-family:var(--display);font-weight:600;
-  color:var(--ink);font-size:clamp(.95rem,1.5vw,1.05rem);line-height:1.45}
-.crm-strip .badge svg{color:var(--action);flex-shrink:0}
-.crm-strip .badge small{display:block;font-weight:500;color:var(--muted);font-size:.9rem;margin-top:4px}
-
-/* ---------- start + guide video ---------- */
-.start-band{background:var(--soft)}
-.start-wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,56px);align-items:start;margin-top:8px}
-.start-wrap .start6{margin-top:28px;grid-template-columns:1fr 1fr}
-.intel-block{margin-top:40px}
-.intel-block .queries{margin-top:22px}
-.intel-block .loop{margin-top:36px}
-.intel-points{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
-.intel-points .ip{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;
-  font-size:.95rem;color:var(--ink-2);display:flex;gap:10px;align-items:flex-start}
-.intel-points .ip svg{color:var(--turquoise);flex-shrink:0;margin-top:2px}
-.video-band.compact .lead{max-width:42ch}
+/* ---------- no crm ---------- */
+.nocrm{background:var(--soft)}
+.qchips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.qchips span{background:#fff;border:1px solid var(--line);border-radius:var(--pill);padding:10px 16px;
+  font-weight:600;color:var(--ink-2);font-family:var(--display);font-size:.95rem}
+.qchips span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--turquoise);margin-inline-end:8px;vertical-align:middle}
 
 /* ---------- brand story ---------- */
 .story{background:linear-gradient(160deg,#0b2f2c 0%, #0c3b36 60%, #0a5049 100%);color:#fff;position:relative;overflow:hidden}
@@ -341,19 +343,14 @@ header.nav.scrolled{border-color:var(--line);box-shadow:0 1px 0 rgba(16,40,38,.0
 .story .sig .chip img{height:26px}
 .story .sig span{font-family:var(--display);font-weight:600;color:#dff6f3}
 
-/* ---------- final cta (single dark brand moment) ---------- */
+/* ---------- final cta ---------- */
 .finalcta{text-align:center}
-.finalcta .box{background:linear-gradient(160deg,#0b2f2c 0%, #0c3b36 60%, #0a5049 100%);border:1px solid rgba(18,181,168,.2);
-  border-radius:var(--r-xl);padding:clamp(40px,6vw,72px) 26px;box-shadow:var(--sh-lg);color:#fff;position:relative;overflow:hidden}
-.finalcta .box::before{content:"";position:absolute;inset-block-start:-30%;inset-inline-start:-10%;width:60%;height:120%;
-  background:radial-gradient(circle,rgba(18,181,168,.28),transparent 60%);pointer-events:none}
-.finalcta h2{font-size:clamp(1.9rem,4.4vw,3rem);font-weight:800;position:relative}
-.finalcta .brand-line{margin:14px auto 0;color:rgba(255,255,255,.72);max-width:48ch;font-size:1.02rem;position:relative}
-.finalcta p{margin:16px auto 0;color:rgba(255,255,255,.86);max-width:46ch;font-size:1.1rem;position:relative}
-.finalcta .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px;position:relative}
-.finalcta .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.28)}
-.finalcta .btn-ghost:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.45);color:#fff}
-.finalcta .login-link{display:inline-block;margin-top:18px;color:#7fe3d8;font-weight:600;position:relative}
+.finalcta .box{background:linear-gradient(160deg,var(--teal-wash),#fff);border:1px solid rgba(18,181,168,.25);
+  border-radius:var(--r-xl);padding:clamp(40px,6vw,72px) 26px;box-shadow:var(--sh)}
+.finalcta h2{font-size:clamp(1.9rem,4.4vw,3rem);font-weight:800}
+.finalcta p{margin:16px auto 0;color:var(--ink-2);max-width:46ch;font-size:1.1rem}
+.finalcta .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.finalcta .login-link{display:inline-block;margin-top:18px;color:var(--action);font-weight:600}
 
 /* ---------- faq ---------- */
 .faq-list{max-width:760px;margin:40px auto 0;display:grid;gap:12px}
@@ -383,14 +380,16 @@ footer{background:#0a201e;color:#cfe6e2}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
 
+.gallery.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.gallery.g3{grid-template-columns:1fr}}
 /* ---------- responsive ---------- */
 @media (max-width:1000px){
   .hero-grid{grid-template-columns:1fr;gap:34px}
   .hero-visual{max-width:520px;margin-inline:auto}
-  .split,.video-wrap,.video-wrap.rev,.start-wrap{grid-template-columns:1fr;gap:30px}
-  .pi-grid,.qq,.queries,.intel-points{grid-template-columns:1fr}
+  .split,.video-wrap,.video-wrap.rev{grid-template-columns:1fr;gap:30px}
+  .pi-grid,.qq,.queries{grid-template-columns:1fr}
   .gallery{grid-template-columns:repeat(2,1fr)}
-  .g-item.wide,.g-item.span1{grid-column:span 1}
+  .g-item.wide,.g-item.span2{grid-column:span 1}
   .start6{grid-template-columns:1fr 1fr}
   .foot{grid-template-columns:1fr 1fr}
 }
@@ -427,6 +426,24 @@ footer{background:#0a201e;color:#cfe6e2}
   .btn,.pi,.query{transition:none}
 }
 
+
+/* refine: hero process line + micro + trust strip */
+.hero .process{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:20px;
+  font-family:var(--display);font-weight:600;color:var(--brand-strong);font-size:clamp(.86rem,1.5vw,1rem)}
+.hero .process .st{background:#fff;border:1px solid var(--line);border-radius:var(--pill);padding:6px 13px;box-shadow:var(--sh-sm)}
+.hero .process .sep{color:var(--turquoise);font-weight:700}
+.hero .micro{margin-top:12px;color:var(--muted);font-size:.9rem;display:flex;align-items:center;gap:7px}
+.hero .micro svg{color:var(--turquoise)}
+.trust-strip{background:linear-gradient(120deg,var(--teal-wash),#fff);border:1px solid rgba(18,181,168,.28);
+  border-radius:var(--r);padding:22px 26px;display:flex;align-items:center;gap:18px;max-width:var(--wrap);
+  margin:0 auto;flex-wrap:wrap}
+.trust-strip .ic{width:46px;height:46px;border-radius:12px;background:#fff;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;color:var(--action);flex-shrink:0}
+.trust-strip p{font-size:1.05rem;color:var(--ink);font-weight:500;flex:1;min-width:240px}
+.trust-strip b{color:var(--action);font-weight:700}
+.intel-sub{font-family:var(--display);font-weight:700;font-size:1.05rem;color:var(--ink);margin:34px 0 14px}
+@media (max-width:560px){ .hero .process{font-size:.82rem} }
+
 /* ---------- language toggle + LTR ---------- */
 .lang-toggle{font-family:var(--display);font-weight:600;font-size:.85rem;border:1px solid var(--line);
   background:#fff;color:var(--ink-2);border-radius:var(--r-xs);padding:9px 13px;cursor:pointer;line-height:1;
@@ -440,6 +457,7 @@ footer{background:#0a201e;color:#cfe6e2}
 [dir=ltr] .hero p.desc,[dir=ltr] .lead,[dir=ltr] .foot .brand-col p{max-width:60ch}
 [dir=ltr] .eyebrow{letter-spacing:.08em}
 </style>
+<link href="assets/favicon.ico" rel="icon" sizes="any"/>
 </head>
 <body>
 <!-- ============ HEADER ============ -->
@@ -449,16 +467,16 @@ footer{background:#0a201e;color:#cfe6e2}
 <img alt="iHoogi" src="assets/img/ihoogi_logo.png"/>
 </a>
 <nav aria-label="ניווט ראשי" class="nav-links" id="navLinks">
-<a data-i18n="k102" href="#how">איך זה עובד</a>
-<a data-i18n="k103" href="#why">למה iHoogi</a>
-<a data-i18n="k104" href="#features">יכולות</a>
-<a data-i18n="k105" href="#product">המוצר</a>
-<a data-i18n="k106" href="#start">איך מתחילים</a>
-<a data-i18n="k107" href="#faq">שאלות נפוצות</a>
+<a data-i18n="k87" href="#how">איך זה עובד</a>
+<a data-i18n="k88" href="#why">למה iHoogi</a>
+<a data-i18n="k89" href="#features">יכולות</a>
+<a data-i18n="k90" href="#product">המוצר</a>
+<a data-i18n="k91" href="#start">איך מתחילים</a>
+<a data-i18n="k92" href="#faq">שאלות נפוצות</a>
 <button aria-label="Switch language" class="lang-toggle mob" type="button">EN</button></nav>
 <div class="nav-cta"><button aria-label="Switch language" class="lang-toggle" type="button">EN</button>
-<a class="login" data-i18n="k108" data-url="LOGIN_URL" href="#">כניסה</a>
-<a class="btn btn-primary" data-i18n="k4" data-url="TRY_IHOOGI_URL" href="#">נסו את iHoogi</a>
+<a class="login" data-i18n="k93" data-url="LOGIN_URL" href="#">כניסה</a>
+<a class="btn btn-primary" data-i18n="k3" data-url="TRY_IHOOGI_URL" href="#">התחילו חינם</a>
 </div>
 <button aria-expanded="false" aria-label="תפריט" class="burger" id="burger"><span></span></button>
 </div>
@@ -471,14 +489,10 @@ footer{background:#0a201e;color:#cfe6e2}
 <div class="hero-copy">
 <span class="eyebrow" data-i18n="k11">בינת לידים לשיווק ומכירות</span>
 <h1 data-i18n="k1">דעו עם מי אתם מדברים — <span class="mark">לפני</span> שאתם מרימים טלפון.</h1>
-<p class="sub" data-i18n="k2">לא עוד ליד עם שם וטלפון.<br>iHoogi מראה לכם מי שווה טיפול, למה — ומה לעשות עכשיו.</p>
-<p class="process" data-i18n="k3">שאלות קצרות → ניתוח תשובות → דירוג ותיעדוף → מעקב → תובנות לשיווק</p>
-<div class="cta-row">
-<a class="btn btn-primary btn-lg" data-i18n="k6" data-url="TRY_IHOOGI_URL" href="#">נסו את iHoogi</a>
-<a class="btn btn-ghost btn-lg" href="#how"><span data-i18n="k5">איך זה עובד</span><svg class="arrow" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg></a>
-</div>
+<p class="sub" data-i18n="k2">במקום לבזבז זמן על כל ליד שנכנס, iHoogi מראה לכם מי שווה טיפול, למה — ומה לעשות עכשיו.</p><div class="process"><span class="st" data-i18n="k155">שאלות קצרות</span><span class="sep">›</span><span class="st" data-i18n="k156">ניתוח תשובות</span><span class="sep">›</span><span class="st" data-i18n="k157">דירוג ותיעדוף</span><span class="sep">›</span><span class="st" data-i18n="k158">מעקב</span><span class="sep">›</span><span class="st" data-i18n="k159">תובנות לשיווק</span></div>
+<div class="cta-row"><a class="btn btn-primary btn-lg" data-url="TRY_IHOOGI_URL" href="#"><span data-i18n="k4">התחילו חינם</span><svg class="arrow" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg></a><a class="btn btn-ghost btn-lg" data-i18n="k5" href="#how">איך זה עובד</a></div><div class="micro"><svg fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24" width="15"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k160">מתחילים בחינם · בלי כרטיס אשראי</span></div>
 <div class="trust">
-<span><svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24" width="16"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k9">שכבת אינטליגנציה — לא החלפת CRM</span></span>
+<span><svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24" width="16"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k8">עובד לצד המערכות שכבר יש לכם</span></span>
 <span><svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24" width="16"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k10">הלקוח משיב בשניות</span></span>
 </div>
 </div>
@@ -491,11 +505,11 @@ footer{background:#0a201e;color:#cfe6e2}
 <svg height="44" viewbox="0 0 44 44" width="44"><circle cx="22" cy="22" fill="none" r="18" stroke="#EEF3F6" stroke-width="5"></circle><circle cx="22" cy="22" fill="none" r="18" stroke="#C2415D" stroke-dasharray="113" stroke-dashoffset="17" stroke-linecap="round" stroke-width="5"></circle></svg>
 <b>92</b>
 </div>
-<div><span class="temp hot"><span class="dot"></span><span data-i18n="k178">חם</span></span><div data-i18n="k180" style="font-size:.78rem;color:var(--muted);margin-top:4px">לפנות עכשיו</div></div>
+<div><span class="temp hot"><span class="dot"></span><span data-i18n="k146">חם</span></span><div data-i18n="k148" style="font-size:.78rem;color:var(--muted);margin-top:4px">לפנות עכשיו</div></div>
 </div>
 <div class="float-chip b">
-<span class="temp cold"><span class="dot"></span><span data-i18n="k179">קר</span></span>
-<div data-i18n="k181" style="font-size:.82rem;color:var(--muted)">מתאים למעקב מאוחר</div>
+<span class="temp cold"><span class="dot"></span><span data-i18n="k147">קר</span></span>
+<div data-i18n="k149" style="font-size:.82rem;color:var(--muted)">מתאים למעקב מאוחר</div>
 </div>
 </div>
 </div>
@@ -506,52 +520,53 @@ footer{background:#0a201e;color:#cfe6e2}
 <div class="wrap">
 <div class="reveal">
 <span class="eyebrow" data-i18n="k12">הערך בקצרה</span>
-<h2 class="h2" data-i18n="k26">הלקוח שלכם משקיע שניות.<br/>העסק שלכם חוסך שעות.</h2>
-<p class="highlight" data-i18n="k42">איש המכירות פותח את השיחה כשהוא כבר יודע עם מי הוא מדבר.</p>
+<h2 class="h2" data-i18n="k22">הלקוח שלכם משקיע שניות.<br/>העסק שלכם חוסך שעות.</h2>
+<p class="highlight" data-i18n="k34">איש המכירות פותח את השיחה כשהוא כבר יודע עם מי הוא מדבר.</p>
 </div>
 <div class="tri">
 <div class="cell reveal">
 <div class="ic"><svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="22"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></div>
-<h3 data-i18n="k145">פחות זמן על שאלות בסיס</h3>
-<p data-i18n="k148">המידע החשוב כבר מחכה לפני השיחה — בלי לפתוח כל פעם מאפס.</p>
+<h3 data-i18n="k114">פחות זמן על שאלות בסיס</h3>
+<p data-i18n="k117">המידע החשוב כבר מחכה לפני השיחה — בלי לפתוח כל פעם מאפס.</p>
 </div>
 <div class="cell reveal">
 <div class="ic"><svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="22"><path d="M3 12h4l3 8 4-16 3 8h4"></path></svg></div>
-<h3 data-i18n="k146">פחות שיחות לא רלוונטיות</h3>
-<p data-i18n="k149">מזהים מוקדם מי מתאים ומי פחות — ומפנים אנרגיה למקום הנכון.</p>
+<h3 data-i18n="k115">פחות שיחות לא רלוונטיות</h3>
+<p data-i18n="k118">מזהים מוקדם מי מתאים ומי פחות — ומפנים אנרגיה למקום הנכון.</p>
 </div>
 <div class="cell reveal">
 <div class="ic"><svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="22"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><circle cx="12" cy="12" fill="currentColor" r="0.6"></circle></svg></div>
-<h3 data-i18n="k147">יותר זמן ללידים שחשובים</h3>
-<p data-i18n="k150">הלידים החמים עולים לראש התור — כדי שיטופלו בזמן שהם עוד חמים.</p>
+<h3 data-i18n="k116">יותר זמן ללידים שחשובים</h3>
+<p data-i18n="k119">הלידים החמים עולים לראש התור — כדי שיטופלו בזמן שהם עוד חמים.</p>
 </div>
 </div>
 </div>
 </section>
+<!-- ============ PROBLEM ============ -->
 <!-- ============ HOW IT WORKS ============ -->
 <section class="section" id="how" style="background:var(--soft)">
 <div class="wrap">
 <div class="center reveal">
-<span class="eyebrow" data-i18n="k14">איך זה עובד</span>
-<h2 class="h2" data-i18n="k28">ארבעה צעדים — מליד להחלטה.</h2>
+<span class="eyebrow" data-i18n="k13">איך זה עובד</span>
+<h2 class="h2" data-i18n="k23">ארבעה צעדים — מליד להחלטה.</h2>
 </div>
 <div class="steps4">
-<div class="step reveal"><div class="num">01</div><h3 data-i18n="k151">שאלו</h3><p data-i18n="k155">שאלות קצרות וממוקדות שחושפות את מה שבאמת חשוב.</p></div>
-<div class="step reveal"><div class="num">02</div><h3 data-i18n="k152">עונים</h3><p data-i18n="k156">הלקוח משיב במהירות — בלי שאלון ארוך ומתיש.</p></div>
-<div class="step reveal"><div class="num">03</div><h3 data-i18n="k153">מבינים</h3><p data-i18n="k157">iHoogi מנתח את התשובות, מדרג ומתעדף.</p></div>
-<div class="step reveal"><div class="num">04</div><h3 data-i18n="k154">פועלים</h3><p data-i18n="k158">העסק יודע למי לפנות קודם ומה הצעד הבא.</p></div>
+<div class="step reveal"><div class="num">01</div><h3 data-i18n="k120">שואלים נכון</h3><p data-i18n="k124">שאלות קצרות וממוקדות שחושפות את מה שבאמת חשוב.</p></div>
+<div class="step reveal"><div class="num">02</div><h3 data-i18n="k121">הלקוח עונה</h3><p data-i18n="k125">הלקוח משיב במהירות — בלי שאלון ארוך ומתיש.</p></div>
+<div class="step reveal"><div class="num">03</div><h3 data-i18n="k122">iHoogi מנתחת</h3><p data-i18n="k126">iHoogi מנתחת את התשובות, מדרגת ומתעדפת.</p></div>
+<div class="step reveal"><div class="num">04</div><h3 data-i18n="k123">אתם פועלים</h3><p data-i18n="k127">העסק יודע למי לפנות קודם ומה הצעד הבא.</p></div>
 </div>
 </div>
 </section>
 <!-- ============ VIDEO 1 — product overview ============ -->
-<section class="section video-band compact" id="video1">
+<section class="section video-band" id="video1">
 <div class="wrap">
 <div class="video-wrap">
 <div class="video-copy reveal">
-<span class="eyebrow" data-i18n="k15">סרטון קצר</span>
-<h2 class="h2" data-i18n="k29">iHoogi בפעולה.</h2>
-<p class="lead" data-i18n="k44">כדקה אחת שמראה את הרעיון — מהשאלות ועד לתיעדוף.</p>
-<div style="margin-top:20px"><span class="video-badge"><svg fill="currentColor" height="15" viewbox="0 0 24 24" width="15"><path d="M8 5v14l11-7z"></path></svg><span data-i18n="k176">סרטון סקירה</span></span></div>
+<span class="eyebrow" data-i18n="k14">סרטון קצר</span>
+<h2 class="h2" data-i18n="k24">iHoogi בפעולה.</h2>
+<p class="lead" data-i18n="k35">סקירה קצרה של מה שקורה כשליד נכנס — מהשאלות ועד לתיעדוף. כ-50 שניות שמראות את הרעיון כולו.</p>
+<div style="margin-top:20px"><span class="video-badge"><svg fill="currentColor" height="15" viewbox="0 0 24 24" width="15"><path d="M8 5v14l11-7z"></path></svg><span data-i18n="k145">סרטון סקירה</span></span></div>
 </div>
 <div class="reveal">
 <div class="player" data-src="assets/media/video1_overview.mp4?v=20260811">
@@ -568,212 +583,201 @@ footer{background:#0a201e;color:#cfe6e2}
 <section class="section" id="features">
 <div class="wrap">
 <div class="center reveal">
-<span class="eyebrow" data-i18n="k16">היכולות</span>
-<h2 class="h2" data-i18n="k30">לא רק איסוף לידים.<br/>מערכת החלטות חכמה.</h2>
+<span class="eyebrow" data-i18n="k15">היכולות</span>
+<h2 class="h2" data-i18n="k25">לא רק איסוף לידים.<br/>מערכת החלטות חכמה.</h2>
 </div>
 <div class="pi-grid">
 <div class="pi reveal">
-<div class="cap" data-i18n="k125">שאלו טוב יותר</div>
-<h3 data-i18n="k129">שאלות שמגלות את מה שחשוב</h3>
+<div class="cap" data-i18n="k94">שאלו טוב יותר</div>
+<h3 data-i18n="k98">שאלות שמגלות את מה שחשוב</h3>
 <ul>
-<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k133">בונים שאלות קצרות לפי העסק, הקהל והמטרה</span></li>
-<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k134">חושפים מידע להחלטה בלי שאלון מתיש</span></li>
-<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k135">מותאם לפי מה שחשוב לכם במכירה</span></li>
+<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k102">בונים שאלות קצרות לפי העסק, הקהל והמטרה</span></li>
+<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k103">חושפים מידע להחלטה בלי שאלון מתיש</span></li>
+<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k104">מותאם לפי מה שחשוב לכם במכירה</span></li>
 </ul>
 </div>
 <div class="pi reveal">
-<div class="cap" data-i18n="k126">הבינו טוב יותר</div>
-<h3 data-i18n="k130">ניתוח, ציון ותיעדוף</h3>
+<div class="cap" data-i18n="k95">הבינו טוב יותר</div>
+<h3 data-i18n="k99">ניתוח, ציון ותיעדוף</h3>
 <ul>
-<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k136">ציון והתאמה לכל ליד</span></li>
-<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k137">סיווג חם / פושר / קר ותיעדוף</span></li>
-<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k138">ההקשר וההסבר מאחורי כל ליד</span></li>
+<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k105">ציון והתאמה לכל ליד</span></li>
+<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k106">סיווג חם / פושר / קר ותיעדוף</span></li>
+<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k107">ההקשר וההסבר מאחורי כל ליד</span></li>
 </ul>
 </div>
 <div class="pi reveal">
-<div class="cap" data-i18n="k127">פעלו טוב יותר</div>
-<h3 data-i18n="k131">מעקב וביצוע מכירה</h3>
+<div class="cap" data-i18n="k96">פעלו טוב יותר</div>
+<h3 data-i18n="k100">מעקב וביצוע מכירה</h3>
 <ul>
-<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k139">התראות, תזכורות וסטטוס לכל ליד</span></li>
-<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k140">פעולות WhatsApp, טלפון ומייל</span></li>
-<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k141">שיוך צוות ומעקב זמני תגובה</span></li>
+<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k108">התראות, תזכורות וסטטוס לכל ליד</span></li>
+<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k109">פעולות WhatsApp, טלפון ומייל</span></li>
+<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k110">שיוך צוות ומעקב זמני תגובה</span></li>
 </ul>
 </div>
 <div class="pi reveal">
-<div class="cap" data-i18n="k128">למדו טוב יותר</div>
-<h3 data-i18n="k132">תובנות שיווק שמצטברות</h3>
+<div class="cap" data-i18n="k97">למדו טוב יותר</div>
+<h3 data-i18n="k101">תובנות שיווק שמצטברות</h3>
 <ul>
-<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k142">אילו קמפיינים מביאים לידים מתאימים</span></li>
-<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k143">מה משותף ללידים החזקים</span></li>
-<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k144">מה לחדד בקמפיין הבא</span></li>
+<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k111">אילו קמפיינים מביאים לידים מתאימים</span></li>
+<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k112">מה משותף ללידים החזקים</span></li>
+<li><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k113">מה לחדד בקמפיין הבא</span></li>
 </ul>
 </div>
 </div>
 </div>
 </section>
-<!-- ============ DECISION CENTER ============ -->
+<!-- ============ SALES INTELLIGENCE — Decision Center (real screenshot) ============ -->
 <section class="section" id="product" style="background:var(--soft)">
 <div class="wrap">
 <div class="split">
 <div class="reveal">
 <div class="shot">
 <img alt="מרכז ההחלטות של iHoogi — אריחי מדדים: פניות חמות, פושרים, קרים ומטופלות" loading="lazy" src="assets/img/product_dashboard.jpg"/>
-<div class="cap"><svg fill="none" height="14" stroke="var(--turquoise)" stroke-width="2" viewbox="0 0 24 24" width="14"><rect height="18" rx="2" width="18" x="3" y="3"></rect><path d="M3 9h18"></path></svg><span data-i18n="k54">מתוך המערכת — מרכז ההחלטות</span></div>
+<div class="cap"><svg fill="none" height="14" stroke="var(--turquoise)" stroke-width="2" viewbox="0 0 24 24" width="14"><rect height="18" rx="2" width="18" x="3" y="3"></rect><path d="M3 9h18"></path></svg><span data-i18n="k47">מתוך המערכת — מרכז ההחלטות</span></div>
 </div>
 </div>
 <div class="reveal">
-<span class="eyebrow" data-i18n="k17">מרכז ההחלטות</span>
-<h2 class="h2" data-i18n="k31">לדעת למי לפנות, מתי ולמה.</h2>
-<p class="lead" data-i18n="k45">כל מה שצריך כדי להחליט מה לעשות עם ליד — במקום אחד.</p>
-<ul class="dc-list">
-<li data-i18n="k50"><span class="k">מי</span> הליד</li>
-<li data-i18n="k208"><span class="k">מה</span> הוא רוצה</li>
-<li data-i18n="k51"><span class="k">ציון</span> ההתאמה</li>
-<li data-i18n="k209"><span class="k">למה</span> הוא מתאים</li>
-<li data-i18n="k210"><span class="k">מקור</span> הליד</li>
-<li data-i18n="k211"><span class="k">זמן</span> המתנה</li>
-<li data-i18n="k53"><span class="k">פעולה</span> — הצעד הבא</li>
-</ul>
+<span class="eyebrow" data-i18n="k16">מרכז ההחלטות</span>
+<h2 class="h2" data-i18n="k26">לדעת למי לפנות, מתי ולמה.</h2>
+<p class="lead" data-i18n="k36">כל מה שצריך כדי להחליט מה לעשות עם ליד — במקום אחד. איש המכירות מתחיל עם הקשר, לא עם שאלות היכרות בסיסיות.</p>
+<ul class="dc-list"><li data-i18n="k39"><span class="k">מי</span> הליד ומה הוא רוצה</li><li data-i18n="k40"><span class="k">ציון</span> ההתאמה — ולמה</li><li data-i18n="k41"><span class="k">מקור</span> הליד וזמן ההמתנה</li><li data-i18n="k42"><span class="k">פעולה</span> הצעד הבא הנכון</li></ul>
 </div>
 </div>
 </div>
 </section>
-<!-- ============ MARKETING + QUESTION INTEL + LOOP (merged) ============ -->
-<section class="section" id="marketing">
-<div class="wrap">
-<div class="center reveal">
-<span class="eyebrow" data-i18n="k18">שיווק ומכירות באותו מעגל</span>
-<h2 class="h2" data-i18n="k32">לא רק לדעת כמה לידים הגיעו — להבין מה באמת עובד.</h2>
-<p class="lead" data-i18n="k46">מכמות לאיכות: אילו קמפיינים מביאים לידים חמים, מה משותף להם — ואיך זה משפר את הקמפיין הבא.</p>
-</div>
-<div class="qq">
+<!-- ============ MARKETING INTELLIGENCE ============ -->
+<section class="section" id="intel"><div class="wrap"><div class="center reveal"><span class="eyebrow" data-i18n="k17">בינת שיווק ומכירות</span><h2 class="h2" data-i18n="k27">לא רק לדעת כמה לידים הגיעו —<br/>להבין מה באמת עובד.</h2><p class="lead center" data-i18n="k37" style="margin-inline:auto">iHoogi יורדת עד רמת השאלה והתשובה: אילו קמפיינים מביאים לידים מתאימים, מה משותף ללידים החזקים, ועל מה כדאי לחדד בפעם הבאה.</p></div><div class="split" style="margin-top:40px"></div><div class="reveal"><div class="shot"><img alt="ניתוח לפי שאלה — מתוך מערכת iHoogi" loading="lazy" src="assets/img/product_question.jpg"/><div class="cap"><svg fill="none" height="14" stroke="var(--turquoise)" stroke-width="2" viewbox="0 0 24 24" width="14"><rect height="18" rx="2" width="18" x="3" y="3"></rect><path d="M3 9h18"></path></svg><span data-i18n="k48">ניתוח לפי שאלה — מתוך המערכת</span></div></div></div><div class="reveal"><ul class="dc-list" style="margin-top:0"><li data-i18n="k43"><span class="k">שאלה</span> לרדת עד תשובה בודדת ולפלח לפיה</li><li data-i18n="k44"><span class="k">דפוס</span> אילו תשובות חוזרות אצל הלידים החזקים</li><li data-i18n="k45"><span class="k">מקור</span> אילו קמפיינים מביאים איכות — לא רק כמות</li><li data-i18n="k46"><span class="k">שיפור</span> מה לחדד בקמפיין הבא</li></ul></div><p class="intel-sub" data-i18n="k161">איכות מול כמות</p><div class="qq">
 <div class="card q1 reveal">
-<h3><svg fill="none" height="20" stroke="var(--muted)" stroke-width="2" viewbox="0 0 24 24" width="20"><path d="M3 3v18h18"></path><rect height="8" width="3" x="7" y="10"></rect><rect height="12" width="3" x="12" y="6"></rect><rect height="5" width="3" x="17" y="13"></rect></svg><span data-i18n="k55">כמות לידים</span></h3>
+<h3><svg fill="none" height="20" stroke="var(--muted)" stroke-width="2" viewbox="0 0 24 24" width="20"><path d="M3 3v18h18"></path><rect height="8" width="3" x="7" y="10"></rect><rect height="12" width="3" x="12" y="6"></rect><rect height="5" width="3" x="17" y="13"></rect></svg><span data-i18n="k49">כמות לידים</span></h3>
 <div class="bars">
-<div class="bar"><span data-i18n="k186">קמפיין א׳</span><div class="track"><div class="fill" style="width:88%;background:#cbd5e1"></div></div><span>210</span></div>
-<div class="bar"><span data-i18n="k187">קמפיין ב׳</span><div class="track"><div class="fill" style="width:64%;background:#cbd5e1"></div></div><span>150</span></div>
+<div class="bar"><span data-i18n="k150">קמפיין א׳</span><div class="track"><div class="fill" style="width:88%;background:#cbd5e1"></div></div><span>210</span></div>
+<div class="bar"><span data-i18n="k151">קמפיין ב׳</span><div class="track"><div class="fill" style="width:64%;background:#cbd5e1"></div></div><span>150</span></div>
 </div>
-<p class="note" data-i18n="k57">מספר גדול לא אומר שהלידים מתאימים.</p>
+<p class="note" data-i18n="k51">מספר גדול לא אומר שהלידים מתאימים.</p>
 </div>
 <div class="card q2 reveal">
-<h3><svg fill="none" height="20" stroke="var(--action)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><path d="M12 2l2.4 5 5.6.6-4 4 1 5.4L12 19l-5 3 1-5.4-4-4 5.6-.6z"></path></svg><span data-i18n="k56">איכות והתאמה</span></h3>
+<h3><svg fill="none" height="20" stroke="var(--action)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><path d="M12 2l2.4 5 5.6.6-4 4 1 5.4L12 19l-5 3 1-5.4-4-4 5.6-.6z"></path></svg><span data-i18n="k50">איכות והתאמה</span></h3>
 <div class="bars">
-<div class="bar"><span data-i18n="k188">קמפיין א׳</span><div class="track"><div class="fill" style="width:34%;background:var(--cold)"></div></div><span class="temp cold" style="padding:2px 8px">31%</span></div>
-<div class="bar"><span data-i18n="k189">קמפיין ב׳</span><div class="track"><div class="fill" style="width:72%;background:var(--hot)"></div></div><span class="temp hot" style="padding:2px 8px">72%</span></div>
+<div class="bar"><span data-i18n="k152">קמפיין א׳</span><div class="track"><div class="fill" style="width:34%;background:var(--cold)"></div></div><span class="temp cold" style="padding:2px 8px">31%</span></div>
+<div class="bar"><span data-i18n="k153">קמפיין ב׳</span><div class="track"><div class="fill" style="width:72%;background:var(--hot)"></div></div><span class="temp hot" style="padding:2px 8px">72%</span></div>
 </div>
-<p class="note" data-i18n="k58">קמפיין ב׳ הביא פחות לידים — אבל הרבה יותר לידים חמים.</p>
+<p class="note" data-i18n="k52">פחות לידים. הרבה יותר מהלידים שאתם באמת רוצים.</p>
 </div>
-</div>
-<div class="intel-block">
-<div class="intel-points">
-<div class="ip reveal"><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k212">ניתוח לפי שאלה ותשובה — לא רק ציון כללי</span></div>
-<div class="ip reveal"><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k213">דפוסים שחוזרים אצל לידים חזקים</span></div>
-<div class="ip reveal"><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k214">מה לשפר בשאלון ובקמפיין הבא</span></div>
-<div class="ip reveal"><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k215">שיווק ומכירות לומדים מאותו מידע</span></div>
-</div>
-<div class="queries">
-<div class="query reveal"><div class="qic"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4-4"></path></svg></div><p data-i18n="k59">"הראו לי את כל מי שענה X"</p><span class="res" data-i18n="k182">→ פילוח מיידי</span></div>
-<div class="query reveal"><div class="qic"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><path d="M12 2l2.4 5 5.6.6-4 4 1 5.4L12 19l-5 3 1-5.4-4-4 5.6-.6z"></path></svg></div><p data-i18n="k62">"אילו תשובות חוזרות אצל הלידים החזקים?"</p><span class="res" data-i18n="k185">→ דפוס איכות</span></div>
-</div>
-<!-- intelligence loop -->
-<div aria-hidden="true" class="loop reveal">
+</div><div aria-hidden="true" class="loop reveal">
 <div class="spin"></div>
 <div class="hub">
 <img alt="" src="assets/img/ihoogi_logo.png"/>
-<span data-i18n="k190">הלב של הלולאה</span>
+<span data-i18n="k154">הלב של הלולאה</span>
 </div>
-<div class="node" data-i="1"><div class="b" data-i18n="k192"><span class="idx">1</span><br/>פרסום</div></div>
-<div class="node" data-i="2"><div class="b" data-i18n="k193"><span class="idx">2</span><br/>שאלות חכמות</div></div>
-<div class="node" data-i="3"><div class="b" data-i18n="k194"><span class="idx">3</span><br/>מידע מהלקוח</div></div>
-<div class="node" data-i="4"><div class="b" data-i18n="k195"><span class="idx">4</span><br/>ניתוח וציון</div></div>
-<div class="node" data-i="5"><div class="b" data-i18n="k196"><span class="idx">5</span><br/>החלטת מכירה</div></div>
-<div class="node" data-i="6"><div class="b" data-i18n="k197"><span class="idx">6</span><br/>מעקב</div></div>
-<div class="node" data-i="7"><div class="b" data-i18n="k198"><span class="idx">7</span><br/>תוצאות</div></div>
-<div class="node" data-i="8"><div class="b" data-i18n="k199"><span class="idx">8</span><br/>תובנות שיווק</div></div>
-</div>
-<div aria-hidden="true" class="loop-mobile">
-<div class="lm" data-i18n="k200"><span class="idx">1</span>פרסום</div><div class="arrow-d"></div>
-<div class="lm" data-i18n="k201"><span class="idx">2</span>שאלות חכמות</div><div class="arrow-d"></div>
-<div class="lm" data-i18n="k202"><span class="idx">3</span>מידע מהלקוח</div><div class="arrow-d"></div>
-<div class="lm" data-i18n="k203"><span class="idx">4</span>ניתוח וציון</div><div class="arrow-d"></div>
-<div class="lm" data-i18n="k204"><span class="idx">5</span>החלטת מכירה</div><div class="arrow-d"></div>
-<div class="lm" data-i18n="k205"><span class="idx">6</span>מעקב</div><div class="arrow-d"></div>
-<div class="lm" data-i18n="k206"><span class="idx">7</span>תוצאות</div><div class="arrow-d"></div>
-<div class="lm" data-i18n="k207"><span class="idx">8</span>תובנות שיווק → קמפיין טוב יותר</div>
-</div>
-<p class="loop-caption reveal" data-i18n="k63">הלולאה נעשית חכמה ומדויקת יותר עם הזמן.</p>
-</div>
-</div>
-</section>
-<!-- ============ GALLERY (compact) ============ -->
-<section class="section" id="gallery" style="background:var(--soft)">
+<!-- 8 nodes positioned around the circle via JS -->
+<div class="node" data-i="1"><div class="b" data-i18n="k164"><span class="idx">1</span><br/>פרסום</div></div>
+<div class="node" data-i="2"><div class="b" data-i18n="k165"><span class="idx">2</span><br/>שאלות חכמות</div></div>
+<div class="node" data-i="3"><div class="b" data-i18n="k166"><span class="idx">3</span><br/>מידע מהלקוח</div></div>
+<div class="node" data-i="4"><div class="b" data-i18n="k167"><span class="idx">4</span><br/>ניתוח וציון</div></div>
+<div class="node" data-i="5"><div class="b" data-i18n="k168"><span class="idx">5</span><br/>החלטת מכירה</div></div>
+<div class="node" data-i="6"><div class="b" data-i18n="k169"><span class="idx">6</span><br/>מעקב</div></div>
+<div class="node" data-i="7"><div class="b" data-i18n="k170"><span class="idx">7</span><br/>תוצאות</div></div>
+<div class="node" data-i="8"><div class="b" data-i18n="k171"><span class="idx">8</span><br/>תובנות שיווק</div></div>
+</div><div aria-hidden="true" class="loop-mobile">
+<div class="lm" data-i18n="k172"><span class="idx">1</span>פרסום</div><div class="arrow-d"></div>
+<div class="lm" data-i18n="k173"><span class="idx">2</span>שאלות חכמות</div><div class="arrow-d"></div>
+<div class="lm" data-i18n="k174"><span class="idx">3</span>מידע מהלקוח</div><div class="arrow-d"></div>
+<div class="lm" data-i18n="k175"><span class="idx">4</span>ניתוח וציון</div><div class="arrow-d"></div>
+<div class="lm" data-i18n="k176"><span class="idx">5</span>החלטת מכירה</div><div class="arrow-d"></div>
+<div class="lm" data-i18n="k177"><span class="idx">6</span>מעקב</div><div class="arrow-d"></div>
+<div class="lm" data-i18n="k178"><span class="idx">7</span>תוצאות</div><div class="arrow-d"></div>
+<div class="lm" data-i18n="k179"><span class="idx">8</span>תובנות שיווק → קמפיין טוב יותר</div>
+</div><p class="loop-caption reveal" data-i18n="k53">כל ליד מלמד אתכם משהו. הקמפיין הבא כבר מתחיל חכם יותר.</p></div></section>
+<!-- ============ QUESTION-LEVEL INTELLIGENCE ============ -->
+<!-- ============ INTELLIGENCE LOOP (signature) ============ -->
+<!-- ============ GALLERY (real screenshots) ============ -->
+<section class="section" id="gallery">
 <div class="wrap">
 <div class="center reveal">
-<span class="eyebrow" data-i18n="k21">מבט מקרוב</span>
-<h2 class="h2" data-i18n="k35">iHoogi, כמו שהוא נראה באמת.</h2>
+<span class="eyebrow" data-i18n="k18">מבט מקרוב</span>
+<h2 class="h2" data-i18n="k28">תכירו את iHoogi מבפנים.</h2>
 </div>
-<div class="gallery">
-<div class="g-item reveal"><img alt="דשבורד מרכז ההחלטות" loading="lazy" src="assets/img/product_dashboard.jpg"/><div class="gc" data-i18n="k64">מי צריך תשומת לב עכשיו</div></div>
-<div class="g-item reveal"><img alt="רשימת לידים מדורגת" loading="lazy" src="assets/img/product_leads_scene.jpg"/><div class="gc" data-i18n="k65">להבין כל תשובה</div></div>
-<div class="g-item reveal"><img alt="תיעדוף אוטומטי — מי חם, מי קר ולמה" loading="lazy" src="assets/img/hero_key_visual.jpg"/><div class="gc" data-i18n="k66">למה הליד רלוונטי</div></div>
-<div class="g-item reveal"><img alt="iHoogi מזהה, ממיין וממליץ על הצעד הבא" loading="lazy" src="assets/img/story_key_visual.jpg"/><div class="gc" data-i18n="k67">מה נכון לעשות עכשיו</div></div>
+<div class="gallery g3"><div class="g-item reveal"><img alt="מרכז ההחלטות — מתוך המערכת" loading="lazy" src="assets/img/product_dashboard.jpg"/><div class="gc" data-i18n="k54">מי צריך תשומת לב עכשיו</div></div><div class="g-item reveal"><img alt="ניתוח לפי שאלה — מתוך המערכת" loading="lazy" src="assets/img/product_question.jpg"/><div class="gc" data-i18n="k55">להבין כל תשובה</div></div><div class="g-item reveal"><img alt="לוח מדדים — מתוך המערכת" loading="lazy" src="assets/img/product_leads_list.jpg"/><div class="gc" data-i18n="k56">מה נכון לעשות עכשיו</div></div></div>
+</div>
+</section>
+<!-- ============ HOW TO START + VIDEO 2 ============ -->
+<section class="section" id="start" style="background:var(--soft)">
+<div class="wrap">
+<div class="center reveal">
+<span class="eyebrow" data-i18n="k19">איך מתחילים</span>
+<h2 class="h2" data-i18n="k29">להתחיל עם iHoogi זה פשוט.</h2>
+</div>
+<div class="start6" style="margin-top:44px">
+<div class="sstep reveal"><div class="n">1</div><div class="body"><h3><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle></svg><span data-i18n="k128">הגדרה</span></h3><p data-i18n="k134">מגדירים את העסק, הקהל, המטרות ומה חשוב כשמעריכים ליד.</p></div></div>
+<div class="sstep reveal"><div class="n">2</div><div class="body"><h3><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg><span data-i18n="k129">בנייה</span></h3><p data-i18n="k135">בונים שאלות קצרות וממוקדות — מהר.</p></div></div>
+<div class="sstep reveal"><div class="n">3</div><div class="body"><h3><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M4 12v8h16v-8"></path><path d="M12 16V4M8 8l4-4 4 4"></path></svg><span data-i18n="k130">פרסום</span></h3><p data-i18n="k136">משתמשים בקישור בכל מקום שהלידים מגיעים ממנו.</p><div class="pub"><span data-i18n="k140">קמפיינים</span><span data-i18n="k141">דפי נחיתה</span><span data-i18n="k142">אתר</span><span>WhatsApp</span><span data-i18n="k143">רשתות</span><span data-i18n="k144">שותפים</span></div></div></div>
+<div class="sstep reveal"><div class="n">4</div><div class="body"><h3><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg><span data-i18n="k131">קבלה</span></h3><p data-i18n="k137">הלקוחות עונים — והלידים נכנסים ל-iHoogi מנותחים.</p></div></div>
+<div class="sstep reveal"><div class="n">5</div><div class="body"><h3><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg><span data-i18n="k132">החלטה</span></h3><p data-i18n="k138">עובדים ממרכז ההחלטות — למי לפנות ומה לעשות.</p></div></div>
+<div class="sstep reveal"><div class="n">6</div><div class="body"><h3><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M23 4v6h-6M1 20v-6h6"></path><path d="M3.5 9a9 9 0 0 1 14.9-3.4L23 10M1 14l4.6 4.4A9 9 0 0 0 20.5 15"></path></svg><span data-i18n="k133">שיפור</span></h3><p data-i18n="k139">משתמשים במידע שהצטבר כדי לשפר שאלות, טירגוט וקמפיינים.</p></div></div>
 </div>
 </div>
 </section>
-<!-- ============ GETTING STARTED + VIDEO 2 ============ -->
-<section class="section start-band" id="start">
+<!-- ============ VIDEO 2 moved to founder-mini near end ============ -->
+<!-- ============ BRAND STORY ============ -->
+<section class="section story" id="story">
 <div class="wrap">
-<div class="start-wrap">
-<div>
 <div class="reveal">
-<span class="eyebrow" data-i18n="k22">איך מתחילים</span>
-<h2 class="h2" data-i18n="k36">להתחיל עם iHoogi זה פשוט.</h2>
-<p class="lead" data-i18n="k48">שישה צעדים קצרים — והדרכה קצרה ליד.</p>
-</div>
-<div class="start6">
-<div class="sstep reveal"><div class="n">1</div><div class="body"><h3><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle></svg><span data-i18n="k159">הגדרה</span></h3><p data-i18n="k165">מגדירים את העסק, הקהל, המטרות ומה חשוב כשמעריכים ליד.</p></div></div>
-<div class="sstep reveal"><div class="n">2</div><div class="body"><h3><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg><span data-i18n="k160">בנייה</span></h3><p data-i18n="k166">בונים שאלות קצרות וממוקדות — מהר.</p></div></div>
-<div class="sstep reveal"><div class="n">3</div><div class="body"><h3><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M4 12v8h16v-8"></path><path d="M12 16V4M8 8l4-4 4 4"></path></svg><span data-i18n="k161">פרסום</span></h3><p data-i18n="k167">משתמשים בקישור בכל מקום שהלידים מגיעים ממנו.</p></div></div>
-<div class="sstep reveal"><div class="n">4</div><div class="body"><h3><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg><span data-i18n="k162">קבלה</span></h3><p data-i18n="k168">הלקוחות עונים — והלידים נכנסים ל-iHoogi מנותחים.</p></div></div>
-<div class="sstep reveal"><div class="n">5</div><div class="body"><h3><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg><span data-i18n="k163">החלטה</span></h3><p data-i18n="k169">עובדים ממרכז ההחלטות — למי לפנות ומה לעשות.</p></div></div>
-<div class="sstep reveal"><div class="n">6</div><div class="body"><h3><svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M23 4v6h-6M1 20v-6h6"></path><path d="M3.5 9a9 9 0 0 1 14.9-3.4L23 10M1 14l4.6 4.4A9 9 0 0 0 20.5 15"></path></svg><span data-i18n="k164">שיפור</span></h3><p data-i18n="k170">משתמשים במידע שהצטבר כדי לשפר שאלות, טירגוט וקמפיינים.</p></div></div>
-</div>
-</div>
-<div class="reveal" id="video2">
-<div class="player" data-src="assets/media/video2_guide.mp4?v=20260811">
-<img alt="תצוגה מקדימה של סרטון ההסבר" class="poster" loading="lazy" src="assets/media/video2_poster.jpg?v=20260811"/>
-<div aria-label="נגן סרטון הסבר" class="play" role="button" tabindex="0">
-<div class="btn-play"><svg fill="currentColor" height="30" viewbox="0 0 24 24" width="30"><path d="M8 5v14l11-7z"></path></svg></div>
-</div>
-</div>
-<div style="margin-top:14px;text-align:center"><span class="video-badge"><svg fill="currentColor" height="15" viewbox="0 0 24 24" width="15"><path d="M8 5v14l11-7z"></path></svg><span data-i18n="k177">הסבר על המוצר</span></span></div>
+<h2 data-i18n="k32">כל ליד הופך למידע.<br/><span class="fade">כל מידע הופך לתובנה.</span><br/><span class="fade">כל תובנה — להחלטה חכמה יותר.</span></h2>
+<p class="sub" data-i18n="k57">הלקוח משקיע שניות. העסק חוסך שעות. איש המכירות פותח את השיחה כשהוא כבר יודע עם מי הוא מדבר.</p>
+<div class="sig">
+<span class="chip"><img alt="iHoogi" src="assets/img/ihoogi_logo.png"/></span>
+<span data-i18n="k58">בינת לידים לשיווק ומכירות חכמים יותר</span>
 </div>
 </div>
 </div>
 </section>
-<!-- ============ CRM TRUST STRIP ============ -->
-<section class="crm-strip" id="nocrm">
+<!-- ============ FINAL CTA ============ -->
+<section class="section" id="works-with" style="padding-block:clamp(30px,4vw,52px)"><div class="wrap"><div class="trust-strip reveal"><div class="ic"><svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><path d="M4 7h16M4 12h16M4 17h10"></path></svg></div><p data-i18n="k162">כבר עובדים עם כלים אחרים? מצוין. <b>iHoogi מוסיפה את שכבת החוכמה</b> — בלי לשנות את תהליך העבודה שלכם.</p></div></div></section>
+<!-- ============ PROOF (two customer quotes) ============ -->
+<section class="section" id="proof" style="padding-block:clamp(36px,5vw,64px)">
 <div class="wrap">
-<div class="inner reveal">
-<div class="badge">
-<svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="22"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-<span data-i18n="k49">עובדים עם CRM? מצוין.<small>iHoogi מוסיפה את שכבת החוכמה — בלי להחליף את תהליך העבודה שלכם.</small></span>
+<div class="proof reveal">
+<div class="proof-grid">
+<div class="proof-item">
+<blockquote data-i18n="k180">בגיוס נהגים אנחנו סוף־סוף יודעים למי כדאי לחזור — בלי לבזבז זמן על כל פנייה.</blockquote>
+<div class="who" data-i18n="k181">צוות גיוס · זיגזג — חברת שליחויות</div>
+</div>
+<div class="proof-item">
+<blockquote data-i18n="k183">בפרסום לריטריט ראינו מי באמת מעוניין — וזה חסך לנו המון שיחות שלא היו מובילות להרשמה.</blockquote>
+<div class="who" data-i18n="k184">ריס פרייבר · ריספורט</div>
+</div>
 </div>
 </div>
 </div>
 </section>
-<!-- ============ FINAL CTA (single dark brand moment) ============ -->
+<!-- ============ FOUNDER MINI (human moment near end) ============ -->
+<section class="section" id="founder" style="padding-block:clamp(28px,4vw,48px);background:transparent">
+<div class="wrap">
+<div class="founder-mini reveal">
+<img alt="מייסדת iHoogi" loading="lazy" src="assets/img/founder_still.jpg"/>
+<div>
+<span class="eyebrow" data-i18n="k20">מהמייסדת</span>
+<h3 data-i18n="k30">למה בניתי את iHoogi</h3>
+<p data-i18n="k38">רגע אנושי קצר — למה נולדה הפלטפורמה, ומה חשוב לי שתראו לפני שמתחילים.</p>
+<button class="play-mini" data-play-src="assets/media/video2_guide.mp4?v=20260811" type="button">
+<svg fill="currentColor" height="18" viewBox="0 0 24 24" width="18"><path d="M8 5v14l11-7z"></path></svg>
+<span data-i18n="k182">צפו בסרטון קצר</span>
+</button>
+</div>
+</div>
+</div>
+</section>
 <section class="section finalcta" id="cta">
 <div class="wrap">
 <div class="box reveal">
-<p class="brand-line" data-i18n="k70">כל ליד הופך למידע. כל מידע הופך לתובנה. כל תובנה — להחלטה חכמה יותר.</p>
-<h2 data-i18n="k41">דעו יותר, עוד לפני שאמרתם שלום.</h2>
-<p data-i18n="k72">ראו מה הלידים שלכם באמת מספרים — עוד לפני שהשיחה מתחילה.</p>
+<h2 data-i18n="k33">דעו יותר, עוד לפני שאמרתם שלום.</h2>
+<p data-i18n="k59">ראו מה הלידים שלכם באמת מספרים — עוד לפני שהשיחה מתחילה.</p>
 <div class="cta-row">
-<a class="btn btn-primary btn-lg" data-i18n="k7" data-url="TRY_IHOOGI_URL" href="#">נסו את iHoogi</a>
-<a class="btn btn-ghost btn-lg" data-i18n="k8" data-url="REQUEST_DEMO_URL" href="#">לבקשת דמו</a>
+<a class="btn btn-primary btn-lg" data-i18n="k6" data-url="TRY_IHOOGI_URL" href="#">התחילו חינם</a>
+<a class="btn btn-ghost btn-lg" data-i18n="k7" data-url="REQUEST_DEMO_URL" href="#">לבקשת דמו</a>
 </div>
-<a class="login-link" data-i18n="k73" data-url="LOGIN_URL" href="#">כבר יש לכם חשבון? כניסה</a>
+<a class="login-link" data-i18n="k60" data-url="LOGIN_URL" href="#">כבר יש לכם חשבון? כניסה</a>
+<div class="micro"><svg fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewBox="0 0 24 24" width="15"><path d="M20 6L9 17l-5-5"></path></svg><span data-i18n="k160">מתחילים בחינם · בלי כרטיס אשראי</span></div>
 </div>
 </div>
 </section>
@@ -781,15 +785,16 @@ footer{background:#0a201e;color:#cfe6e2}
 <section class="section" id="faq" style="background:var(--soft)">
 <div class="wrap">
 <div class="center reveal">
-<span class="eyebrow" data-i18n="k25">שאלות נפוצות</span>
-<h2 class="h2" data-i18n="k39">כל מה שרציתם לדעת.</h2>
+<span class="eyebrow" data-i18n="k21">שאלות נפוצות</span>
+<h2 class="h2" data-i18n="k31">כל מה שרציתם לדעת.</h2>
 </div>
 <div class="faq-list">
-<details class="faq reveal"><summary><span data-i18n="k74">מה זה iHoogi?</span><span class="pm">+</span></summary><div class="ans" data-i18n="k81">iHoogi היא פלטפורמת בינת לידים שמחברת בין שיווק למכירות. היא עוזרת לעסק לשאול את השאלות הנכונות, לנתח את התשובות, לדרג ולתעדף לידים — ולתת הקשר שימושי עוד לפני השיחה הראשונה.</div></details>
-<details class="faq reveal"><summary><span data-i18n="k75">האם iHoogi מחליף את ה-CRM שלי?</span><span class="pm">+</span></summary><div class="ans" data-i18n="k82">לא. iHoogi לא מחליף CRM — הוא מוסיף שכבת אינטליגנציה בין השיווק למכירות. אתם ממשיכים לעבוד כרגיל, רק עם הבנה טובה יותר של כל ליד.</div></details>
-<details class="faq reveal"><summary><span data-i18n="k76">כמה זמן לוקח לליד לענות?</span><span class="pm">+</span></summary><div class="ans" data-i18n="k83">שניות. השאלות קצרות וממוקדות בכוונה — הלקוח לא אמור להרגיש שהוא ממלא שאלון ארוך, והעסק עדיין מקבל את המידע החשוב.</div></details>
-<details class="faq reveal"><summary><span data-i18n="k77">אפשר להשתמש ב-iHoogi בכמה קמפיינים?</span><span class="pm">+</span></summary><div class="ans" data-i18n="k84">כן. אפשר לחבר מקורות וקמפיינים שונים, ו-iHoogi מרכז את המידע כדי להשוות איכות והתאמה — לא רק כמות.</div></details>
-<details class="faq reveal"><summary><span data-i18n="k80">אפשר לעקוב אחרי טיפול וזמני תגובה?</span><span class="pm">+</span></summary><div class="ans" data-i18n="k87">כן. יש התראות, תזכורות, סטטוס לכל ליד, שיוך צוות ומעקב אחרי זמני תגובה — כדי שאף ליד חם לא ייפול בין הכיסאות.</div></details>
+<details class="faq reveal"><summary><span data-i18n="k61">מה זה iHoogi?</span><span class="pm">+</span></summary><div class="ans" data-i18n="k67">iHoogi היא פלטפורמת בינת לידים שמחברת בין שיווק למכירות. היא עוזרת לעסק לשאול את השאלות הנכונות, לנתח את התשובות, לדרג ולתעדף לידים — ולתת הקשר שימושי עוד לפני השיחה הראשונה.</div></details>
+<details class="faq reveal"><summary><span data-i18n="k62">האם iHoogi מחליף את הכלים שכבר יש לי?</span><span class="pm">+</span></summary><div class="ans" data-i18n="k68">לא. iHoogi לא באה במקום הכלים שלכם — היא מוסיפה שכבת חוכמה שמחברת בין השיווק למכירות. אתם ממשיכים לעבוד כרגיל, רק עם הבנה טובה יותר של כל ליד.</div></details>
+<details class="faq reveal"><summary><span data-i18n="k63">כמה זמן לוקח לליד לענות?</span><span class="pm">+</span></summary><div class="ans" data-i18n="k69">שניות. השאלות קצרות וממוקדות בכוונה — הלקוח לא אמור להרגיש שהוא ממלא שאלון ארוך, והעסק עדיין מקבל את המידע החשוב.</div></details>
+<details class="faq reveal"><summary><span data-i18n="k64">אפשר להשתמש ב-iHoogi בכמה קמפיינים?</span><span class="pm">+</span></summary><div class="ans" data-i18n="k70">כן. אפשר לחבר מקורות וקמפיינים שונים, ו-iHoogi מרכזת את המידע כדי להשוות איכות והתאמה — לא רק כמות.</div></details>
+<details class="faq reveal"><summary><span data-i18n="k65">אפשר למצוא לידים לפי תשובה מסוימת?</span><span class="pm">+</span></summary><div class="ans" data-i18n="k71">בהחלט. אפשר לרדת עד רמת השאלה והתשובה — למשל להציג את כל מי שבחר בשירות מסוים, או לזהות דפוסים שחוזרים אצל הלידים החזקים.</div></details>
+<details class="faq reveal"><summary><span data-i18n="k66">אפשר לעקוב אחרי טיפול וזמני תגובה?</span><span class="pm">+</span></summary><div class="ans" data-i18n="k72">כן. יש התראות, תזכורות, סטטוס לכל ליד, שיוך צוות ומעקב אחרי זמני תגובה — כדי שאף ליד חם לא ייפול בין הכיסאות.</div></details>
 </div>
 </div>
 </section>
@@ -799,28 +804,28 @@ footer{background:#0a201e;color:#cfe6e2}
 <div class="foot">
 <div class="brand-col">
 <span class="chip"><img alt="iHoogi" src="assets/img/ihoogi_logo.png"/></span>
-<p data-i18n="k88">בינת לידים לשיווק ומכירות חכמים יותר. דעו יותר, עוד לפני שאמרתם שלום.</p>
+<p data-i18n="k73">בינת לידים לשיווק ומכירות חכמים יותר. דעו יותר, עוד לפני שאמרתם שלום.</p>
 </div>
-<div><h4 data-i18n="k89">מוצר</h4><ul>
-<li><a data-i18n="k92" href="#features">יכולות</a></li>
-<li><a data-i18n="k93" href="#product">מרכז ההחלטות</a></li>
-<li><a data-i18n="k94" href="#gallery">מבט על המערכת</a></li>
+<div><h4 data-i18n="k74">מוצר</h4><ul>
+<li><a data-i18n="k77" href="#features">יכולות</a></li>
+<li><a data-i18n="k78" href="#product">מרכז ההחלטות</a></li>
+<li><a data-i18n="k79" href="#gallery">מבט על המערכת</a></li>
 </ul></div>
-<div><h4 data-i18n="k90">מידע</h4><ul>
-<li><a data-i18n="k95" href="#how">איך זה עובד</a></li>
-<li><a data-i18n="k96" href="#start">איך מתחילים</a></li>
-<li><a data-i18n="k97" href="#faq">שאלות נפוצות</a></li>
+<div><h4 data-i18n="k75">מידע</h4><ul>
+<li><a data-i18n="k80" href="#how">איך זה עובד</a></li>
+<li><a data-i18n="k81" href="#start">איך מתחילים</a></li>
+<li><a data-i18n="k82" href="#faq">שאלות נפוצות</a></li>
 </ul></div>
-<div><h4 data-i18n="k91">חשבון</h4><ul>
-<li><a data-i18n="k98" data-url="TRY_IHOOGI_URL" href="#">נסו את iHoogi</a></li>
-<li><a data-i18n="k99" data-url="REQUEST_DEMO_URL" href="#">בקשת דמו</a></li>
-<li><a data-i18n="k100" data-url="LOGIN_URL" href="#">כניסה</a></li>
-<li><a data-i18n="k101" data-url="CONTACT" href="#">צור קשר</a></li>
+<div><h4 data-i18n="k76">חשבון</h4><ul>
+<li><a data-i18n="k83" data-url="TRY_IHOOGI_URL" href="#">התחילו חינם</a></li>
+<li><a data-i18n="k84" data-url="REQUEST_DEMO_URL" href="#">בקשת דמו</a></li>
+<li><a data-i18n="k85" data-url="LOGIN_URL" href="#">כניסה</a></li>
+<li><a data-i18n="k86" data-url="CONTACT" href="#">צור קשר</a></li>
 </ul></div>
 </div>
 <div class="foot-bottom">
 <span>© <span id="yr"></span> iHoogi · בינת לידים לשיווק ומכירות חכמים יותר</span>
-<span data-i18n="k191">פרטיות · תנאי שימוש</span>
+<span data-i18n="k163">פרטיות · תנאי שימוש</span>
 </div>
 </div>
 </footer>
@@ -829,10 +834,10 @@ footer{background:#0a201e;color:#cfe6e2}
    SITE_CONFIG — כתובות במקום אחד. החליפו את ה-# בכתובות האמיתיות.
    ========================================================= */
 const SITE_CONFIG = {
-  TRY_IHOOGI_URL:  "#",   // כתובת הרשמה / התחלה
-  LOGIN_URL:       "#",   // כתובת כניסה לאפליקציה
-  REQUEST_DEMO_URL:"#",   // כתובת בקשת דמו
-  CONTACT:         "#"    // מייל/וואטסאפ ליצירת קשר  (למשל: mailto:hello@ihoogi.com)
+  TRY_IHOOGI_URL:  "https://app.ihoogi.com/register",
+  LOGIN_URL:       "https://app.ihoogi.com/login",
+  REQUEST_DEMO_URL:"mailto:office@ihoogi.com",
+  CONTACT:         "mailto:office@ihoogi.com"
 };
 document.querySelectorAll('[data-url]').forEach(el=>{
   const key = el.getAttribute('data-url');
@@ -910,9 +915,31 @@ if(!reduce && 'IntersectionObserver' in window){
   window.addEventListener('resize', layout, {passive:true});
 })();
 
+
+
+/* founder mini — open video2 in a lightweight overlay player */
+document.querySelectorAll('[data-play-src]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const src = btn.getAttribute('data-play-src');
+    let host = document.getElementById('founderPlayerHost');
+    if(!host){
+      host = document.createElement('div');
+      host.id = 'founderPlayerHost';
+      host.style.cssText = 'position:fixed;inset:0;background:rgba(8,20,28,.72);display:flex;align-items:center;justify-content:center;z-index:9999;padding:24px';
+      host.addEventListener('click', e=>{ if(e.target===host){ host.remove(); } });
+      const v = document.createElement('video');
+      v.controls = true; v.playsInline = true; v.autoplay = true;
+      v.style.cssText = 'width:min(920px,100%);max-height:80vh;border-radius:14px;background:#000';
+      v.src = src;
+      host.appendChild(v);
+      document.body.appendChild(host);
+    }
+  });
+});
+
 /* ============ i18n engine ============ */
-const I18N = {"he":{"k1":"דעו עם מי אתם מדברים — <span class=\"mark\">לפני</span> שאתם מרימים טלפון.","k2":"לא עוד ליד עם שם וטלפון.<br>iHoogi מראה לכם מי שווה טיפול, למה — ומה לעשות עכשיו.","k3":"שאלות קצרות → ניתוח תשובות → דירוג ותיעדוף → מעקב → תובנות לשיווק","k4":"נסו את iHoogi","k5":"איך זה עובד","k6":"נסו את iHoogi","k7":"נסו את iHoogi","k8":"לבקשת דמו","k9":"שכבת אינטליגנציה — לא החלפת CRM","k10":"הלקוח משיב בשניות","k11":"בינת לידים לשיווק ומכירות","k12":"הערך בקצרה","k13":"הבעיה","k14":"איך זה עובד","k15":"סרטון קצר","k16":"היכולות","k17":"מרכז ההחלטות","k18":"שיווק ומכירות באותו מעגל","k19":"רזולוציה מלאה","k20":"לולאת האינטליגנציה","k21":"מבט מקרוב","k22":"איך מתחילים","k23":"מהמייסדת","k24":"מיקום נכון","k25":"שאלות נפוצות","k26":"הלקוח שלכם משקיע שניות.<br>העסק שלכם חוסך שעות.","k27":"ליד הוא הרבה יותר משם ומספר טלפון.","k28":"ארבעה צעדים — מליד להחלטה.","k29":"iHoogi בפעולה.","k30":"לא רק איסוף לידים.<br>מערכת החלטות חכמה.","k31":"לדעת למי לפנות, מתי ולמה.","k32":"לא רק לדעת כמה לידים הגיעו — להבין מה באמת עובד.","k33":"רדו לעומק — מעבר לציון הכולל.","k34":"לולאה חכמה אחת<br>שמחברת שיווק ומכירות.","k35":"iHoogi, כמו שהוא נראה באמת.","k36":"להתחיל עם iHoogi זה פשוט.","k37":"מהצעד הראשון<br>ועד מעקב חכם יותר.","k38":"הוסיפו אינטליגנציה.<br>אל תחליפו את זרימת העבודה.","k39":"כל מה שרציתם לדעת.","k40":"כל ליד הופך למידע.<br><span class=\"fade\">כל מידע הופך לתובנה.</span><br><span class=\"fade\">כל תובנה מובילה להחלטה חכמה יותר.</span>","k41":"דעו יותר, עוד לפני שאמרתם שלום.","k42":"איש המכירות פותח את השיחה כשהוא כבר יודע עם מי הוא מדבר.","k43":"שם וטלפון לא מספרים לאיש המכירות מה הלקוח באמת רוצה, כמה הוא מתאים, ולמה כדאי לחזור אליו קודם. זה הפער בין <b>“קיבלנו ליד”</b> לבין <b>“הבנו את הליד”</b>.","k44":"כדקה אחת שמראה את הרעיון — מהשאלות ועד לתיעדוף.","k45":"כל מה שצריך כדי להחליט מה לעשות עם ליד — במקום אחד.","k46":"מכמות לאיכות: אילו קמפיינים מביאים לידים חמים, מה משותף להם — ואיך זה משפר את הקמפיין הבא.","k47":"iHoogi לא עוצר בציון. אפשר לרדת עד רמת השאלה והתשובה — ולשאול את המערכת בדיוק מה שמעניין אתכם.","k48":"שישה צעדים קצרים — והדרכה קצרה ליד.","k49":"עובדים עם CRM? מצוין.<small>iHoogi מוסיפה את שכבת החוכמה — בלי להחליף את תהליך העבודה שלכם.</small>","k50":"<span class=\"k\">מי</span> הליד","k51":"<span class=\"k\">ציון</span> ההתאמה","k52":"<span class=\"k\">מקור</span> הליד וכמה זמן הוא ממתין","k53":"<span class=\"k\">פעולה</span> — הצעד הבא","k54":"מתוך המערכת — מרכז ההחלטות","k55":"כמות לידים","k56":"איכות והתאמה","k57":"מספר גדול לא אומר שהלידים מתאימים.","k58":"קמפיין ב׳ הביא פחות לידים — אבל הרבה יותר לידים חמים.","k59":"\"הראו לי את כל מי שענה X\"","k60":"\"אילו לידים בחרו בשירות הזה?\"","k61":"\"על איזו שאלה מדלגים הכי הרבה?\"","k62":"\"אילו תשובות חוזרות אצל הלידים החזקים?\"","k63":"הלולאה נעשית חכמה ומדויקת יותר עם הזמן.","k64":"מי צריך תשומת לב עכשיו","k65":"להבין כל תשובה","k66":"למה הליד רלוונטי","k67":"מה נכון לעשות עכשיו","k68":"ללמוד מכל קמפיין","k69":"מעקב אחרי הצעד הבא","k70":"כל ליד הופך למידע. כל מידע הופך לתובנה. כל תובנה — להחלטה חכמה יותר.","k71":"בינת לידים לשיווק ומכירות חכמים יותר","k72":"ראו מה הלידים שלכם באמת מספרים — עוד לפני שהשיחה מתחילה.","k73":"כבר יש לכם חשבון? כניסה","k74":"מה זה iHoogi?","k75":"האם iHoogi מחליף את ה-CRM שלי?","k76":"כמה זמן לוקח לליד לענות?","k77":"אפשר להשתמש ב-iHoogi בכמה קמפיינים?","k78":"אפשר למצוא לידים לפי תשובה מסוימת?","k79":"iHoogi יכול לזהות אילו קמפיינים מביאים לידים טובים יותר?","k80":"אפשר לעקוב אחרי טיפול וזמני תגובה?","k81":"iHoogi היא פלטפורמת בינת לידים שמחברת בין שיווק למכירות. היא עוזרת לעסק לשאול את השאלות הנכונות, לנתח את התשובות, לדרג ולתעדף לידים — ולתת הקשר שימושי עוד לפני השיחה הראשונה.","k82":"לא. iHoogi לא מחליף CRM — הוא מוסיף שכבת אינטליגנציה בין השיווק למכירות. אתם ממשיכים לעבוד כרגיל, רק עם הבנה טובה יותר של כל ליד.","k83":"שניות. השאלות קצרות וממוקדות בכוונה — הלקוח לא אמור להרגיש שהוא ממלא שאלון ארוך, והעסק עדיין מקבל את המידע החשוב.","k84":"כן. אפשר לחבר מקורות וקמפיינים שונים, ו-iHoogi מרכז את המידע כדי להשוות איכות והתאמה — לא רק כמות.","k85":"בהחלט. אפשר לרדת עד רמת השאלה והתשובה — למשל להציג את כל מי שבחר בשירות מסוים, או לזהות דפוסים שחוזרים אצל הלידים החזקים.","k86":"כן. במקום לשאול רק כמה לידים הביא קמפיין, iHoogi עוזר להבין אילו לידים הוא הביא — ובאיזו איכות והתאמה — כדי לחדד את הקמפיין הבא.","k87":"כן. יש התראות, תזכורות, סטטוס לכל ליד, שיוך צוות ומעקב אחרי זמני תגובה — כדי שאף ליד חם לא ייפול בין הכיסאות.","k88":"בינת לידים לשיווק ומכירות חכמים יותר. דעו יותר, עוד לפני שאמרתם שלום.","k89":"מוצר","k90":"מידע","k91":"חשבון","k92":"יכולות","k93":"מרכז ההחלטות","k94":"מבט על המערכת","k95":"איך זה עובד","k96":"איך מתחילים","k97":"שאלות נפוצות","k98":"נסו את iHoogi","k99":"בקשת דמו","k100":"כניסה","k101":"צור קשר","k102":"איך זה עובד","k103":"למה iHoogi","k104":"יכולות","k105":"המוצר","k106":"איך מתחילים","k107":"שאלות נפוצות","k108":"כניסה","k109":"מי הגיע?","k110":"מה הוא רוצה?","k111":"כמה הוא מתאים?","k112":"למה?","k113":"מאיפה הגיעו הלידים הכי טובים?","k114":"למי לפנות עכשיו?","k115":"מה נלמד לקמפיין הבא?","k116":"מה שקיבלתם","k117":"מה שחשוב לדעת","k118":"שם מלא","k119":"מספר טלפון","k120":"…וזהו.","k121":"מה הלקוח באמת רוצה","k122":"כמה הוא מתאים ולמה","k123":"דחיפות: למי לפנות קודם","k124":"מאיזה מקור / קמפיין הגיע","k125":"שאלו טוב יותר","k126":"הבינו טוב יותר","k127":"פעלו טוב יותר","k128":"למדו טוב יותר","k129":"שאלות שמגלות את מה שחשוב","k130":"ניתוח, ציון ותיעדוף","k131":"מעקב וביצוע מכירה","k132":"תובנות שיווק שמצטברות","k133":"בונים שאלות קצרות לפי העסק, הקהל והמטרה","k134":"חושפים מידע להחלטה בלי שאלון מתיש","k135":"מותאם לפי מה שחשוב לכם במכירה","k136":"ציון והתאמה לכל ליד","k137":"סיווג חם / פושר / קר ותיעדוף","k138":"ההקשר וההסבר מאחורי כל ליד","k139":"התראות, תזכורות וסטטוס לכל ליד","k140":"פעולות WhatsApp, טלפון ומייל","k141":"שיוך צוות ומעקב זמני תגובה","k142":"אילו קמפיינים מביאים לידים מתאימים","k143":"מה משותף ללידים החזקים","k144":"מה לחדד בקמפיין הבא","k145":"פחות זמן על שאלות בסיס","k146":"פחות שיחות לא רלוונטיות","k147":"יותר זמן ללידים שחשובים","k148":"המידע החשוב כבר מחכה לפני השיחה — בלי לפתוח כל פעם מאפס.","k149":"מזהים מוקדם מי מתאים ומי פחות — ומפנים אנרגיה למקום הנכון.","k150":"הלידים החמים עולים לראש התור — כדי שיטופלו בזמן שהם עוד חמים.","k151":"שאלו","k152":"עונים","k153":"מבינים","k154":"פועלים","k155":"שאלות קצרות וממוקדות שחושפות את מה שבאמת חשוב.","k156":"הלקוח משיב במהירות — בלי שאלון ארוך ומתיש.","k157":"iHoogi מנתח את התשובות, מדרג ומתעדף.","k158":"העסק יודע למי לפנות קודם ומה הצעד הבא.","k159":"הגדרה","k160":"בנייה","k161":"פרסום","k162":"קבלה","k163":"החלטה","k164":"שיפור","k165":"מגדירים את העסק, הקהל, המטרות ומה חשוב כשמעריכים ליד.","k166":"בונים שאלות קצרות וממוקדות — מהר.","k167":"משתמשים בקישור בכל מקום שהלידים מגיעים ממנו.","k168":"הלקוחות עונים — והלידים נכנסים ל-iHoogi מנותחים.","k169":"עובדים ממרכז ההחלטות — למי לפנות ומה לעשות.","k170":"משתמשים במידע שהצטבר כדי לשפר שאלות, טירגוט וקמפיינים.","k171":"קמפיינים","k172":"דפי נחיתה","k173":"אתר","k174":"רשתות","k175":"שותפים","k176":"סרטון סקירה","k177":"הסבר על המוצר","k178":"חם","k179":"קר","k180":"לפנות עכשיו","k181":"מתאים למעקב מאוחר","k182":"→ פילוח מיידי","k183":"→ פילוח לפי שירות","k184":"→ שיפור השאלון","k185":"→ דפוס איכות","k186":"קמפיין א׳","k187":"קמפיין ב׳","k188":"קמפיין א׳","k189":"קמפיין ב׳","k190":"הלב של הלולאה","k191":"פרטיות · תנאי שימוש","k192":"<span class=\"idx\">1</span><br>פרסום","k193":"<span class=\"idx\">2</span><br>שאלות חכמות","k194":"<span class=\"idx\">3</span><br>מידע מהלקוח","k195":"<span class=\"idx\">4</span><br>ניתוח וציון","k196":"<span class=\"idx\">5</span><br>החלטת מכירה","k197":"<span class=\"idx\">6</span><br>מעקב","k198":"<span class=\"idx\">7</span><br>תוצאות","k199":"<span class=\"idx\">8</span><br>תובנות שיווק","k200":"<span class=\"idx\">1</span>פרסום","k201":"<span class=\"idx\">2</span>שאלות חכמות","k202":"<span class=\"idx\">3</span>מידע מהלקוח","k203":"<span class=\"idx\">4</span>ניתוח וציון","k204":"<span class=\"idx\">5</span>החלטת מכירה","k205":"<span class=\"idx\">6</span>מעקב","k206":"<span class=\"idx\">7</span>תוצאות","k207":"<span class=\"idx\">8</span>תובנות שיווק → קמפיין טוב יותר","k208":"<span class=\"k\">מה</span> הוא רוצה","k209":"<span class=\"k\">למה</span> הוא מתאים","k210":"<span class=\"k\">מקור</span> הליד","k211":"<span class=\"k\">זמן</span> המתנה","k212":"ניתוח לפי שאלה ותשובה — לא רק ציון כללי","k213":"דפוסים שחוזרים אצל לידים חזקים","k214":"מה לשפר בשאלון ובקמפיין הבא","k215":"שיווק ומכירות לומדים מאותו מידע"},"en":{"k1":"Know exactly who you’re talking to — <span class=\"mark\">before</span> you pick up the phone.","k2":"Not another lead with just a name and phone number.<br>iHoogi shows you who’s worth your time, why — and what to do next.","k3":"Short questions → answer analysis → scoring & prioritization → follow-up → marketing insight","k4":"Try iHoogi","k5":"See how it works ","k6":"Try iHoogi","k7":"Try iHoogi","k8":"Request a demo","k9":"An intelligence layer — not a CRM replacement","k10":"Customers answer in seconds","k11":"Lead Intelligence for Sales & Marketing","k12":"The value, in short","k13":"The problem","k14":"See how it works ","k15":"Short video","k16":"Capabilities","k17":"Decision center","k18":"Marketing & sales in one loop","k19":"Full resolution","k20":"The intelligence loop","k21":"A closer look","k22":"Getting started","k23":"From the founder","k24":"The right fit","k25":"FAQ","k26":"Your customer spends seconds.<br>Your business saves hours.","k27":"A lead is much more than a name and a number.","k28":"Four steps — from lead to decision.","k29":"iHoogi in action.","k30":"Not just lead capture.<br>A smart decision system.","k31":"Know who to call, when, and why.","k32":"Not just how many leads arrived — understand what actually works.","k33":"Go deeper — beyond the overall score.","k34":"One smart loop<br>that connects marketing and sales.","k35":"iHoogi, exactly as it really looks.","k36":"Getting started with iHoogi is simple.","k37":"From the first step<br>to smarter follow-up.","k38":"Add intelligence.<br>Don’t replace your workflow.","k39":"Everything you wanted to know.","k40":"Every lead becomes information.<br><span class=\"fade\">Every piece of information becomes insight.</span><br><span class=\"fade\">Every insight leads to a smarter decision.</span>","k41":"Know more — before you even say hello.","k42":"Your salesperson opens every call already knowing who’s on the other end.","k43":"A name and a phone number don’t tell your sales team what the customer actually wants, how good a fit they are, or why to call them first. That’s the gap between <b>“we got a lead”</b> and <b>“we understand the lead.”</b>","k44":"About a minute that shows the whole idea — from questions to prioritization.","k45":"Everything you need to decide what to do with a lead — in one place.","k46":"From quantity to quality: which campaigns bring hot leads, what they share — and how that improves the next campaign.","k47":"iHoogi doesn’t stop at a score. Drill down to the question-and-answer level — and ask the system exactly what you care about.","k48":"Six short steps — with a quick how-to video beside them.","k49":"Already using a CRM? Perfect.<small>iHoogi adds the intelligence layer — without replacing your workflow.</small>","k50":"<span class=\"k\">Who</span> the lead is","k51":"<span class=\"k\">Score</span> & fit","k52":"<span class=\"k\">Source</span> of the lead and how long it’s been waiting","k53":"<span class=\"k\">Action</span> — next step","k54":"From the product — the decision center","k55":"Lead quantity","k56":"Quality & fit","k57":"A big number doesn’t mean the leads are a fit.","k58":"Campaign B brought fewer leads — but far more hot ones.","k59":"“Show me everyone who answered X”","k60":"“Which leads chose this service?”","k61":"“Which question gets skipped most?”","k62":"“What answers repeat among strong leads?”","k63":"The loop gets smarter and sharper over time.","k64":"Who needs attention now","k65":"Understand every answer","k66":"Why the lead is relevant","k67":"What to do next","k68":"Learn from every campaign","k69":"Track the next step","k70":"Every lead becomes information. Every insight becomes a smarter decision.","k71":"Lead intelligence for smarter marketing & sales","k72":"See what your leads are really telling you — before the conversation even starts.","k73":"Already have an account? Log in","k74":"What is iHoogi?","k75":"Does iHoogi replace my CRM?","k76":"How long does it take a lead to answer?","k77":"Can I use iHoogi across several campaigns?","k78":"Can I find leads by a specific answer?","k79":"Can iHoogi tell which campaigns bring better leads?","k80":"Can I track handling and response times?","k81":"iHoogi is a lead-intelligence platform that connects marketing and sales. It helps you ask the right questions, analyze the answers, score and prioritize leads — and hand your team useful context before the first conversation.","k82":"No. iHoogi doesn’t replace your CRM — it adds an intelligence layer between marketing and sales. You keep working as usual, just with a better understanding of every lead.","k83":"Seconds. The questions are deliberately short and focused — the customer never feels like they’re filling out a long form, yet you still get the information that matters.","k84":"Yes. Connect multiple sources and campaigns, and iHoogi brings the data together to compare quality and fit — not just volume.","k85":"Absolutely. You can drill down to the question-and-answer level — for example, show everyone who chose a specific service, or spot patterns that repeat among strong leads.","k86":"Yes. Instead of only asking how many leads a campaign brought, iHoogi helps you understand which leads it brought — and at what quality and fit — so you can sharpen the next one.","k87":"Yes. There are alerts, reminders, a status for every lead, team assignment and response-time tracking — so no hot lead ever slips through the cracks.","k88":"Lead intelligence for smarter marketing & sales. Know more — before you even say hello.","k89":"Product","k90":"Info","k91":"Account","k92":"Capabilities","k93":"Decision center","k94":"See the product","k95":"See how it works ","k96":"Getting started","k97":"FAQ","k98":"Try iHoogi","k99":"Request a demo","k100":"Log in","k101":"Contact","k102":"See how it works ","k103":"Why iHoogi","k104":"Capabilities","k105":"Product","k106":"Getting started","k107":"FAQ","k108":"Log in","k109":"Who came in?","k110":"What do they want?","k111":"How good a fit?","k112":"Why?","k113":"Where did the best leads come from?","k114":"Who to call now?","k115":"What do we learn for next time?","k116":"What you got","k117":"What actually matters","k118":"Full name","k119":"Phone number","k120":"…and that’s it.","k121":"What the customer really wants","k122":"How good a fit — and why","k123":"Urgency: who to call first","k124":"Which source / campaign it came from","k125":"Ask better","k126":"Understand better","k127":"Act better","k128":"Learn better","k129":"Questions that reveal what matters","k130":"Analysis, scoring & prioritization","k131":"Follow-up & sales execution","k132":"Marketing insight that compounds","k133":"Build short questions around your business, audience and goal","k134":"Surface decision-ready information — without a draining form","k135":"Tuned to what matters in your sale","k136":"A score and fit for every lead","k137":"Hot / warm / cold classification and ranking","k138":"The context and the “why” behind each lead","k139":"Alerts, reminders and status for every lead","k140":"WhatsApp, phone and email actions","k141":"Team assignment and response-time tracking","k142":"Which campaigns bring the right leads","k143":"What your strongest leads have in common","k144":"What to sharpen in the next campaign","k145":"Less time on basic questions","k146":"Fewer irrelevant calls","k147":"More time for the leads that matter","k148":"The essentials are ready before the call — no starting from scratch every time.","k149":"Spot early who’s a fit and who isn’t — and put your energy where it counts.","k150":"Hot leads rise to the top of the queue — handled while they’re still hot.","k151":"Ask","k152":"They answer","k153":"Understand","k154":"Act","k155":"Short, focused questions that surface what really matters.","k156":"Customers reply in moments — no long, draining form.","k157":"iHoogi analyzes the answers, scores and prioritizes.","k158":"You know who to call first — and what the next step is.","k159":"Set up","k160":"Build","k161":"Publish","k162":"Receive","k163":"Decide","k164":"Improve","k165":"Define your business, audience, goals and what matters when scoring a lead.","k166":"Build short, focused questions — fast.","k167":"Use the link anywhere your leads come from.","k168":"Customers answer — and leads arrive in iHoogi, already analyzed.","k169":"Work from the decision center — who to call and what to do.","k170":"Use what you’ve learned to improve questions, targeting and campaigns.","k171":"Campaigns","k172":"Landing pages","k173":"Website","k174":"Social","k175":"Partners","k176":"Overview video","k177":"Product walkthrough","k178":"Hot","k179":"Cold","k180":"Call now","k181":"Good for later follow-up","k182":"→ Instant segment","k183":"→ By service","k184":"→ Survey tuning","k185":"→ Quality pattern","k186":"Campaign A","k187":"Campaign B","k188":"Campaign A","k189":"Campaign B","k190":"The heart of the loop","k191":"Privacy · Terms of use","k192":"<span class=\"idx\">1</span><br>Advertise","k193":"<span class=\"idx\">2</span><br>Smart questions","k194":"<span class=\"idx\">3</span><br>Info from the customer","k195":"<span class=\"idx\">4</span><br>Analysis & scoring","k196":"<span class=\"idx\">5</span><br>Sales decision","k197":"<span class=\"idx\">6</span><br>Follow-up","k198":"<span class=\"idx\">7</span><br>Results","k199":"<span class=\"idx\">8</span><br>Marketing insight","k200":"<span class=\"idx\">1</span>Advertise","k201":"<span class=\"idx\">2</span>Smart questions","k202":"<span class=\"idx\">3</span>Info from the customer","k203":"<span class=\"idx\">4</span>Analysis & scoring","k204":"<span class=\"idx\">5</span>Sales decision","k205":"<span class=\"idx\">6</span>Follow-up","k206":"<span class=\"idx\">7</span>Results","k207":"<span class=\"idx\">8</span>Marketing insight → a better campaign","k208":"<span class=\"k\">What</span> they want","k209":"<span class=\"k\">Why</span> they’re a fit","k210":"<span class=\"k\">Source</span> of the lead","k211":"<span class=\"k\">Wait</span> time","k212":"Question-and-answer analysis — not just an overall score","k213":"Patterns that repeat among strong leads","k214":"What to improve in the form and next campaign","k215":"Marketing and sales learn from the same signal"}};
-const I18N_DOC = {"he": {"title": "iHoogi — בינת לידים לשיווק ומכירות חכמים יותר", "desc": "iHoogi הופך את המידע שמגיע עם כל ליד להחלטה עסקית טובה יותר — עוד לפני השיחה הראשונה."}, "en": {"title": "iHoogi — Lead Intelligence for Smarter Marketing & Sales", "desc": "iHoogi turns the information that arrives with every lead into a better business decision — before the first conversation."}};
+const I18N = {"he":{"k1":"דעו עם מי אתם מדברים — <span class=\"mark\">לפני</span> שאתם מרימים טלפון.","k2":"במקום לבזבז זמן על כל ליד שנכנס, iHoogi מראה לכם מי שווה טיפול, למה — ומה לעשות עכשיו.","k3":"התחילו חינם","k4":"התחילו חינם","k5":"איך זה עובד","k6":"התחילו חינם","k7":"לבקשת דמו","k8":"עובד לצד המערכות שכבר יש לכם","k9":"הלקוח משיב בשניות","k10":"הלקוח משיב בשניות","k11":"בינת לידים לשיווק ומכירות","k12":"הערך בקצרה","k13":"איך זה עובד","k14":"סרטון קצר","k15":"היכולות","k16":"מרכז ההחלטות","k17":"בינת שיווק ומכירות","k18":"מבט מקרוב","k19":"איך מתחילים","k20":"מהמייסדת","k21":"שאלות נפוצות","k22":"הלקוח שלכם משקיע שניות.<br>העסק שלכם חוסך שעות.","k23":"ארבעה צעדים — מליד להחלטה.","k24":"iHoogi בפעולה.","k25":"לא רק איסוף לידים.<br>מערכת החלטות חכמה.","k26":"לדעת למי לפנות, מתי ולמה.","k27":"לא רק לדעת כמה לידים הגיעו —<br>להבין מה באמת עובד.","k28":"תכירו את iHoogi מבפנים.","k29":"להתחיל עם iHoogi זה פשוט.","k30":"למה בניתי את iHoogi","k31":"כל מה שרציתם לדעת.","k32":"כל ליד הופך למידע.<br><span class=\"fade\">כל מידע הופך לתובנה.</span><br><span class=\"fade\">כל תובנה — להחלטה חכמה יותר.</span>","k33":"דעו יותר, עוד לפני שאמרתם שלום.","k34":"איש המכירות פותח את השיחה כשהוא כבר יודע עם מי הוא מדבר.","k35":"סקירה קצרה של מה שקורה כשליד נכנס — מהשאלות ועד לתיעדוף. כ-50 שניות שמראות את הרעיון כולו.","k36":"כל מה שצריך כדי להחליט מה לעשות עם ליד — במקום אחד. איש המכירות מתחיל עם הקשר, לא עם שאלות היכרות בסיסיות.","k37":"iHoogi יורדת עד רמת השאלה והתשובה: אילו קמפיינים מביאים לידים מתאימים, מה משותף ללידים החזקים, ועל מה כדאי לחדד בפעם הבאה.","k38":"רגע אנושי קצר — למה נולדה הפלטפורמה, ומה חשוב לי שתראו לפני שמתחילים.","k39":"<span class=\"k\">מי</span> הליד ומה הוא רוצה","k40":"<span class=\"k\">ציון</span> ההתאמה — ולמה","k41":"<span class=\"k\">מקור</span> הליד וזמן ההמתנה","k42":"<span class=\"k\">פעולה</span> הצעד הבא הנכון","k43":"<span class=\"k\">שאלה</span> לרדת עד תשובה בודדת ולפלח לפיה","k44":"<span class=\"k\">דפוס</span> אילו תשובות חוזרות אצל הלידים החזקים","k45":"<span class=\"k\">מקור</span> אילו קמפיינים מביאים איכות — לא רק כמות","k46":"<span class=\"k\">שיפור</span> מה לחדד בקמפיין הבא","k47":"מתוך המערכת — מרכז ההחלטות","k48":"ניתוח לפי שאלה — מתוך המערכת","k49":"כמות לידים","k50":"איכות והתאמה","k51":"מספר גדול לא אומר שהלידים מתאימים.","k52":"פחות לידים. הרבה יותר מהלידים שאתם באמת רוצים.","k53":"כל ליד מלמד אתכם משהו. הקמפיין הבא כבר מתחיל חכם יותר.","k54":"מי צריך תשומת לב עכשיו","k55":"להבין כל תשובה","k56":"מה נכון לעשות עכשיו","k57":"הלקוח משקיע שניות. העסק חוסך שעות. איש המכירות פותח את השיחה כשהוא כבר יודע עם מי הוא מדבר.","k58":"בינת לידים לשיווק ומכירות חכמים יותר","k59":"ראו מה הלידים שלכם באמת מספרים — עוד לפני שהשיחה מתחילה.","k60":"כבר יש לכם חשבון? כניסה","k61":"מה זה iHoogi?","k62":"האם iHoogi מחליף את הכלים שכבר יש לי?","k63":"כמה זמן לוקח לליד לענות?","k64":"אפשר להשתמש ב-iHoogi בכמה קמפיינים?","k65":"אפשר למצוא לידים לפי תשובה מסוימת?","k66":"אפשר לעקוב אחרי טיפול וזמני תגובה?","k67":"iHoogi היא פלטפורמת בינת לידים שמחברת בין שיווק למכירות. היא עוזרת לעסק לשאול את השאלות הנכונות, לנתח את התשובות, לדרג ולתעדף לידים — ולתת הקשר שימושי עוד לפני השיחה הראשונה.","k68":"לא. iHoogi לא באה במקום הכלים שלכם — היא מוסיפה שכבת חוכמה שמחברת בין השיווק למכירות. אתם ממשיכים לעבוד כרגיל, רק עם הבנה טובה יותר של כל ליד.","k69":"שניות. השאלות קצרות וממוקדות בכוונה — הלקוח לא אמור להרגיש שהוא ממלא שאלון ארוך, והעסק עדיין מקבל את המידע החשוב.","k70":"כן. אפשר לחבר מקורות וקמפיינים שונים, ו-iHoogi מרכזת את המידע כדי להשוות איכות והתאמה — לא רק כמות.","k71":"בהחלט. אפשר לרדת עד רמת השאלה והתשובה — למשל להציג את כל מי שבחר בשירות מסוים, או לזהות דפוסים שחוזרים אצל הלידים החזקים.","k72":"כן. יש התראות, תזכורות, סטטוס לכל ליד, שיוך צוות ומעקב אחרי זמני תגובה — כדי שאף ליד חם לא ייפול בין הכיסאות.","k73":"בינת לידים לשיווק ומכירות חכמים יותר. דעו יותר, עוד לפני שאמרתם שלום.","k74":"מוצר","k75":"מידע","k76":"חשבון","k77":"יכולות","k78":"מרכז ההחלטות","k79":"מבט על המערכת","k80":"איך זה עובד","k81":"איך מתחילים","k82":"שאלות נפוצות","k83":"התחילו חינם","k84":"בקשת דמו","k85":"כניסה","k86":"צור קשר","k87":"איך זה עובד","k88":"למה iHoogi","k89":"יכולות","k90":"המוצר","k91":"איך מתחילים","k92":"שאלות נפוצות","k93":"כניסה","k94":"שאלו טוב יותר","k95":"הבינו טוב יותר","k96":"פעלו טוב יותר","k97":"למדו טוב יותר","k98":"שאלות שמגלות את מה שחשוב","k99":"ניתוח, ציון ותיעדוף","k100":"מעקב וביצוע מכירה","k101":"תובנות שיווק שמצטברות","k102":"בונים שאלות קצרות לפי העסק, הקהל והמטרה","k103":"חושפים מידע להחלטה בלי שאלון מתיש","k104":"מותאם לפי מה שחשוב לכם במכירה","k105":"ציון והתאמה לכל ליד","k106":"סיווג חם / פושר / קר ותיעדוף","k107":"ההקשר וההסבר מאחורי כל ליד","k108":"התראות, תזכורות וסטטוס לכל ליד","k109":"פעולות WhatsApp, טלפון ומייל","k110":"שיוך צוות ומעקב זמני תגובה","k111":"אילו קמפיינים מביאים לידים מתאימים","k112":"מה משותף ללידים החזקים","k113":"מה לחדד בקמפיין הבא","k114":"פחות זמן על שאלות בסיס","k115":"פחות שיחות לא רלוונטיות","k116":"יותר זמן ללידים שחשובים","k117":"המידע החשוב כבר מחכה לפני השיחה — בלי לפתוח כל פעם מאפס.","k118":"מזהים מוקדם מי מתאים ומי פחות — ומפנים אנרגיה למקום הנכון.","k119":"הלידים החמים עולים לראש התור — כדי שיטופלו בזמן שהם עוד חמים.","k120":"שואלים נכון","k121":"הלקוח עונה","k122":"iHoogi מנתחת","k123":"אתם פועלים","k124":"שאלות קצרות וממוקדות שחושפות את מה שבאמת חשוב.","k125":"הלקוח משיב במהירות — בלי שאלון ארוך ומתיש.","k126":"iHoogi מנתחת את התשובות, מדרגת ומתעדפת.","k127":"העסק יודע למי לפנות קודם ומה הצעד הבא.","k128":"הגדרה","k129":"בנייה","k130":"פרסום","k131":"קבלה","k132":"החלטה","k133":"שיפור","k134":"מגדירים את העסק, הקהל, המטרות ומה חשוב כשמעריכים ליד.","k135":"בונים שאלות קצרות וממוקדות — מהר.","k136":"משתמשים בקישור בכל מקום שהלידים מגיעים ממנו.","k137":"הלקוחות עונים — והלידים נכנסים ל-iHoogi מנותחים.","k138":"עובדים ממרכז ההחלטות — למי לפנות ומה לעשות.","k139":"משתמשים במידע שהצטבר כדי לשפר שאלות, טירגוט וקמפיינים.","k140":"קמפיינים","k141":"דפי נחיתה","k142":"אתר","k143":"רשתות","k144":"שותפים","k145":"סרטון סקירה","k146":"חם","k147":"קר","k148":"לפנות עכשיו","k149":"מתאים למעקב מאוחר","k150":"קמפיין א׳","k151":"קמפיין ב׳","k152":"קמפיין א׳","k153":"קמפיין ב׳","k154":"הלב של הלולאה","k155":"שאלות קצרות","k156":"ניתוח תשובות","k157":"דירוג ותיעדוף","k158":"מעקב","k159":"תובנות לשיווק","k160":"מתחילים בחינם · בלי כרטיס אשראי","k161":"איכות מול כמות","k162":"כבר עובדים עם כלים אחרים? מצוין. <b>iHoogi מוסיפה את שכבת החוכמה</b> — בלי לשנות את תהליך העבודה שלכם.","k163":"פרטיות · תנאי שימוש","k164":"<span class=\"idx\">1</span><br>פרסום","k165":"<span class=\"idx\">2</span><br>שאלות חכמות","k166":"<span class=\"idx\">3</span><br>מידע מהלקוח","k167":"<span class=\"idx\">4</span><br>ניתוח וציון","k168":"<span class=\"idx\">5</span><br>החלטת מכירה","k169":"<span class=\"idx\">6</span><br>מעקב","k170":"<span class=\"idx\">7</span><br>תוצאות","k171":"<span class=\"idx\">8</span><br>תובנות שיווק","k172":"<span class=\"idx\">1</span>פרסום","k173":"<span class=\"idx\">2</span>שאלות חכמות","k174":"<span class=\"idx\">3</span>מידע מהלקוח","k175":"<span class=\"idx\">4</span>ניתוח וציון","k176":"<span class=\"idx\">5</span>החלטת מכירה","k177":"<span class=\"idx\">6</span>מעקב","k178":"<span class=\"idx\">7</span>תוצאות","k179":"<span class=\"idx\">8</span>תובנות שיווק → קמפיין טוב יותר","k180":"בגיוס נהגים אנחנו סוף־סוף יודעים למי כדאי לחזור — בלי לבזבז זמן על כל פנייה.","k181":"צוות גיוס · זיגזג — חברת שליחויות","k182":"צפו בסרטון קצר","k183":"בפרסום לריטריט ראינו מי באמת מעוניין — וזה חסך לנו המון שיחות שלא היו מובילות להרשמה.","k184":"ריס פרייבר · ריספורט"},"en":{"k1":"Know exactly who you’re talking to — <span class=\"mark\">before</span> you pick up the phone.","k2":"Instead of spending time on every lead that comes in, iHoogi shows you who’s worth your attention, why — and what to do now.","k3":"Start free","k4":"Start free","k5":"See how it works ","k6":"Start free","k7":"Request a demo","k8":"Works alongside your existing tools","k9":"Customers answer in seconds","k10":"Customers answer in seconds","k11":"Lead Intelligence for Sales & Marketing","k12":"The value, in short","k13":"See how it works ","k14":"Short video","k15":"Capabilities","k16":"Decision center","k17":"Sales & marketing intelligence","k18":"Inside the product","k19":"Getting started","k20":"From the founder","k21":"FAQ","k22":"Your customer spends seconds.<br>Your business saves hours.","k23":"Four steps — from lead to decision.","k24":"iHoogi in action.","k25":"Not just lead capture.<br>A smart decision system.","k26":"Know who to call, when, and why.","k27":"Not just knowing how many leads came in —<br>understand what actually works.","k28":"Meet iHoogi from the inside.","k29":"Getting started with iHoogi is simple.","k30":"Why I built iHoogi","k31":"Everything you wanted to know.","k32":"Every lead becomes information.<br><span class=\"fade\">Every piece of information becomes insight.</span><br><span class=\"fade\">Every insight — a smarter decision.</span>","k33":"Know more — before you even say hello.","k34":"Your salesperson opens every call already knowing who’s on the other end.","k35":"A quick look at what happens when a lead comes in — from the questions to prioritization. About 50 seconds that show the whole idea.","k36":"Everything you need to decide what to do with a lead — in one place. Your sales team starts with context, not with introductions.","k37":"iHoogi drills down to the question-and-answer level: which campaigns bring the right leads, what your strongest leads share, and what to sharpen next time.","k38":"A short human moment — why the platform was born, and what I want you to see before you start.","k39":"<span class=\"k\">Who</span> the lead is and what they want","k40":"<span class=\"k\">Fit</span> score — and why","k41":"<span class=\"k\">Source</span> and how long it’s waited","k42":"<span class=\"k\">Action</span> — the right next step","k43":"<span class=\"k\">Question</span> drill down to a single answer and segment by it","k44":"<span class=\"k\">Pattern</span> which answers repeat among strong leads","k45":"<span class=\"k\">Source</span> which campaigns bring quality — not just volume","k46":"<span class=\"k\">Improve</span> what to sharpen in the next campaign","k47":"From the product — the decision center","k48":"Question-level analysis — from the product","k49":"Lead quantity","k50":"Quality & fit","k51":"A big number doesn’t mean the leads are a fit.","k52":"Fewer leads. Far more of the leads you actually want.","k53":"Every lead teaches you something. The next campaign already starts smarter.","k54":"Who needs attention now","k55":"Understand every answer","k56":"What to do now","k57":"The customer spends seconds. The business saves hours. Your salesperson opens the call already knowing who’s on the line.","k58":"Lead intelligence for smarter marketing & sales","k59":"See what your leads are really telling you — before the conversation even starts.","k60":"Already have an account? Log in","k61":"What is iHoogi?","k62":"Does iHoogi replace the tools I already use?","k63":"How long does it take a lead to answer?","k64":"Can I use iHoogi across several campaigns?","k65":"Can I find leads by a specific answer?","k66":"Can I track handling and response times?","k67":"iHoogi is a lead-intelligence platform that connects marketing and sales. It helps you ask the right questions, analyze the answers, score and prioritize leads — and hand your team useful context before the first conversation.","k68":"No. iHoogi doesn’t replace your tools — it adds a smart layer that connects marketing and sales. You keep working as usual, just with a better understanding of every lead.","k69":"Seconds. The questions are deliberately short and focused — the customer never feels like they’re filling out a long form, yet you still get the information that matters.","k70":"Yes. Connect multiple sources and campaigns, and iHoogi brings the data together to compare quality and fit — not just volume.","k71":"Absolutely. You can drill down to the question-and-answer level — for example, show everyone who chose a specific service, or spot patterns that repeat among strong leads.","k72":"Yes. There are alerts, reminders, a status for every lead, team assignment and response-time tracking — so no hot lead ever slips through the cracks.","k73":"Lead intelligence for smarter marketing & sales. Know more — before you even say hello.","k74":"Product","k75":"Info","k76":"Account","k77":"Capabilities","k78":"Decision center","k79":"See the product","k80":"See how it works ","k81":"Getting started","k82":"FAQ","k83":"Start free","k84":"Request a demo","k85":"Log in","k86":"Contact","k87":"See how it works ","k88":"Why iHoogi","k89":"Capabilities","k90":"Product","k91":"Getting started","k92":"FAQ","k93":"Log in","k94":"Ask better","k95":"Understand better","k96":"Act better","k97":"Learn better","k98":"Questions that reveal what matters","k99":"Analysis, scoring & prioritization","k100":"Follow-up & sales execution","k101":"Marketing insight that compounds","k102":"Build short questions around your business, audience and goal","k103":"Surface decision-ready information — without a draining form","k104":"Tuned to what matters in your sale","k105":"A score and fit for every lead","k106":"Hot / warm / cold classification and ranking","k107":"The context and the “why” behind each lead","k108":"Alerts, reminders and status for every lead","k109":"WhatsApp, phone and email actions","k110":"Team assignment and response-time tracking","k111":"Which campaigns bring the right leads","k112":"What your strongest leads have in common","k113":"What to sharpen in the next campaign","k114":"Less time on basic questions","k115":"Fewer irrelevant calls","k116":"More time for the leads that matter","k117":"The essentials are ready before the call — no starting from scratch every time.","k118":"Spot early who’s a fit and who isn’t — and put your energy where it counts.","k119":"Hot leads rise to the top of the queue — handled while they’re still hot.","k120":"Ask the right questions","k121":"The customer answers","k122":"iHoogi analyzes","k123":"You act","k124":"Short, focused questions that surface what really matters.","k125":"Customers reply in moments — no long, draining form.","k126":"iHoogi analyzes the answers, scores and prioritizes.","k127":"You know who to call first — and what the next step is.","k128":"Set up","k129":"Build","k130":"Publish","k131":"Receive","k132":"Decide","k133":"Improve","k134":"Define your business, audience, goals and what matters when scoring a lead.","k135":"Build short, focused questions — fast.","k136":"Use the link anywhere your leads come from.","k137":"Customers answer — and leads arrive in iHoogi, already analyzed.","k138":"Work from the decision center — who to call and what to do.","k139":"Use what you’ve learned to improve questions, targeting and campaigns.","k140":"Campaigns","k141":"Landing pages","k142":"Website","k143":"Social","k144":"Partners","k145":"Overview video","k146":"Hot","k147":"Cold","k148":"Call now","k149":"Good for later follow-up","k150":"Campaign A","k151":"Campaign B","k152":"Campaign A","k153":"Campaign B","k154":"The heart of the loop","k155":"Short questions","k156":"Answer analysis","k157":"Scoring & prioritization","k158":"Follow-up","k159":"Marketing insight","k160":"Start free · no credit card","k161":"Quality vs. quantity","k162":"Already using other tools? Great. <b>iHoogi adds the smart layer</b> — without changing your workflow.","k163":"Privacy · Terms of use","k164":"<span class=\"idx\">1</span><br>Advertise","k165":"<span class=\"idx\">2</span><br>Smart questions","k166":"<span class=\"idx\">3</span><br>Info from the customer","k167":"<span class=\"idx\">4</span><br>Analysis & scoring","k168":"<span class=\"idx\">5</span><br>Sales decision","k169":"<span class=\"idx\">6</span><br>Follow-up","k170":"<span class=\"idx\">7</span><br>Results","k171":"<span class=\"idx\">8</span><br>Marketing insight","k172":"<span class=\"idx\">1</span>Advertise","k173":"<span class=\"idx\">2</span>Smart questions","k174":"<span class=\"idx\">3</span>Info from the customer","k175":"<span class=\"idx\">4</span>Analysis & scoring","k176":"<span class=\"idx\">5</span>Sales decision","k177":"<span class=\"idx\">6</span>Follow-up","k178":"<span class=\"idx\">7</span>Results","k179":"<span class=\"idx\">8</span>Marketing insight → a better campaign","k180":"When recruiting drivers we finally know who to call back — without spending time on every inquiry.","k181":"Recruiting team · Zigzag — delivery company","k182":"Watch a short video","k183":"In our retreat ads we saw who was truly interested — and that saved us a lot of calls that wouldn’t convert.","k184":"Reese Freiber · Resport"}};
+const I18N_DOC = {"he": {"title": "iHoogi — בינת לידים לשיווק ומכירות חכמים יותר", "desc": "iHoogi הופכת את המידע שמגיע עם כל ליד להחלטה עסקית טובה יותר — עוד לפני השיחה הראשונה."}, "en": {"title": "iHoogi — Lead Intelligence for Smarter Marketing & Sales", "desc": "iHoogi turns the information that arrives with every lead into a better business decision — before the first conversation."}};
 
 function applyLang(lang){
   const dict = I18N[lang] || {};
