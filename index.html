@@ -428,8 +428,10 @@ footer{background:#0a201e;color:#cfe6e2}
   .foot{grid-template-columns:1fr 1fr}
 }
 @media (max-width:820px){
-  .nav-links,.nav-cta{display:none}
-  .burger{display:flex}
+  .nav-links{display:none}
+  .nav-cta .login,.nav-cta .btn-primary{display:none}
+  .nav-cta{display:flex;margin-inline-start:auto;gap:8px}
+  .burger{display:flex;margin-inline-start:0}
   .nav-links.open{display:flex;position:absolute;inset-block-start:100%;inset-inline:12px;flex-direction:column;
     background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-lg);padding:10px;gap:2px}
   .nav-links.open a{padding:12px}
@@ -496,8 +498,14 @@ footer{background:#0a201e;color:#cfe6e2}
 [dir=ltr] .compare .mid>svg{transform:scaleX(-1)}
 [dir=ltr] .hero p.desc,[dir=ltr] .lead,[dir=ltr] .foot .brand-col p{max-width:60ch}
 [dir=ltr] .nav-inner{flex-direction:row}
-[dir=ltr] .nav-links{margin-inline-start:auto;margin-inline-end:0}
-[dir=ltr] .nav-cta{margin-inline-start:8px;margin-inline-end:0}
+[dir=ltr] .brand{order:1}
+[dir=ltr] .nav-links{order:2;margin-inline-start:auto;margin-inline-end:0}
+[dir=ltr] .nav-cta{order:3;margin-inline-start:8px;margin-inline-end:0}
+[dir=ltr] .burger{order:4;margin-inline-start:0}
+[dir=ltr] body{text-align:left}
+[dir=ltr] .center{text-align:center}
+[dir=ltr] .hero-copy,.hero .sub,.hero-title,.value .cell,.step,.pi,.video-copy,.proof-item,.faq,.foot{text-align:left}
+[dir=ltr] .center .eyebrow{justify-content:center}
 [dir=ltr] .eyebrow{letter-spacing:.08em}
 </style>
 <link href="assets/favicon.ico" rel="icon" sizes="any"/>
@@ -517,8 +525,8 @@ footer{background:#0a201e;color:#cfe6e2}
 <a data-i18n="k20" href="#proof">מהמייסדת</a>
 <a data-i18n="k91" href="#start">איך מתחילים</a>
 <a data-i18n="k92" href="#faq">שאלות נפוצות</a>
-<button aria-label="Switch language" class="lang-toggle mob" type="button">EN</button></nav>
-<div class="nav-cta"><button aria-label="Switch language" class="lang-toggle" type="button">EN</button>
+<button aria-label="Switch language" class="lang-toggle mob" type="button">English</button></nav>
+<div class="nav-cta"><button aria-label="Switch language" class="lang-toggle" type="button">English</button>
 <a class="login" data-i18n="k93" data-url="LOGIN_URL" href="#">כניסה</a>
 <a class="btn btn-primary" data-i18n="k3" data-url="SIGNUP_URL" href="https://www.ihoogi.com/profile" target="_blank" rel="noopener noreferrer">התחילו עכשיו</a>
 </div>
@@ -875,7 +883,7 @@ function applyLang(lang){
   const d = I18N_DOC[lang];
   if(d){ document.title = d.title;
     const m=document.querySelector('meta[name=description]'); if(m) m.setAttribute('content', d.desc); }
-  document.querySelectorAll('.lang-toggle').forEach(b=> b.textContent = (lang==='he') ? 'EN' : 'עב');
+  document.querySelectorAll('.lang-toggle').forEach(b=> b.textContent = (lang==='he') ? 'English' : 'עברית');
   try{ localStorage.setItem('ihoogi_lang', lang); }catch(e){}
 }
 (function(){
