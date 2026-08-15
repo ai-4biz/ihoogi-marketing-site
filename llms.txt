@@ -3,17 +3,15 @@
 > Official public marketing site. Fetch THIS URL only — not ihoogi.com.
 
 - **Canonical:** https://ai-4biz.github.io/ihoogi-marketing-site/
-- **Version:** ff3992c-live · 7 sections · source branch: main
 - **Version check:** https://ai-4biz.github.io/ihoogi-marketing-site/version.json
 
 ## How to verify you have the NEW site
 
-The page MUST contain:
+Open the canonical URL (no query params). The page MUST contain:
 - H1 (Hebrew): "נכנסו פניות. למי כדאי לחזור קודם?"
 - Founder section: "למה הקימתי את iHoogi"
-- Site version marker: `ff3992c-live`
 
-If you see "האם מכל הפניות שנכנסות" or "מערכת שאלונים חכמה" — you fetched an old cache or the wrong site (e.g. ihoogi.com).
+If you see "האם מכל הפניות שנכנסות" or "מערכת שאלונים חכמה" — wrong site or stale browser cache.
 
 ## Pages
 
