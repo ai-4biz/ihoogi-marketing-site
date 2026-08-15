@@ -1,15 +1,9 @@
 {
   "version": "rewrite-v2",
-  "commit": "0278ec5",
-  "canonical": "https://ai-4biz.github.io/ihoogi-marketing-site/",
+  "source": "main",
+  "url": "https://ai-4biz.github.io/ihoogi-marketing-site/",
   "fetch_for_ai": "https://ai-4biz.github.io/ihoogi-marketing-site/?v=rewrite-v2",
   "hero_marker_he": "מכל הפניות שנכנסות",
   "hero_marker_en": "Out of every inquiry that comes in",
-  "sections": 7,
-  "not_marketing": [
-    "https://ihoogi.com/",
-    "https://www.ihoogi.com/",
-    "https://www.ihoogi.co.il/"
-  ],
-  "note": "If fetch shows 'בינת לידים' or 11 sections — wrong URL (Angular app or old cache). Use canonical above."
+  "sections": 7
 }
