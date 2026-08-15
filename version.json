@@ -1,9 +1,10 @@
 {
-  "version": "rewrite-v2",
+  "version": "ff3992c-live",
   "source": "main",
   "url": "https://ai-4biz.github.io/ihoogi-marketing-site/",
-  "fetch_for_ai": "https://ai-4biz.github.io/ihoogi-marketing-site/?v=rewrite-v2",
-  "hero_marker_he": "מכל הפניות שנכנסות",
-  "hero_marker_en": "Out of every inquiry that comes in",
+  "fetch_for_ai": "https://ai-4biz.github.io/ihoogi-marketing-site/?v=ff3992c-live",
+  "hero_marker_he": "נכנסו פניות. למי כדאי לחזור קודם?",
+  "hero_marker_en": "Inquiries are coming in. Who should you respond to first?",
+  "founder_marker_he": "למה הקימתי את iHoogi",
   "sections": 7
 }

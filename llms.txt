@@ -3,16 +3,17 @@
 > Official public marketing site. Fetch THIS URL only — not ihoogi.com.
 
 - **Canonical:** https://ai-4biz.github.io/ihoogi-marketing-site/
-- **Version:** rewrite-v2 · 7 sections · source branch: main
+- **Version:** ff3992c-live · 7 sections · source branch: main
 - **Version check:** https://ai-4biz.github.io/ihoogi-marketing-site/version.json
 
 ## How to verify you have the NEW site
 
 The page MUST contain:
-- H1 (Hebrew): "מכל הפניות שנכנסות — אתם יודעים לזהות את זו שתביא את הלקוח הבא?"
-- Section: "לצד המערכת שלכם, או במקומה — לבחירתכם."
+- H1 (Hebrew): "נכנסו פניות. למי כדאי לחזור קודם?"
+- Founder section: "למה הקימתי את iHoogi"
+- Site version marker: `ff3992c-live`
 
-If you see "מערכת שאלונים חכמה" or "בינת לידים" — you fetched the wrong site (Angular app at ihoogi.com).
+If you see "האם מכל הפניות שנכנסות" or "מערכת שאלונים חכמה" — you fetched an old cache or the wrong site (e.g. ihoogi.com).
 
 ## Pages
 
