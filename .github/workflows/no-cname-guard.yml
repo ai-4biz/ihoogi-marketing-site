@@ -1,4 +1,7 @@
-name: Block CNAME (protect github.io URL)
+name: Allow only approved CNAME (dual-URL)
+
+# Policy: www.ihoogi.co.il is an ADDITION.
+# github.io URL must remain available; do not treat custom domain as a replacement.
 
 on:
   push:
@@ -11,10 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fail if CNAME file exists
+      - name: Allow only www.ihoogi.co.il CNAME
         run: |
-          if [ -f CNAME ]; then
-            echo "::error::CNAME must not exist — it breaks https://ai-4biz.github.io/ihoogi-marketing-site/"
+          if [ ! -f CNAME ]; then
+            echo "::error::CNAME missing — expected www.ihoogi.co.il (addition alongside github.io)"
             exit 1
           fi
-          echo "OK: no CNAME file"
+          actual="$(tr -d '[:space:]' < CNAME)"
+          expected="www.ihoogi.co.il"
+          if [ "$actual" != "$expected" ]; then
+            echo "::error::CNAME must be exactly '$expected' (got '$actual')"
+            exit 1
+          fi
+          echo "OK: CNAME=$actual (github.io remains available as parallel URL)"
