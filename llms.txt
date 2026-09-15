@@ -1,13 +1,17 @@
 # iHoogi — Marketing Site (main)
 
-> Official public marketing site. Fetch THIS URL only — not ihoogi.com.
+> Official public marketing site. Fetch THESE URLs — not ihoogi.com (app).
 
-- **Canonical:** https://ai-4biz.github.io/ihoogi-marketing-site/
-- **Version check:** https://ai-4biz.github.io/ihoogi-marketing-site/version.json
+- **Primary (new):** https://www.ihoogi.co.il/
+- **Parallel (existing):** https://ai-4biz.github.io/ihoogi-marketing-site/
+- **Version check:** https://www.ihoogi.co.il/version.json
+- **Version check (github.io):** https://ai-4biz.github.io/ihoogi-marketing-site/version.json
+
+Both URLs serve the same marketing site. The custom domain is an addition, not a replacement.
 
 ## How to verify you have the NEW site
 
-Open the canonical URL (no query params). The page MUST contain:
+Open either URL (no query params). The page MUST contain:
 - H1 (Hebrew): "נכנסו פניות. למי כדאי לחזור קודם?"
 - Founder section: "למה הקימתי את iHoogi"
 
@@ -15,4 +19,5 @@ If you see "האם מכל הפניות שנכנסות" or "מערכת שאלונ
 
 ## Pages
 
-- [Home](https://ai-4biz.github.io/ihoogi-marketing-site/)
+- [Home (www)](https://www.ihoogi.co.il/)
+- [Home (github.io)](https://ai-4biz.github.io/ihoogi-marketing-site/)
