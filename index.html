@@ -741,6 +741,17 @@ section[id],span[id]{scroll-margin-top:78px}
   .hero-visual .frame img{width:100%;max-height:none;object-fit:contain}
   .trust-strip{margin-top:4px;margin-bottom:28px}
 }
+
+/* iPhone hero containment — final narrow-screen guard */
+@media (max-width:560px){
+  .hero .wrap{width:100%;max-width:100%;padding-inline:20px}
+  .hero-grid,.hero-copy{width:100%;max-width:100%;min-width:0}
+  .hero h1,.hero-title{width:100%;max-width:100%;font-size:clamp(1.72rem,7.7vw,2.05rem)!important;line-height:1.12!important;white-space:normal!important;word-break:normal;overflow-wrap:normal;text-wrap:pretty}
+  .hero h1 br,.hero-title br{display:none}
+  .hero .hl{white-space:normal!important}
+  .hero-lead{width:100%;max-width:100%;font-size:.98rem;line-height:1.55;overflow-wrap:break-word}
+  .hero-visual{overflow:hidden}
+}
 </style>
 <link href="assets/favicon.ico" rel="icon" sizes="any"/>
 </head>
