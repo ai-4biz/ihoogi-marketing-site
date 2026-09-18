@@ -752,6 +752,13 @@ section[id],span[id]{scroll-margin-top:78px}
   .hero-lead{width:100%;max-width:100%;font-size:.98rem;line-height:1.55;overflow-wrap:break-word}
   .hero-visual{overflow:hidden}
 }
+
+/* iOS sticky-header anchor/initial-paint guard */
+@media (max-width:560px){
+  html{scroll-padding-top:92px}
+  #top{display:block;height:0;scroll-margin-top:92px}
+  .hero{scroll-margin-top:92px}
+}
 </style>
 <link href="assets/favicon.ico" rel="icon" sizes="any"/>
 </head>
