@@ -721,6 +721,26 @@ section[id],span[id]{scroll-margin-top:78px}
 /* Mobile/performance polish */
 @media(max-width:900px){.hero-visual .frame img{max-height:520px;object-fit:contain}.mobile-beat .shot img,.system-row img{width:100%;height:auto}.lang-toggle.mob{display:block}.nav-cta .lang-toggle{display:none}}
 @media(min-width:901px){.lang-toggle.mob{display:none!important}.nav-cta .lang-toggle{display:inline-flex}}
+
+/* Hero mobile QA fix — keep the first screen compact and prevent RTL clipping */
+@media (max-width:560px){
+  .hero{overflow:hidden}
+  .hero-grid{padding-block:24px 30px;gap:22px}
+  .hero-copy{min-width:0;text-align:right}
+  .hero-copy .hero-brand{margin-bottom:10px}
+  .hero-copy .eyebrow{font-size:.82rem;margin-bottom:8px}
+  .hero h1,.hero-title{font-size:clamp(1.9rem,9vw,2.35rem);line-height:1.08;letter-spacing:0;max-width:100%;overflow-wrap:anywhere}
+  .hero-lead{font-size:1rem;line-height:1.55;margin-top:12px;max-width:100%}
+  .launch-offer{margin-top:16px;padding:15px 14px}
+  .launch-offer strong{font-size:.98rem}
+  .hero-actions{margin-top:12px;gap:10px}
+  .hero-actions .btn{width:100%;white-space:normal;text-align:center;line-height:1.25;padding:15px 12px}
+  .cta-micro{font-size:.88rem;margin-top:9px}
+  .hero-visual{width:100%;max-width:100%;margin-inline:auto}
+  .hero-visual .frame{width:100%;border-radius:18px}
+  .hero-visual .frame img{width:100%;max-height:none;object-fit:contain}
+  .trust-strip{margin-top:4px;margin-bottom:28px}
+}
 </style>
 <link href="assets/favicon.ico" rel="icon" sizes="any"/>
 </head>
