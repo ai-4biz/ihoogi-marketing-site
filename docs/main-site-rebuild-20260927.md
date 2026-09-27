@@ -82,3 +82,10 @@ Subsequent confirmed offer: both assisted setup and self-service receive the fir
 The page uses Rona's first-person voice for setup, with “בנו לי לינק” as the primary action. Necessary Hebrew maqaf punctuation was restored without reintroducing long rhetorical dashes. Cookie consent now appears as a compact strip in normal document flow before the header, rather than a fixed overlay. Reopening preferences scrolls to the strip and focuses its controls. DOM checks cover consent and language behavior; real viewport rendering remains unverified in this environment.
 
 Image-edit prompt: preserve the supplied screenshot layout, Hebrew, score 85, hot badge, contact buttons and answers; replace only the name with “לקוח לדוגמה”, phone with “05X-XXXXXXX” and email with “name@example.com”. The page composition uses HTML/CSS and the existing owl asset.
+
+
+### Brand image correction
+
+Rona rejected the old flat owl asset beside the screenshot. The hero now uses a single generated photograph based on the original Rona/Hoogi brand images, with a phone facing the viewer and the demonstration UI supplied as a reference. It is labeled as a product illustration, not an unedited screenshot. Built-in image editing was used; the complete resulting image was encoded as WebP at its original dimensions for web delivery. No application logic changed.
+
+Prompt: preserve Rona's identity and the established dimensional teal/orange Hoogi character from the original office/cafe references; compose them together naturally with a prominent portrait phone showing the supplied demo inquiry, score 85 and contact buttons; warm original brand atmosphere, realistic hands, no additional marketing text or invented performance numbers.
