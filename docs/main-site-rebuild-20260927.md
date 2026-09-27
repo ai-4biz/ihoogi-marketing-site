@@ -71,3 +71,14 @@ Adapt the same promise and mechanism to the beauty workflow, using the beauty-sp
 - Consent scenarios: no Meta script/event before consent; accepting loads one PageView; questionnaire clicks emit intent only, not Lead; withdrawing consent suppresses subsequent intent events; saved essential/all choices are respected.
 - `git diff --check`: clean.
 - Not completed: real-browser desktop/mobile visual inspection, live questionnaire submission, real Meta delivery verification or conversion testing. DOM checks are not a replacement for those checks.
+
+
+## Review changes accepted on 27 September
+
+The original fictional hero inquiry card was removed after Rona found it unclear. The current hero places Hoogi beside a phone frame containing an edited copy of her supplied system screen. The name and contact details were replaced using the built-in image editing tool; the page labels it as based on a system screen with replacement contact details. The original unredacted screenshot is not included in the repository. The generated asset is `assets/img/mobile-inquiry-demo.png`.
+
+Subsequent confirmed offer: both assisted setup and self-service receive the first 50 incoming inquiries ranked free. Two clearly distinguished CTAs now link to those flows, with attribution preserved for both. Company inquiries can contact office@ihoogi.com. Rona confirmed over 25 years of experience and plans starting at ₪299/month excluding VAT.
+
+The page uses Rona's first-person voice for setup, with “בנו לי לינק” as the primary action. Necessary Hebrew maqaf punctuation was restored without reintroducing long rhetorical dashes. Cookie consent now appears as a compact strip in normal document flow before the header, rather than a fixed overlay. Reopening preferences scrolls to the strip and focuses its controls. DOM checks cover consent and language behavior; real viewport rendering remains unverified in this environment.
+
+Image-edit prompt: preserve the supplied screenshot layout, Hebrew, score 85, hot badge, contact buttons and answers; replace only the name with “לקוח לדוגמה”, phone with “05X-XXXXXXX” and email with “name@example.com”. The page composition uses HTML/CSS and the existing owl asset.
