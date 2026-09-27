@@ -1,925 +1,304 @@
-<!DOCTYPE html>
-<html dir="rtl" lang="he">
+<!doctype html>
+<html lang="he" dir="rtl">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
-<meta content="no-cache" http-equiv="Pragma"/>
-<meta content="0" http-equiv="Expires"/>
-<!-- Meta Pixel is loaded only after marketing-cookie consent. -->
-<link href="https://www.ihoogi.co.il/" rel="canonical"/>
-<link href="llms.txt" rel="alternate" title="LLM site description" type="text/plain"/>
-<title>iHoogi · דעו על מי לענות קודם</title>
-<meta content="iHoogi היא מערכת חכמה להבנת פניות — מבינה ומנתחת כל פנייה עוד לפני השיחה הראשונה, כדי שתדעו במי לטפל קודם ומה לעשות הלאה." name="description"/>
-<meta content="iHoogi · דעו על מי לענות קודם" property="og:title"/>
-<meta content="https://www.ihoogi.co.il/" property="og:url"/>
-<meta content="נבנה עבורכם לינק חכם שמותאם לעסק שלכם. 50 הפניות הראשונות שייכנסו דרכו ידורגו במתנה, ללא התחייבות וללא כרטיס אשראי." property="og:description"/>
-<meta content="assets/img/hero_key_visual.jpg" property="og:image"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&amp;family=Assistant:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<style>/* =========================================================
-   iHoogi Marketing Mini-Site — design tokens (from brief + real assets)
-   ========================================================= */
-
-:root{
-  /* brand */
-  --turquoise:#12B5A8;
-  --brand-strong:#0C9083;
-  --action:#0A7F75;
-  --action-hover:#08766D;
-  --action-pressed:#066D65;
-  /* warm accent (from the real iHoogi logo / owl) — used sparingly */
-  --owl:#F2790A;
-  --owl-soft:#FFF1E6;
-  /* ink & surface */
-  --ink:#111827;
-  --ink-2:#374151;
-  --muted:#4B5563;
-  --line:#E7ECEF;
-  --line-2:#EDF1F3;
-  --bg:#FFFFFF;
-  --soft:#F8FAFC;
-  --soft-2:#F1F5F9;
-  --teal-wash:#EAFbF9;
-  /* lead intelligence (semantic — temperature only) */
-  --hot:#C2415D;         --hot-soft:#FCE8ED;
-  --warm:#D97706;        --warm-soft:#FFEDD5;
-  --cold:#60778E;        --cold-soft:#EEF3F6;
-  --unknown:#6B7280;     --unknown-soft:#F3F4F6;
-  /* radius */
-  --r-xs:8px; --r-sm:12px; --r:16px; --r-lg:18px; --r-xl:24px; --pill:999px;
-  /* shadow (soft, teal-tinted) */
-  --sh-sm:0 1px 2px rgba(16,40,38,.06), 0 1px 3px rgba(16,40,38,.05);
-  --sh:0 6px 18px rgba(12,90,82,.08), 0 2px 6px rgba(12,90,82,.06);
-  --sh-lg:0 24px 60px rgba(12,90,82,.14), 0 8px 20px rgba(12,90,82,.08);
-  /* type */
-  --display:'Rubik','Assistant','Segoe UI','Noto Sans Hebrew',Arial,sans-serif;
-  --body:'Assistant','Segoe UI','Noto Sans Hebrew',Arial,sans-serif;
-  --wrap:1180px;
-}
+<meta charset="utf-8"><meta name="viewport" content="width=device width, initial scale=1, viewport fit=cover">
+<title>iHoogi · דעו למי לחזור קודם, ולמה</title>
+<meta name="description" content="לינק חכם שמכיר את העסק שלכם, שואל את הלקוחות שאלות מתאימות ומדרג את הפניות עם הסבר. הקמה אישית ו־50 פניות ראשונות בדירוג, במתנה.">
+<link rel="canonical" href="https://www.ihoogi.co.il/">
+<meta property="og:title" content="iHoogi · דעו למי לחזור קודם, ולמה">
+<meta property="og:description" content="לינק חכם שמברר, מדרג ומסביר מי מתאים לעסק שלכם. הקמה אישית ו־50 פניות ראשונות בדירוג במתנה.">
+<meta property="og:url" content="https://www.ihoogi.co.il/"><meta property="og:type" content="website"><meta property="og:locale" content="he_IL">
+<meta property="og:image" content="https://www.ihoogi.co.il/assets/img/hero_key_visual.jpg">
+<meta name="theme-color" content="#08675f"><link rel="icon" href="assets/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#123d3c;--muted:#506b69;--teal:#08675f;--mint:#eaf5ef;--paper:#fcfcf8;--line:#dbe6df;--orange:#ef9658;--shadow:0 18px 55px #123d3c0d;font-family:Arial,sans-serif;color:var(--ink);background:var(--paper)}
 
 *{box-sizing:border-box}
-
-html{scroll-behavior:smooth}
-
-body{margin:0;font-family:var(--body);color:var(--ink);background:var(--bg);
-  font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;overflow-x:hidden;
-}
-
-img{max-width:100%;display:block}
-
-a{color:inherit;text-decoration:none}
-
-h1,h2,h3{font-family:var(--display);margin:0;line-height:1.12;letter-spacing:-.01em}
-
-p{margin:0}
-
-::selection{background:var(--turquoise);color:#fff}
-
-.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:22px}
-
-.section{padding-block:clamp(48px,6vw,72px)}
-
-.eyebrow{
-  font-family:var(--display);font-weight:500;font-size:.9rem;letter-spacing:.06em;
-  color:var(--action);display:inline-flex;align-items:center;gap:9px;margin-bottom:16px;
-}
-
-.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--turquoise)}
-
-.hero-copy .eyebrow::before{display:none}
-
-.h2{font-size:clamp(1.6rem,3vw,2.375rem);font-weight:700;color:var(--ink)}
-
-.lead{color:var(--ink-2);font-size:clamp(1.08rem,1.7vw,1.22rem);max-width:60ch}
-
-.center{text-align:center}
-
-.center .eyebrow{justify-content:center}
-
-.center .lead{margin-inline:auto}
-
-/* ---------- buttons ---------- */
-
-.btn{
-  display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;
-  font-size:1rem;padding:14px 24px;border-radius:var(--r-xs);border:1px solid transparent;
-  cursor:pointer;transition:transform .16s ease,background .16s ease,box-shadow .16s ease,border-color .16s;
-  line-height:1;white-space:nowrap;
-}
-
-.btn:focus-visible{outline:3px solid rgba(18,181,168,.45);outline-offset:2px}
-
-.btn-primary{background:var(--action);color:#fff;box-shadow:0 6px 16px rgba(10,127,117,.28)}
-
-.btn-primary:hover{background:var(--action-hover);transform:translateY(-1px);box-shadow:0 10px 22px rgba(10,127,117,.32)}
-
-.btn-primary:active{background:var(--action-pressed);transform:translateY(0)}
-
-.btn-ghost{background:#fff;color:var(--action);border-color:var(--line)}
-
-.btn-ghost:hover{border-color:var(--turquoise);color:var(--action-hover);transform:translateY(-1px);box-shadow:var(--sh-sm)}
-
-.btn-lg{padding:17px 30px;font-size:1.06rem}
-
-/* RTL: arrow points/moves left */
-
-/* ---------- header ---------- */
-
-header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);
-  backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid transparent;transition:border-color .2s,box-shadow .2s,padding .2s}
-
-header.nav.scrolled{border-color:var(--line);box-shadow:0 1px 0 rgba(16,40,38,.04)}
-
-.nav-inner{max-width:var(--wrap);margin-inline:auto;padding:14px 22px;display:flex;align-items:center;gap:22px}
-
-.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
-
-.brand img{height:34px;width:auto}
-
-.brand .mascot{height:42px;width:auto}
-
-.hero-brand{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-
-.hero-brand .mascot{height:72px;width:auto;flex-shrink:0;filter:drop-shadow(0 8px 18px rgba(10,127,117,.18))}
-
-.hero-brand .word{font-family:var(--display);font-weight:800;font-size:clamp(1.55rem,3vw,2rem);color:var(--ink);letter-spacing:-.02em}
-
-.video-cta{margin-top:22px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-
-.nav-links{display:flex;align-items:center;gap:6px;margin-inline-start:auto}
-
-.nav-links a{font-size:.95rem;color:var(--ink-2);font-weight:500;padding:9px 12px;border-radius:var(--r-xs);transition:color .15s,background .15s}
-
-.nav-links a:hover{color:var(--action);background:var(--soft-2)}
-
-.nav-cta{display:flex;align-items:center;gap:10px;margin-inline-start:8px}
-
-.nav-cta .login{font-weight:600;color:var(--action);padding:9px 12px;border-radius:var(--r-xs)}
-
-.nav-cta .login:hover{background:var(--teal-wash)}
-
-.burger{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:44px;height:44px;
-  align-items:center;justify-content:center;cursor:pointer;margin-inline-start:auto}
-
-.burger span{display:block;width:20px;height:2px;background:var(--ink);position:relative}
-
-.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:var(--ink)}
-
-.burger span::before{top:-6px}
-
-.burger span::after{top:6px}
-
-/* ---------- hero ---------- */
-
-.hero{position:relative;background:
-  radial-gradient(120% 120% at 90% 0%, var(--teal-wash) 0%, rgba(234,251,249,0) 46%),
-  linear-gradient(180deg,#fff 0%, var(--soft) 100%);
-  overflow:hidden}
-
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,68px);align-items:center;
-  padding-block:clamp(46px,7vw,92px)}
-
-.hero h1{font-size:clamp(2.125rem,4vw,3.375rem);color:var(--ink);max-width:680px}
-
-.hero-title{font-weight:700;line-height:1.1;letter-spacing:-0.01em;text-wrap:balance;margin-bottom:clamp(10px,1.8vw,16px);max-width:680px}
-
-.hl{color:var(--action);font-weight:700;white-space:nowrap}
-
-.hero-lead{margin:clamp(14px,2.2vw,22px) 0 0;font-family:var(--body);font-weight:400;color:var(--ink-2);opacity:1;
-  font-size:1.125rem;line-height:1.65;max-width:680px}
-
-.hero-empower{margin:clamp(14px,2vw,20px) 0 0;font-family:var(--display);font-weight:600;
-  color:var(--brand-strong);font-size:clamp(.94rem,1.4vw,1.05rem);line-height:1.48;opacity:.92;max-width:min(52ch,100%)}
-
-.hero .trust{margin-top:26px;display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}
-
-.hero .trust span{display:inline-flex;align-items:center;gap:7px}
-
-.hero .trust svg{color:var(--turquoise)}
-
-.hero-visual{position:relative}
-
-.hero-visual .frame{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);
-  border:1px solid rgba(255,255,255,.6);background:#fff}
-
-.hero-visual .frame img{width:100%;height:auto}
-
-/* floating temperature chip on hero */
-
-.float-chip{position:absolute;background:#fff;border:1px solid var(--line);border-radius:var(--r);
-  box-shadow:var(--sh);padding:12px 15px;display:flex;align-items:center;gap:12px;font-size:.9rem}
-
-.float-chip.a{inset-block-start:22px;inset-inline-start:-14px}
-
-.float-chip.b{inset-block-end:24px;inset-inline-end:-12px}
-
-.score-ring{width:44px;height:44px;flex-shrink:0;position:relative}
-
-.score-ring svg{transform:rotate(-90deg)}
-
-.score-ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-weight:700;font-size:.9rem;color:var(--ink)}
-
-/* ---------- temperature badge (signature semantic system) ---------- */
-
-.temp{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:.82rem;
-  padding:5px 11px;border-radius:var(--pill);font-family:var(--display)}
-
-.temp .dot{width:8px;height:8px;border-radius:50%}
-
-.temp.hot{background:var(--hot-soft);color:var(--hot)}
-
-.temp.hot .dot{background:var(--hot)}
-
-.temp.cold{background:var(--cold-soft);color:var(--cold)}
-
-.temp.cold .dot{background:var(--cold)}
-
-/* ---------- empowerment strip + manifesto ---------- */
-
-.manifesto-punch{font-size:1.2rem;font-weight:700;color:var(--ink);margin:14px 0}
-
-/* ---------- value strip ---------- */
-
-.value{background:var(--soft)}
-
-.value-sub{margin:10px 0 0;font-family:var(--display);font-weight:600;color:var(--brand-strong);
-  font-size:clamp(.98rem,1.4vw,1.08rem);line-height:1.45;opacity:.82;max-width:min(42ch,100%)}
-
-.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
-
-.value .tri{grid-template-columns:repeat(2,1fr);margin-top:24px;gap:16px}
-
-.value .tri .cell{padding:20px}
-
-.tri .cell{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px}
-
-.tri .cell .ic{width:42px;height:42px;border-radius:12px;background:var(--teal-wash);color:var(--action);
-  display:flex;align-items:center;justify-content:center;margin-bottom:14px}
-
-.tri .cell h3{font-size:1.08rem;font-weight:700;margin-bottom:6px}
-
-.tri .cell p{color:var(--muted);font-size:.96rem}
-
-/* ---------- problem (before/after) ---------- */
-
-/* ---------- how it works (4 steps) ---------- */
-
-.steps4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px;counter-reset:s}
-
-.steps3{grid-template-columns:repeat(3,1fr)}
-
-#onelink .steps4{grid-template-columns:repeat(4,1fr)}
-
-.step{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 22px}
-
-.step .num{font-family:var(--display);font-weight:800;font-size:.95rem;color:#fff;background:var(--action);
-  width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-
-.step h3{font-size:1.12rem;font-weight:700;margin-bottom:6px}
-
-.step p{color:var(--muted);font-size:.96rem}
-
-.step::after{content:"";position:absolute;inset-block-start:43px;inset-inline-start:-8px;width:16px;height:2px;
-  background:repeating-linear-gradient(90deg,var(--turquoise) 0 4px,transparent 4px 8px)}
-
-.step:last-child::after{display:none}
-
-/* ---------- video component ---------- */
-
-.video-band{background:var(--soft)}
-
-.video-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,60px);align-items:center;margin-top:8px}
-
-.video-copy .h2{color:inherit}
-
-.video-copy .lead{margin-top:12px;margin-bottom:0;max-width:52ch;font-size:clamp(1rem,1.5vw,1.14rem)}
-
-.video-copy .video-bridge{margin:10px 0 0;color:var(--muted);font-size:clamp(.88rem,1.15vw,.94rem);line-height:1.45;max-width:52ch}
-
-.video-band.dark .eyebrow::before{background:#7fe3d8}
-
-.player{position:relative;max-width:340px;margin-inline:auto;border-radius:var(--r-lg);overflow:hidden;
-  box-shadow:var(--sh-lg);background:#000;aspect-ratio:9/16}
-
-.player video{width:100%;height:100%;object-fit:cover;display:block;background:#000}
-
-.player .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:pointer}
-
-.player .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.28));transition:opacity .2s}
-
-.player .play .btn-play{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.92);
-  display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.3);transition:transform .18s}
-
-.player .play:hover .btn-play{transform:scale(1.06)}
-
-.player .play .btn-play svg{color:var(--action);margin-inline-start:4px}
-
-.player.playing .play,.player.playing .poster{opacity:0;pointer-events:none}
-
-.video-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
-  border-radius:var(--pill);padding:6px 14px;font-size:.85rem;color:var(--ink-2);font-weight:600;font-family:var(--display)}
-
-/* ---------- use options (with / without existing system) ---------- */
-
-.use-options{max-width:min(920px,100%);margin:28px auto 0;grid-template-columns:repeat(2,1fr);gap:18px}
-
-.use-options .cell{display:flex;flex-direction:column;min-height:100%}
-
-.use-options .cell h3{font-size:1.08rem;font-weight:700;margin-bottom:8px;color:var(--ink)}
-
-.use-options .cell p{color:var(--muted);font-size:.96rem;margin:0;line-height:1.5;flex:1}
-
-#features .fit-intro{max-width:min(960px,100%);margin-inline:auto}
-
-#features .fit-headline{font-size:clamp(1.35rem,2.4vw,1.85rem);line-height:1.22;letter-spacing:-0.01em;text-wrap:balance;
-  max-width:min(900px,100%);margin:0 auto;color:var(--ink);font-weight:700}
-
-/* ---------- product intelligence (4 groups) ---------- */
-
-.pi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:44px}
-
-.pi{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;transition:transform .18s,box-shadow .18s,border-color .18s}
-
-.pi:hover{transform:translateY(-3px);box-shadow:var(--sh);border-color:rgba(18,181,168,.3)}
-
-.pi h3{font-size:1.24rem;font-weight:700;margin-bottom:14px}
-
-.pi ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
-
-.pi li{display:flex;gap:9px;color:var(--ink-2);font-size:.98rem}
-
-.pi li svg{color:var(--turquoise);flex-shrink:0;margin-top:3px}
-
-.pi p{color:var(--muted);font-size:.98rem;margin:0}
-
-/* ---------- sales intelligence (real screenshot) ---------- */
-
-/* just to flip visual order; content stays rtl */
-
-.shot{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-lg);border:1px solid var(--line);background:#fff}
-
-.shot img{width:100%;height:auto}
-
-/* ---------- marketing intelligence (quantity vs quality) ---------- */
-
-.qq{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
-
-.qq .card{border-radius:var(--r-lg);padding:28px;border:1px solid var(--line)}
-
-.qq .q1{background:var(--soft-2)}
-
-.qq .q2{background:linear-gradient(180deg,var(--teal-wash),#fff);border-color:rgba(18,181,168,.28)}
-
-.qq h3{font-size:1.1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:9px}
-
-.bars{display:grid;gap:10px}
-
-.bar{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:10px;font-size:.9rem}
-
-.bar .track{height:12px;border-radius:var(--pill);background:#fff;overflow:hidden;border:1px solid var(--line)}
-
-.bar .fill{height:100%;border-radius:var(--pill)}
-
-.qq .note{margin-top:18px;color:var(--muted);font-size:.92rem}
-
-/* ---------- question-level intelligence ---------- */
-
-/* ---------- intelligence loop (signature) ---------- */
-
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* ---------- gallery ---------- */
-
-/* ---------- founder mini + proof ---------- */
-
-.founder-mini{display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:start;max-width:820px;margin:48px auto 0;padding:22px 24px;background:#fff;border:1px solid rgba(18,181,168,.18);border-radius:18px}
-
-.founder-mini img{width:120px;height:120px;object-fit:cover;border-radius:50%;border:3px solid #fff;box-shadow:0 8px 24px rgba(15,45,60,.12)}
-
-.founder-mini .eyebrow{margin-bottom:6px}
-
-.founder-mini h3{font-size:1.25rem;font-weight:800;margin:0 0 8px;line-height:1.25}
-
-.founder-mini p{margin:0;color:var(--ink-2);font-size:.98rem;max-width:56ch}
-
-.founder-mini p + p{margin-top:10px}
-
-.founder-mini .manifesto-punch{font-size:1.05rem;font-weight:700;color:var(--ink);margin:12px 0}
-
-.founder-mini .play-mini{display:inline-flex;align-items:center;gap:8px;margin-top:14px;color:var(--action);font-weight:700;font-size:.92rem;cursor:pointer;background:none;border:0;padding:0;font-family:inherit}
-
-.founder-mini .play-mini svg{flex:0 0 auto}
-
-.proof{max-width:860px;margin:0 auto;text-align:center}
-
-.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
-
-.proof-item{text-align:start}
-
-.proof-item blockquote{font-size:1.05rem}
-
-@media (max-width:720px){.proof-grid{grid-template-columns:1fr}}
-
-.proof blockquote{margin:0;font-size:1.2rem;line-height:1.55;font-weight:600;color:var(--ink);quotes:none}
-
-.proof blockquote::before{content:"\201C";color:var(--turquoise);font-size:1.6em;line-height:0;vertical-align:-.25em;margin-inline-end:4px}
-
-.proof .who{margin-top:14px;color:var(--muted);font-size:.92rem}
-
-@media (max-width:640px){.founder-mini{grid-template-columns:1fr;text-align:center}.founder-mini img{margin-inline:auto}}
-
-.testimonial-card{max-width:860px;margin:30px auto 34px;padding:clamp(24px,4vw,34px);background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh);text-align:start}
-.testimonial-card blockquote{margin:0;font-size:clamp(1.05rem,1.7vw,1.2rem);line-height:1.7;font-weight:600;color:var(--ink)}
-.testimonial-card .who{margin-top:16px;color:var(--muted);font-size:.95rem;font-weight:600}
-.floating-login{position:fixed;z-index:79;left:18px;top:104px;display:inline-flex;align-items:center;justify-content:center;padding:11px 17px;border-radius:999px;background:#fff;color:var(--brand-strong);border:2px solid var(--brand-strong);font-family:var(--display);font-weight:800;box-shadow:0 10px 28px rgba(15,23,42,.16);text-decoration:none}.floating-login:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(15,23,42,.2)}.login-prominent{display:inline-flex!important;padding:9px 14px!important;border:1.5px solid var(--brand-strong)!important;border-radius:999px!important;color:var(--brand-strong)!important;font-weight:800!important}.mobile-sticky-cta{display:none}
-@media (max-width:820px){
-  body{padding-bottom:76px}
-  .floating-login{top:auto;left:16px;right:auto;bottom:calc(82px + env(safe-area-inset-bottom));padding:9px 14px;font-size:.9rem;z-index:81}
-  .mobile-sticky-cta{display:flex;position:fixed;z-index:80;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));justify-content:center}
-  .mobile-sticky-cta .btn{width:100%;max-width:520px;justify-content:center;box-shadow:0 10px 30px rgba(10,127,117,.34)}
-}
-
-/* ---------- how to start (6 steps) ---------- */
-
-/* ---------- no crm ---------- */
-
-/* ---------- brand story ---------- */
-
-/* ---------- final cta ---------- */
-
-.finalcta{text-align:center}
-
-.finalcta .box{background:linear-gradient(160deg,var(--teal-wash),#fff);border:1px solid rgba(18,181,168,.25);
-  border-radius:var(--r-xl);padding:clamp(40px,6vw,72px) 26px;box-shadow:var(--sh)}
-
-.finalcta h2{font-size:clamp(1.9rem,4.4vw,3rem);font-weight:800}
-
-.finalcta p{margin:16px auto 0;color:var(--ink-2);max-width:46ch;font-size:1.1rem}
-
-.finalcta .login-link{display:inline-block;margin-top:18px;color:var(--action);font-weight:600}
-
-.section-cta{margin-top:clamp(32px,5vw,48px);text-align:center}
-
-.section-cta .demo-link,.hero .demo-link{display:inline-block;margin-top:16px;color:var(--action);font-weight:600;text-decoration:underline;text-underline-offset:3px;font-size:1rem}
-
-.finalcta .demo-link{display:inline-block;margin-top:14px;color:var(--action);font-weight:600;text-decoration:underline;text-underline-offset:3px}
-
-/* ---------- dual CTA pair (guided vs self-serve) ---------- */
-
-.cta-pair{display:flex;flex-wrap:wrap;gap:clamp(16px,3vw,30px);margin-top:clamp(24px,3.5vw,34px);align-items:flex-start}
-
-.cta-choice{display:flex;flex-direction:column;gap:9px;flex:1 1 240px;min-width:0;max-width:330px}
-
-.cta-choice .btn{width:100%;justify-content:center}
-
-.cta-micro{margin:0;color:var(--muted);font-size:.88rem;line-height:1.45}
-
-.cta-pair--center{justify-content:center}
-
-.cta-pair--center .cta-choice{align-items:center;text-align:center}
-
-@media (max-width:560px){.cta-pair .cta-choice{flex:1 1 100%;max-width:none}}
-
-/* ---------- faq ---------- */
-
-.faq-list{max-width:760px;margin:40px auto 0;display:grid;gap:12px}
-
-.faq{border:1px solid var(--line);border-radius:var(--r);background:#fff;overflow:hidden}
-
-.faq summary{list-style:none;cursor:pointer;padding:20px 22px;font-family:var(--display);font-weight:600;
-  font-size:1.05rem;display:flex;align-items:center;justify-content:space-between;gap:14px}
-
-.faq summary::-webkit-details-marker{display:none}
-
-.faq summary .pm{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--teal-wash);color:var(--action);
-  display:flex;align-items:center;justify-content:center;transition:transform .2s}
-
-.faq[open] summary .pm{transform:rotate(45deg)}
-
-.faq .ans{padding:0 22px 20px;color:var(--ink-2);font-size:1rem}
-
-/* ---------- footer ---------- */
-
-footer{background:#0a201e;color:#cfe6e2}
-
-.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;padding-block:56px}
-
-.foot .brand-col .chip{background:#fff;border-radius:12px;padding:9px 12px;display:inline-block}
-
-.foot .brand-col .chip img{height:26px}
-
-.foot .brand-col p{margin-top:16px;color:#9fc4be;font-size:.95rem;max-width:34ch}
-
-.foot h4{font-family:var(--display);font-size:.8rem;letter-spacing:.05em;color:#7fb3ac;margin:0 0 14px;font-weight:600}
-
-.foot ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
-
-.foot a{color:#cfe6e2;font-size:.95rem}
-
-.foot a:hover{color:#fff}
-
-.foot-bottom{border-top:1px solid rgba(255,255,255,.08);padding-block:22px;display:flex;justify-content:space-between;
-  align-items:center;gap:16px;flex-wrap:wrap;color:#a9d0ca;font-size:.92rem;font-family:var(--display)}
-
-/* ---------- reveal animation ---------- */
-
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
-
-.reveal.in{opacity:1;transform:none}
-
-/* ---------- responsive ---------- */
-
-@media (max-width:1000px){.hero-grid{grid-template-columns:1fr;gap:34px}.hero-visual{max-width:520px;margin-inline:auto}.split,.video-wrap,.video-wrap.rev{grid-template-columns:1fr;gap:30px}.pi-grid,.qq,.queries{grid-template-columns:1fr}.value .tri{grid-template-columns:repeat(2,1fr)}.foot{grid-template-columns:1fr 1fr}}
-
-@media (max-width:820px){.nav-links{display:none}.nav-cta .login,.nav-cta .btn-primary{display:none}.nav-cta{display:flex;margin-inline-start:auto;gap:8px}.burger{display:flex;margin-inline-start:0}.nav-links.open{display:flex;position:absolute;inset-block-start:100%;inset-inline:12px;flex-direction:column;
-    background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-lg);padding:10px;gap:2px}.nav-links.open a{padding:12px}.steps3{grid-template-columns:1fr}.steps4{grid-template-columns:1fr 1fr}#onelink .steps4{grid-template-columns:repeat(2,1fr)}.step::after{display:none}.tri{grid-template-columns:1fr}.value .tri{grid-template-columns:1fr}/* loop -> vertical */}
-
-@media (max-width:560px){body{font-size:16px}.foot{grid-template-columns:1fr}#onelink .steps4{grid-template-columns:1fr}.float-chip{display:none}}
-
-@media (prefers-reduced-motion:reduce){*{animation:none !important;scroll-behavior:auto !important}.reveal{opacity:1;transform:none;transition:none}.btn,.pi,.query{transition:none}}
-
-/* hero: 5-step journey — desktop 2+3 rows in copy column; mobile vertical */
-
-.hero-journey{margin-top:18px;max-width:100%;overflow-x:clip}
-
-.hero-journey__rows{display:flex;flex-direction:column;gap:10px;width:100%}
-
-.jrow{display:grid;align-items:center;width:100%}
-
-.jnode{background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 12px 11px;
-  box-shadow:var(--sh-sm);display:flex;flex-direction:column;gap:4px;min-width:0}
-
-.jnum{font-family:var(--display);font-weight:700;font-size:.68rem;letter-spacing:.06em;color:var(--muted);line-height:1}
-
-.jtext{font-family:var(--display);font-weight:600;color:var(--brand-strong);font-size:clamp(.78rem,.95vw,.88rem);
-  line-height:1.32;margin:0;text-align:center}
-
-.jsep,.jbridge{color:var(--turquoise);display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:0 2px}
-
-.jsep .ar,.jbridge .ar{width:15px;height:15px}
-
-[dir=ltr] .jsep .ar{transform:scaleX(-1)}
-
-@media (min-width:769px){.jrow--top{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto;gap:clamp(5px,.9vw,10px)}.jrow--bottom{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);gap:clamp(5px,.9vw,10px)}.jbridge{align-self:end;padding-bottom:2px}[dir=ltr] .jbridge{align-self:start}}
-
-@media (max-width:768px){.hero-journey__rows{gap:0;max-width:min(400px,100%)}.jrow{display:contents}.jnode{padding:12px 14px}.jtext{font-size:.92rem;text-align:start;line-height:1.35}.jsep,.jbridge{padding:6px 0}.jsep .ar{transform:rotate(-90deg)}[dir=ltr] .jsep .ar{transform:rotate(-90deg)}}
-
-.intel-sub{font-family:var(--display);font-weight:700;font-size:1.05rem;color:var(--ink);margin:34px 0 14px}
-
-@media (max-width:560px){.hero-lead{font-size:1.05rem}.hero-empower{font-size:.92rem}}
-
-/* ---------- language toggle + LTR ---------- */
-
-.lang-toggle{font-family:var(--display);font-weight:600;font-size:.85rem;border:1px solid var(--line);
-  background:#fff;color:var(--ink-2);border-radius:var(--r-xs);padding:9px 13px;cursor:pointer;line-height:1;
-  transition:border-color .15s,color .15s}
-
-.lang-toggle:hover{border-color:var(--turquoise);color:var(--action)}
-
-.lang-toggle.mob{display:none}
-
-@media (max-width:820px){.lang-toggle.mob{display:block;margin-top:6px}}
-
-[dir=ltr] .btn .arrow{transform:scaleX(-1)}
-
-[dir=ltr] .btn:hover .arrow{transform:scaleX(-1) translateX(4px)}
-
-[dir=ltr] .compare .mid>svg{transform:scaleX(-1)}
-
-[dir=ltr] .hero p.desc,[dir=ltr] .lead,[dir=ltr] .foot .brand-col p{max-width:60ch}
-
-[dir=ltr] .nav-inner{flex-direction:row}
-
-[dir=ltr] .nav-links{margin-inline-start:auto;margin-inline-end:0}
-
-[dir=ltr] .nav-cta{margin-inline-start:8px;margin-inline-end:0}
-
-[dir=ltr] .eyebrow{letter-spacing:.08em}
-
-/* V4 — team/system image in full-system section */
-.team-system{margin:32px auto 0;max-width:min(920px,100%);text-align:center}
-.team-system img{width:100%;height:auto;max-height:520px;object-fit:cover;border-radius:18px;box-shadow:var(--sh);border:1px solid var(--line);display:block}
-@media (max-width:560px){.team-system img{max-height:430px}}
-
-/* =========================================================
-   MOBILE POLISH PASS — appended overrides (2026-08)
-   Goal: cleaner above-the-fold, keep the scoring story visible,
-   lift the primary CTA, fix layout bugs. Desktop untouched
-   except the pi-card accents (issue 7) which improve both.
-   ========================================================= */
-
-/* [7] Capability cards — visual rhythm on ALL breakpoints */
-.pi-grid{counter-reset:pi}
-.pi{counter-increment:pi;position:relative;overflow:hidden}
-.pi::after{content:counter(pi,decimal-leading-zero);position:absolute;
-  inset-block-start:14px;inset-inline-end:20px;font-family:var(--display);font-weight:800;
-  font-size:2.1rem;line-height:1;color:var(--teal-wash);pointer-events:none;z-index:0}
-.pi>*{position:relative;z-index:1}
-.pi h3{display:flex;align-items:flex-start;gap:10px}
-.pi h3::before{content:"";flex-shrink:0;width:9px;height:9px;border-radius:3px;
-  background:var(--turquoise);margin-top:.5em}
-
-/* [5] Sticky-nav offset so anchor jumps don't hide section titles */
-section[id],span[id]{scroll-margin-top:78px}
-
-@media (max-width:768px){
-  /* [4] Reorder hero column: primary CTA rises above the 5-step journey */
-  .hero-copy{display:flex;flex-direction:column}
-  .hero-copy .eyebrow{order:1}
-  .hero-copy h1{order:2}
-  .hero-copy .hero-lead{order:3}
-  .hero-copy .hero-empower{order:4;margin-top:16px}
-  .hero-copy .cta-pair{order:5;margin-top:14px}
-  .hero-copy .hero-journey{order:6;margin-top:22px}
-  .hero-copy .trust{order:7}
-
-  /* [1] Remove duplicate branding above the fold — nav already carries it */
-  .hero-brand{display:none}
-
-  /* tighter nav on phones (shorter mascot, less padding) */
-  .nav-inner{padding-block:11px}
-  .brand .mascot{height:34px}
-  .brand img:not(.mascot){height:28px}
-
-  /* compact the journey nodes a touch */
-  .jnode{padding:11px 13px}
-}
-
-@media (max-width:560px){
-  /* [2] Keep the intelligence story on mobile: chips become a static
-         two-up strip under the hero image instead of display:none */
-  .float-chip{display:flex !important;position:static;inset:auto;
-    flex:1 1 calc(50% - 6px);min-width:0}
-  .float-chip.a,.float-chip.b{inset:auto}
-  .hero-visual{display:flex;flex-wrap:wrap;gap:12px;max-width:460px}
-  .hero-visual .frame{flex:1 1 100%}
-
-  /* [6] Video CTA: stack badge + link instead of cramming side by side */
-  .video-cta{flex-direction:column;align-items:flex-start;gap:14px}
-  .video-cta .demo-link{font-size:1.02rem;font-weight:600;color:var(--action);
-    text-decoration:underline;text-underline-offset:3px}
-
-  /* [8] Trim a little vertical air on the tightest screens */
-  .section{padding-block:clamp(44px,10vw,64px)}
-}
-
-/* [3] Bug fix: #start "how to begin" steps must be ONE column on mobile.
-   The element carries both .steps4 and .steps3; the later .steps4 rule
-   was winning at <=820px and forcing a cramped 2-col grid. */
-@media (max-width:820px){
-  .steps4.steps3{grid-template-columns:1fr}
-}
-
-/* =========================================================
-   DEEP POLISH PASS — motion & micro-interactions (2026-08)
-   Builds on the existing .reveal IntersectionObserver.
-   Everything here is presentational and fully disabled under
-   prefers-reduced-motion. No markup / logic changes.
-   ========================================================= */
-
-/* Softer, more premium reveal curve + slightly shorter travel */
-.reveal{transform:translateY(18px);
-  transition:opacity .7s cubic-bezier(.16,.84,.44,1),transform .7s cubic-bezier(.16,.84,.44,1)}
-
-/* Staggered cascade for cards inside key grids (low specificity via :where) */
-:where(.pi-grid,.tri,.use-options,.steps4,.qq,.faq-list,.proof-grid) > .reveal:nth-child(2){transition-delay:.07s}
-:where(.pi-grid,.tri,.use-options,.steps4,.qq,.faq-list,.proof-grid) > .reveal:nth-child(3){transition-delay:.14s}
-:where(.pi-grid,.tri,.use-options,.steps4,.qq,.faq-list,.proof-grid) > .reveal:nth-child(4){transition-delay:.21s}
-:where(.pi-grid,.tri,.use-options,.steps4,.qq,.faq-list,.proof-grid) > .reveal:nth-child(5){transition-delay:.28s}
-:where(.pi-grid,.tri,.use-options,.steps4,.qq,.faq-list,.proof-grid) > .reveal:nth-child(6){transition-delay:.35s}
-
-/* Gentle hover lift on the remaining card types (pi already lifts) */
-.step,.tri .cell,.use-options .cell,.qq .card,.founder-mini{
-  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
-.step:hover,.tri .cell:hover,.use-options .cell:hover,.qq .card:hover{
-  transform:translateY(-3px);box-shadow:var(--sh);border-color:rgba(18,181,168,.3)}
-
-/* FAQ: subtle fade-in of the answer when a row opens; hover tint on the row */
-.faq{transition:border-color .18s ease,box-shadow .18s ease}
-.faq:hover{border-color:rgba(18,181,168,.35)}
-.faq[open]{box-shadow:var(--sh-sm)}
-.faq[open] .ans{animation:ihoogiFaqIn .28s ease}
-@keyframes ihoogiFaqIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
-
-/* Signature touch: a quiet pulse on the HOT dot in the hero chip only —
-   a subtle "act now" cue that reinforces prioritisation. */
-@keyframes ihoogiPulse{
-  0%{box-shadow:0 0 0 0 rgba(194,65,93,.45)}
-  70%{box-shadow:0 0 0 7px rgba(194,65,93,0)}
-  100%{box-shadow:0 0 0 0 rgba(194,65,93,0)}}
-.float-chip .temp.hot .dot{animation:ihoogiPulse 2.4s ease-out infinite}
-
-/* Respect reduced-motion for every addition above */
-@media (prefers-reduced-motion:reduce){
-  .reveal{transition:none}
-  :where(.pi-grid,.tri,.use-options,.steps4,.qq,.faq-list,.proof-grid) > .reveal{transition-delay:0s}
-  .step,.tri .cell,.use-options .cell,.qq .card,.founder-mini,.faq{transition:none}
-  .step:hover,.tri .cell:hover,.use-options .cell:hover,.qq .card:hover{transform:none;box-shadow:none}
-  .faq[open] .ans{animation:none}
-  .float-chip .temp.hot .dot{animation:none}
-}
-
-
-/* ===== Conversion V3 ===== */
-.launch-offer{margin-top:24px;padding:16px 18px;border:1px solid rgba(18,181,168,.28);background:var(--teal-wash);border-radius:var(--r);display:flex;flex-direction:column;gap:3px;max-width:620px}.launch-offer strong{font-family:var(--display);font-size:1.08rem;color:var(--brand-strong)}.launch-offer span{color:var(--ink-2)}.launch-offer small{font-size:.88rem;color:var(--muted);margin-top:5px}.hero-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px}.text-link{font-weight:700;color:var(--action);padding:10px 4px}.trust-strip{display:flex;align-items:center;justify-content:center;gap:0;border-top:1px solid var(--line);margin:0}.trust-strip>div{padding:10px 18px;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;flex:1}.trust-strip>div+div{border-inline-start:1px solid var(--line)}.trust-strip strong{font-family:var(--display);color:var(--ink-2);font-size:.92rem}.trust-strip span{font-size:.82rem;color:var(--muted)}.stats-at-end{padding-block:16px 10px}@media(max-width:640px){.trust-strip{flex-wrap:wrap}.trust-strip>div{padding:8px 10px;flex:1 1 100%}.trust-strip>div+div{border-inline-start:0}}.pain-block{max-width:900px;margin-inline:auto;text-align:center}.pain-block .lead{margin:18px auto 0}.before-after{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px;text-align:right}.before-after>div{padding:18px;border:1px solid var(--line);border-radius:var(--r);background:var(--soft);display:flex;flex-direction:column;gap:7px}.before-after .after{background:var(--teal-wash);border-color:rgba(18,181,168,.3)}.before-after span{color:var(--ink-2);font-size:.95rem}.bridge-line{font-family:var(--display);font-weight:700;color:var(--brand-strong);margin-top:22px}.value-head{text-align:center;margin-top:56px}.tri3{grid-template-columns:repeat(3,1fr)!important;margin-top:30px}.tri3 .ic{font-family:var(--display);font-weight:800;color:var(--action)}.journey-line{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;margin-top:28px;font-family:var(--display);font-weight:700}.journey-line span{padding:10px 16px;border-radius:var(--pill);background:var(--soft)}.steps5{grid-template-columns:repeat(5,1fr)!important}.north-star{text-align:center;font-family:var(--display);font-size:clamp(1.18rem,2vw,1.5rem);margin:38px auto 0;max-width:850px;color:var(--ink-2)}.north-star strong{color:var(--brand-strong)}.mobile-beat{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}.mobile-facts{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}.mobile-facts span{background:var(--teal-wash);color:var(--brand-strong);font-weight:700;padding:7px 11px;border-radius:var(--pill)}.business-beat,.source-intel{margin-top:72px;padding-top:64px;border-top:1px solid var(--line)}.system-row{display:grid;grid-template-columns:.8fr 1.2fr;gap:34px;align-items:center;margin-top:32px}.system-row>div{padding:24px;border:1px solid var(--line);border-radius:var(--r);background:var(--soft)}.system-row h3{font-size:1.25rem;margin-bottom:8px}.system-row img{border-radius:var(--r);box-shadow:var(--sh)}.source-intel .qq{margin-top:30px}.intel-punch{text-align:center;font-family:var(--display);font-size:1.25rem;margin-top:24px}.intel-punch strong{color:var(--brand-strong)}.disclaimer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:6px}.proof-stat{margin-top:18px;font-size:1.1rem;color:var(--ink-2)}.proof-stat strong{font-family:var(--display);font-size:1.55rem;color:var(--brand-strong)}.closing-cta{max-width:820px;margin-inline:auto}.closing-cta .lead{margin-top:18px}.launch-offer.compact{margin:24px auto 18px;max-width:560px}.closing-cta .login-link{display:block;margin-top:18px}.finalcta{padding-block:clamp(64px,8vw,96px)!important}
-@media(max-width:900px){.trust-strip{grid-template-columns:1fr}.tri3,.steps5{grid-template-columns:1fr!important}.mobile-beat,.system-row{grid-template-columns:1fr}.before-after{grid-template-columns:1fr}.hero-actions{align-items:stretch;flex-direction:column}.hero-actions .btn{justify-content:center}.text-link{text-align:center}.business-beat,.source-intel{margin-top:52px;padding-top:48px}}
-
-
-/* Mobile/performance polish */
-@media(max-width:900px){.hero-visual .frame img{max-height:520px;object-fit:contain}.mobile-beat .shot img,.system-row img{width:100%;height:auto}.lang-toggle.mob{display:block}.nav-cta .lang-toggle{display:none}}
-@media(min-width:901px){.lang-toggle.mob{display:none!important}.nav-cta .lang-toggle{display:inline-flex}}
-
-/* Hero mobile QA fix — keep the first screen compact and prevent RTL clipping */
-@media (max-width:560px){
-  .hero{overflow:hidden}
-  .hero-grid{padding-block:24px 30px;gap:22px}
-  .hero-copy{min-width:0;text-align:right}
-  .hero-copy .hero-brand{margin-bottom:10px}
-  .hero-copy .eyebrow{font-size:.82rem;margin-bottom:8px}
-  .hero h1,.hero-title{font-size:clamp(1.9rem,9vw,2.35rem);line-height:1.08;letter-spacing:0;max-width:100%;overflow-wrap:anywhere}
-  .hero-lead{font-size:1rem;line-height:1.55;margin-top:12px;max-width:100%}
-  .launch-offer{margin-top:16px;padding:15px 14px}
-  .launch-offer strong{font-size:.98rem}
-  .hero-actions{margin-top:12px;gap:10px}
-  .hero-actions .btn{width:100%;white-space:normal;text-align:center;line-height:1.25;padding:15px 12px}
-  .cta-micro{font-size:.88rem;margin-top:9px}
-  .hero-visual{width:100%;max-width:100%;margin-inline:auto}
-  .hero-visual .frame{width:100%;border-radius:18px}
-  .hero-visual .frame img{width:100%;max-height:none;object-fit:contain}
-  .trust-strip{margin-top:4px;margin-bottom:28px}
-}
-
-/* iPhone hero containment — final narrow-screen guard */
-@media (max-width:560px){
-  .hero .wrap{width:100%;max-width:100%;padding-inline:20px}
-  .hero-grid,.hero-copy{width:100%;max-width:100%;min-width:0}
-  .hero h1,.hero-title{width:100%;max-width:100%;font-size:clamp(1.72rem,7.7vw,2.05rem)!important;line-height:1.12!important;white-space:normal!important;word-break:normal;overflow-wrap:normal;text-wrap:pretty}
-  .hero h1 br,.hero-title br{display:none}
-  .hero .hl{white-space:normal!important}
-  .hero-lead{width:100%;max-width:100%;font-size:.98rem;line-height:1.55;overflow-wrap:break-word}
-  .hero-visual{overflow:hidden}
-}
-
-/* iOS sticky-header anchor/initial-paint guard */
-@media (max-width:560px){
-  html{scroll-padding-top:92px}
-  #top{display:block;height:0;scroll-margin-top:92px}
-  .hero{scroll-margin-top:92px}
-}
-
-/* Final conversion and consent polish */
-.hero-gift{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:var(--pill);
-  background:var(--owl-soft);color:#9a4b05;font-family:var(--display);font-weight:700;font-size:.9rem;margin-bottom:16px}
-.hero-title .hl{display:inline}
-.launch-offer strong{font-size:clamp(1.08rem,1.9vw,1.32rem);line-height:1.35}
-.launch-offer small{font-weight:700;color:var(--brand-strong)}
-.cta-micro{margin-top:10px;color:var(--muted);font-size:.92rem;font-weight:600}
-.btn[data-url="GUIDED_SETUP_URL"]{font-weight:800}
-.legal-links{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.legal-links a,.cookie-settings{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
-.cookie-settings{border:0;background:none;font:inherit;cursor:pointer;padding:0}
-.company-name{display:block;margin-top:5px;color:var(--muted);font-size:.86rem}
-.cookie-banner{position:fixed;z-index:200;inset-inline:16px;bottom:16px;max-width:760px;margin-inline:auto;
-  background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--sh-lg);padding:18px;display:none}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{margin:0;font-family:'Assistant',Arial,sans-serif;font-size:19px;line-height:1.65}
+h1,h2,h3,.button{font-family:'Rubik',Arial,sans-serif}
+h1,h2,h3,p{margin:0}
+h1{font-size:clamp(2.5rem,4.6vw,4.3rem);line-height:1.17;letter-spacing:-.045em;font-weight:600}
+h2{font-size:clamp(1.95rem,3.25vw,3rem);line-height:1.25;letter-spacing:-.025em;font-weight:500}
+h3{font-size:1.25rem;line-height:1.4;font-weight:500}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+button,a{-webkit-tap-highlight-color:transparent}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #b35518;outline-offset:5px}
+button{color:inherit}
+a,button{touch-action:manipulation}
+.wrap{width:min(1160px,calc(100% - 48px));margin-inline:auto}
+.skip{position:fixed;top:-100px;inset-inline-start:20px;background:#fff;padding:12px;z-index:100}
+.skip:focus{top:12px}
+.site-header{position:sticky;top:0;z-index:20;background:#fcfcf8f5;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.nav-row{display:flex;align-items:center;gap:24px;min-height:82px}
+.logo{margin-inline-end:auto}
+.logo img{width:116px;height:57px;object-fit:contain}
+.nav-links{display:flex;align-items:center;gap:27px}
+.nav-links a{text-decoration:none;font-size:17px}
+.nav-links a:hover{text-decoration:underline;text-underline-offset:6px}
+.nav-tools{display:flex;align-items:center;gap:16px}
+.lang,.menu{background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 11px;min-height:44px}
+.login{font-size:16px;text-underline-offset:4px}
+.menu{display:none}
+.hero{padding:70px 0 48px}
+.hero-grid{display:grid;grid-template-columns:1.13fr 1fr;align-items:center;gap:64px}
+.eyebrow{font-size:16px;font-weight:700;color:var(--teal);margin-bottom:17px;letter-spacing:.025em}
+.hero h1 strong{color:var(--teal);font-weight:600}
+.hero-copy{max-width:630px}
+.lead{font-size:22px;line-height:1.65;margin-top:25px;max-width:600px}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:30px}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:22px;padding:16px 23px;border-radius:10px;font-size:17px;line-height:1.4;text-decoration:none;font-weight:500;min-height:56px}
+.primary{background:var(--teal);color:#fff;box-shadow:0 6px 0 #064e4810;transition:background .2s,transform .2s}
+.primary:hover{background:#064e48;transform:translateY(-2px)}
+.arrow{font-size:24px;line-height:1}
+[dir=ltr] .arrow{transform:rotate(180deg)}
+.text-link{font-weight:700;font-size:17px;text-underline-offset:5px}
+.offer{font-size:16px;color:var(--muted);margin-top:16px}
+.offer strong{color:var(--ink)}
+.hero-visual{position:relative;background:var(--mint);border:1px solid var(--line);border-radius:28px;padding:23px;box-shadow:var(--shadow)}
+.visual-top{display:flex;gap:12px;align-items:center;padding-bottom:19px;font-size:16px}
+.owl{width:52px;height:58px;object-fit:contain}
+.visual-top strong{display:block;font-size:20px}
+.example-label{font-size:13px;color:var(--muted)}
+.inquiry{background:white;border:1px solid #d5e4db;border-radius:16px;padding:24px;box-shadow:0 8px 22px #123d3c08}
+.inquiry-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:14px}
+.chip{font-size:14px;border-radius:6px;padding:4px 9px;background:#def1e6;color:#17573a;font-weight:700}
+.inquiry h3{font-size:24px;margin-bottom:18px}
+.answers{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:15px;border-block:1px solid var(--line);padding:17px 0}
+.answers dt{font-size:14px;color:var(--muted)}
+.answers dd{margin:0;font-size:17px;font-weight:700}
+.reason{font-size:17px;line-height:1.6;margin-top:17px}
+.reason strong{display:block;color:var(--teal);margin-bottom:3px}
+.sample-action{display:block;background:#f8f0e5;color:var(--ink);text-align:center;border-radius:8px;padding:10px;margin-top:20px;font-size:16px}
+.sample-action-note{font-size:12px;text-align:center;margin-top:6px;color:var(--muted)}
+.next-inquiry{display:flex;align-items:center;gap:12px;margin:13px 4px 0;font-size:15px}
+.dot{width:8px;height:8px;background:#b4772a;border-radius:50%;flex:none}
+.hero-foot{display:flex;justify-content:center;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:33px 0 24px;color:var(--muted);font-size:17px;text-align:center}
+.hero-foot strong{color:var(--ink)}
+section.section{padding:88px 0}
+.section-head{max-width:730px;margin-bottom:38px}
+.section-head p:not(.eyebrow){margin-top:18px;color:var(--muted);font-size:21px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+.step{border-top:1px solid #b9ccc1;padding-top:23px}
+.step-number{font-family:'Rubik',sans-serif;font-size:15px;color:var(--teal);display:block;margin-bottom:18px}
+.step p{color:var(--muted);margin-top:13px}
+.question-strip{margin-top:34px;border-radius:12px;background:var(--mint);padding:21px 26px;display:flex;gap:20px;align-items:baseline;font-size:18px}
+.question-strip strong{flex:none}
+.question-strip p{color:var(--muted)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.soft{background:#edf4ef;border-block:1px solid var(--line)}
+.action-list{list-style:none;padding:0;margin:28px 0 0}
+.action-list li{position:relative;padding-inline-start:26px;margin-top:20px}
+.action-list li:before{content:'✓';position:absolute;inset-inline-start:0;color:var(--teal);font-weight:700}
+.action-list strong{display:block}
+.action-list p{font-size:18px;color:var(--muted)}
+.brand-photo{border-radius:24px;width:100%;aspect-ratio:1.12;object-fit:cover}
+.photo-note{font-size:14px;color:var(--muted);margin-top:12px}
+.difference-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.difference-card{background:white;border:1px solid var(--line);border-radius:16px;padding:28px}
+.difference-card .small-label{font-size:15px;font-weight:700;color:var(--teal);margin-bottom:10px}
+.difference-card p:last-child{color:var(--muted);margin-top:12px}
+.source-box{border:1px solid var(--line);border-radius:22px;background:#fff;padding:30px}
+.source-box h3{margin-bottom:6px}
+.source-row{padding:20px 0;border-bottom:1px solid var(--line)}
+.source-row:last-of-type{border:0}
+.source-title{display:flex;justify-content:space-between;font-size:17px}
+.source-title b{white-space:nowrap}
+.bar-track{height:9px;background:#e9efeb;border-radius:5px;margin-top:13px;direction:ltr}
+.bar-fill{height:100%;background:#81b5a5;border-radius:5px}
+.bar-fill.strong{background:var(--teal)}
+.source-note{font-size:15px;color:var(--muted);margin-top:16px}
+.meta-note{font-size:16px;border-inline-start:3px solid #ef9658;padding-inline-start:17px;margin-top:22px;color:var(--muted)}
+.proof{background:#123d3c;color:#fff}
+.proof .eyebrow{color:#a2d9c0}
+.quote{font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.65;margin:0}
+.quote p+p{margin-top:18px}
+.quote-credit{display:block;font-size:17px;font-style:normal;color:#bfe0ce;margin-top:24px}
+.quote-mark{color:#efb07e;font:72px/1 Georgia,serif;height:48px}
+.proof-grid{display:grid;grid-template-columns:.65fr 1fr;gap:70px;align-items:start}
+.founder{display:flex;gap:28px;align-items:center;border-top:1px solid #ffffff2b;margin-top:46px;padding-top:36px}
+.founder img{width:108px;height:108px;border-radius:50%;object-fit:cover;flex:none}
+.founder h3{margin-bottom:7px}
+.founder p{color:#d0e2d9;font-size:17px;max-width:780px}
+.start{background:#f8f0e5;border:1px solid #e7dac6;border-radius:26px;padding:48px}
+.start-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px}
+.start p{margin-top:18px}
+.setup-steps{list-style:none;counter-reset:setup;padding:0;margin:0}
+.setup-steps li{counter-increment:setup;position:relative;padding-inline-start:46px;margin-bottom:26px;font-size:17px;color:var(--muted)}
+.setup-steps li:before{content:counter(setup);position:absolute;inset-inline-start:0;top:0;border:1px solid #cbbba6;border-radius:50%;width:28px;height:28px;text-align:center;color:var(--ink);font-weight:700}
+.setup-steps strong{color:var(--ink);display:block;font-size:19px}
+.start .offer{margin-top:16px}
+.faq-wrap{max-width:830px;margin-inline:auto}
+.faq-wrap h2{margin-bottom:30px}
+.faq-wrap details{border-bottom:1px solid var(--line);padding:20px 0}
+.faq-wrap summary{cursor:pointer;font-size:20px;font-weight:700;padding-inline-end:10px}
+.faq-wrap details p{color:var(--muted);margin-top:14px;font-size:18px}
+.footer{border-top:1px solid var(--line);padding:35px 0 90px;font-size:15px;color:var(--muted)}
+.footer-row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap}
+.cookie-settings{padding:0;border:0;background:none;text-decoration:underline;font-size:15px}
+.mobile-cta{display:none}
+.cookie-banner{display:none;position:fixed;z-index:50;bottom:18px;inset-inline-start:18px;width:min(440px,calc(100% - 36px));padding:23px;background:#fff;border:1px solid #becdc2;box-shadow:0 6px 40px #123d3c26;border-radius:14px;font-size:16px}
 .cookie-banner.show{display:block}
-.cookie-inner{display:flex;align-items:center;gap:18px}
-.cookie-copy{flex:1;color:var(--ink-2);font-size:.94rem;line-height:1.5}
-.cookie-copy strong{display:block;color:var(--ink);font-family:var(--display);font-size:1.02rem;margin-bottom:3px}
-.cookie-copy a{color:var(--action);font-weight:700;text-decoration:underline}
-.cookie-actions{display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0}
-.cookie-actions .btn{padding:12px 16px;font-size:.9rem}
-.btn-secondary{background:#fff;color:var(--action);border-color:var(--line)}
-html[dir="ltr"] .hero-copy,html[dir="ltr"] .before-after{text-align:left}
-html[dir="ltr"] .float-chip.a{inset-inline-start:-14px;inset-inline-end:auto}
-@media(max-width:700px){.cookie-inner{align-items:stretch;flex-direction:column}.cookie-actions{width:100%}.cookie-actions .btn{flex:1;justify-content:center}}
+.cookie-banner p{margin-top:8px}
+.cookie-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.cookie-actions button{font-size:15px;padding:9px 13px;min-height:44px;border:1px solid #8fa69b;border-radius:6px;background:#fff}
+.cookie-actions button[data-cookie=all]{color:white;background:var(--teal);border-color:var(--teal)}
+[hidden]{display:none!important}
+
+@media(min-width:1600px){.hero{padding-top:100px}
+}
+
+@media(max-width:1000px){.hero-grid,.split{gap:35px}
+.nav-links{gap:18px}
+.hero-grid{grid-template-columns:1.05fr 1fr}
+.hero h1{font-size:3rem}
+.lead{font-size:20px}
+.hero-visual{padding:17px}
+.inquiry{padding:18px}
+.proof-grid{gap:40px}
+.start{padding:32px}
+.start-grid{gap:35px}
+}
+
+@media(max-width:760px){body{font-size:18px}
+.wrap{width:calc(100% - 36px)}
+.nav-row{min-height:70px;gap:12px}
+.logo img{width:94px;height:50px}
+.nav-tools{gap:10px}
+.login{display:none}
+.menu{display:block;font-size:16px}
+.nav-links{display:none;position:absolute;top:70px;inset-inline:0;background:var(--paper);padding:18px 24px 24px;border-bottom:1px solid var(--line);box-shadow:0 8px 14px #123d3c0a}
+.nav-links.open{display:flex;flex-direction:column;align-items:stretch;gap:0}
+.nav-links a{padding:10px}
+.hero{padding:34px 0 12px}
+.hero-grid,.split,.proof-grid,.start-grid{grid-template-columns:1fr;gap:34px}
+.hero h1{font-size:clamp(2.2rem,8.4vw,3.3rem);letter-spacing:-.035em}
+.eyebrow{font-size:15px;margin-bottom:13px}
+.lead{font-size:19px;margin-top:19px}
+.cta-row{gap:17px;margin-top:24px}
+.hero .cta-row{align-items:stretch;flex-direction:column}
+.hero .text-link{text-align:center}
+.button{padding:15px 19px;font-size:16px}
+.offer{font-size:15px}
+.hero-visual{max-width:520px;width:100%;margin-inline:auto;padding:19px}
+.visual-top{padding-bottom:14px}
+.inquiry{padding:20px}
+.hero-foot{padding:26px 0 20px;font-size:16px}
+section.section{padding:56px 0}
+.section-head{margin-bottom:28px}
+.section-head p:not(.eyebrow){font-size:19px}
+.steps{grid-template-columns:1fr;gap:24px}
+.step{padding-top:18px}
+.step-number{margin-bottom:10px}
+.step p{margin-top:8px}
+.question-strip{display:block;padding:20px;font-size:17px}
+.question-strip p{margin-top:8px}
+.difference-grid{grid-template-columns:1fr;gap:14px}
+.difference-card{padding:23px}
+.brand-photo{aspect-ratio:1.35}
+.proof-grid{gap:25px}
+.founder{gap:18px;align-items:flex-start;flex-wrap:wrap;margin-top:32px;padding-top:30px}
+.founder img{width:80px;height:80px}
+.founder div{flex:1;min-width:210px}
+.founder p{font-size:16px}
+.start{padding:27px 23px;border-radius:20px}
+.start h2{font-size:2rem}
+.start-grid{gap:30px}
+.start .button{width:100%;gap:10px}
+.source-box{padding:23px}
+.source-title{gap:10px;font-size:16px}
+.faq-wrap summary{font-size:18px}
+.footer{padding-bottom:110px}
+.mobile-cta{display:flex;position:fixed;bottom:0;inset-inline:0;z-index:30;background:#fcfcf8f5;padding:10px 18px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line);align-items:center;gap:15px;justify-content:center;backdrop-filter:blur(10px)}
+.mobile-cta .button{padding:12px 18px;min-height:46px;flex:1;max-width:380px;font-size:15px}
+.mobile-cta p{font-size:13px;line-height:1.5}
+
+
+}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*{transition:none!important}
+}
+
+.secondary{background:#fff;color:var(--teal);border:1px solid var(--teal)}
+.secondary:hover{background:var(--mint)}
+.company-contact{margin-top:28px;padding:25px;border:1px solid var(--line);border-radius:16px;background:white;text-align:center}
+.company-contact p{margin:8px 0;font-size:18px;color:var(--muted)}
+.company-contact a{display:inline-block;padding:8px;font-weight:700;color:var(--teal);text-underline-offset:4px}
+
+.hero-product{margin:0;min-width:0}
+.product-scene{display:flex;align-items:center;justify-content:center;gap:8px;padding:26px 12px;background:var(--mint);border:1px solid var(--line);border-radius:26px}
+.product-owl{width:24%;max-width:110px;height:auto;flex-shrink:0}
+.phone-shell{width:76%;max-width:330px;padding:9px;border:2px solid #345653;border-radius:30px;background:#173d3b;box-shadow:0 18px 35px #123d3c24;overflow:hidden}
+.phone-screen{display:block;width:100%;height:auto;border-radius:20px;background:#fff}
+.hero-product figcaption{text-align:center;font-size:14px}
+.hero-product figcaption strong{font-size:17px;color:var(--ink)}
+.cookie-banner{position:relative;inset:auto;z-index:auto;width:100%;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;background:#f0f4ef;padding:12px max(18px,calc((100% - 1160px)/2));font-size:15px;gap:14px;align-items:center}
+.cookie-banner.show{display:flex;flex-wrap:wrap}
+.cookie-banner>strong{font-size:15px}
+.cookie-banner>p{flex:1 1 420px;margin:0}
+.cookie-actions{margin:0;gap:8px}
+.cookie-actions button{padding:7px 12px}
+@media(max-width:760px){.cookie-banner{gap:8px;padding:10px 18px;font-size:14px}.cookie-banner>strong{display:none}.cookie-banner>p{flex-basis:100%}.cookie-actions{width:100%}.cookie-actions button{flex:1}.product-scene{padding:20px 9px;gap:4px}.phone-shell{padding:6px;border-radius:24px}.phone-screen{border-radius:16px}.hero-product{width:100%;max-width:500px;margin-inline:auto}.hero-product figcaption strong{font-size:16px}}
 </style>
-<link href="assets/favicon.ico" rel="icon" sizes="any"/>
 </head>
 <body>
-<!-- ============ HEADER ============ -->
-<header class="nav" id="nav">
-<div class="nav-inner">
-<a aria-label="iHoogi" class="brand" href="#top">
-<img alt="דמות iHoogi" class="mascot" decoding="async" src="assets/img/hoogi_mascot.png"/>
-<img alt="iHoogi" decoding="async" src="assets/img/ihoogi_logo.png"/>
-</a>
-<nav aria-label="ניווט ראשי" class="nav-links" id="navLinks">
-<a data-i18n="k88" href="#why">למה iHoogi</a>
-<a data-i18n="k87" href="#onelink">איך זה עובד</a>
-<a data-i18n="k89" href="#features">יכולות</a>
-<a data-i18n="k20" href="#proof">מהמייסדת</a>
-<a data-i18n="k91" href="#start">איך מתחילים</a>
-<a data-i18n="k92" href="#faq">שאלות נפוצות</a>
-<button aria-label="Switch language" class="lang-toggle mob" type="button">English</button></nav>
-<div class="nav-cta"><button aria-label="Switch language" class="lang-toggle" type="button">English</button>
-<a class="login login-prominent" data-url="LOGIN_URL" href="https://ihoogi.com/landing">כניסה ל־iHoogi</a>
-<a class="btn btn-primary" data-url="GUIDED_SETUP_URL" href="https://ihoogi.com/q/d_klHh3Uxoj6ys/chat">קבלו את המתנה</a>
+<a class="skip" href="#main"><span data-en="Skip to content">דלגו לתוכן</span></a>
+<aside class="cookie-banner" id="cookieBanner" aria-labelledby="cookieTitle"><strong id="cookieTitle"><span data-en="Cookie preferences">העדפות עוגיות</span></strong><p><span data-en="We use essential cookies to operate the site. Meta marketing and measurement cookies load only with your consent.">אנחנו משתמשים בעוגיות חיוניות להפעלת האתר. עוגיות שיווק ומדידה של Meta ייטענו רק אם תאשרו אותן.</span> <a href="https://ihoogi.com/privacy"><span data-en="Privacy policy">מדיניות הפרטיות</span></a></p><div class="cookie-actions"><button type="button" data-cookie="essential"><span data-en="Essential only">חיוניות בלבד</span></button><button type="button" data-cookie="all"><span data-en="Accept all">אישור הכול</span></button></div></aside>
+<header class="site-header" id="nav"><div class="wrap nav-row">
+<a class="logo" href="#top" aria-label="iHoogi"><img src="assets/img/ihoogi_logo.png" width="116" height="57" alt="iHoogi"></a>
+<nav class="nav-links" id="navLinks" aria-label="ניווט ראשי" data-en-aria="Main navigation">
+<a href="#how"><span data-en="How it works">איך זה עובד</span></a><a href="#why"><span data-en="Why iHoogi">למה iHoogi</span></a><a href="#proof"><span data-en="Our story">מהשטח</span></a><a href="#start"><span data-en="Get started">מתחילים ביחד</span></a>
+</nav><div class="nav-tools"><a class="login" href="https://ihoogi.com/landing"><span data-en="Log in">כניסה למערכת</span></a><button class="lang" id="langToggle" type="button" aria-label="Switch to English" lang="en">EN</button><button class="menu" id="burger" type="button" aria-expanded="false" aria-controls="navLinks"><span data-en="Menu">תפריט</span></button></div></div></header>
+<main id="main">
+<section class="hero" id="top"><div class="wrap"><div class="hero-grid">
+<div class="hero-copy"><p data-en="iHoogi · Your business’s smart link" class="eyebrow">iHoogi · הלינק החכם של העסק שלכם</p>
+<h1><span data-en="You brought in the inquiries.">כבר הבאתם את הפניות.</span><br><strong><span data-en="Know who to call first, and why.">דעו למי לחזור קודם, ולמה.</span></strong></h1>
+<p data-en="Inquiries are coming in, but who should you call first? iHoogi learns what matters to your business and asks customers the right questions. You receive their answers, a score and an explanation before you pick up the phone." class="lead">הפניות מגיעות, אבל למי כדאי לחזור קודם? iHoogi לומד מה חשוב לעסק שלכם ושואל את הלקוחות את השאלות המתאימות. אתם מקבלים את התשובות, ציון והסבר, ויודעים מי מתאים עוד לפני שמרימים טלפון.</p>
+<div class="cta-row"><a class="button primary" data-url="GUIDED_SETUP_URL" href="https://ihoogi.com/q/d_klHh3Uxoj6ys/chat"><span data-en="Build my link">בנו לי לינק</span><span aria-hidden="true" class="arrow">←</span></a><a class="button secondary" data-url="TRY_IHOOGI_URL" href="https://ihoogi.com/landing"><span data-en="I want to try it myself">רוצה לנסות בעצמי</span></a></div>
+<p class="offer"><strong data-en="Both options include your first 50 inquiries ranked free.">בשתי האפשרויות, דירוג 50 הפניות הראשונות במתנה.</strong><br><span data-en="I’m Rona, and I can set up your link for free. You can also start yourself.">אני רונה, ואשמח להקים עבורכם את הלינק ללא עלות. אפשר גם להתחיל לבד.</span><br><span data-en="No credit card · No commitment">ללא כרטיס אשראי · ללא התחייבות</span></p>
 </div>
-<button aria-expanded="false" aria-label="תפריט" class="burger" id="burger"><span></span></button>
-</div>
-</header>
-<span id="top"></span>
-<!-- ============ HERO ============ -->
-<section class="hero" id="hero"><div class="wrap"><div class="hero-grid">
-<div class="hero-copy"><div class="hero-brand"><img alt="iHoogi" class="mascot" decoding="async" src="assets/img/hoogi_mascot.png"/><span class="word">iHoogi</span></div>
-<span class="hero-gift">הסוכן האישי של העסק שלכם</span>
-<h1 class="hero-title">כבר הבאתם את הפניות.<br><span class="hl">למי חוזרים קודם?</span></h1>
-<p class="hero-lead">לומדת מה חשוב לעסק שלכם, מתעדפת את הפניות ומקפיצה את המידע מיד לנייד.</p>
-<p class="hero-empower"><strong>לא משנים איך מביאים פניות. משנים מה קורה כשהן מגיעות.</strong></p>
-<div class="hero-actions"><a class="btn btn-primary btn-lg" data-url="GUIDED_SETUP_URL" href="https://ihoogi.com/q/d_klHh3Uxoj6ys/chat">מתחילים בחינם</a></div>
-<p class="cta-micro"><strong>🎁 50 הפניות הבאות של העסק שלכם — מדורגות במתנה</strong><br>הפניות שכבר מגיעות לעסק שלכם • ללא כרטיס אשראי • ללא התחייבות</p></div>
-<div class="hero-visual"><div class="frame"><img alt="פרטי הפנייה, רמת ההתאמה והפעולות הזמינות ב־iHoogi" decoding="async" fetchpriority="high" src="assets/img/product_features_composite.jpg"/></div><div class="float-chip a"><div class="score-ring"><svg height="44" viewBox="0 0 44 44" width="44"><circle cx="22" cy="22" fill="none" r="18" stroke="#EEF3F6" stroke-width="5"></circle><circle cx="22" cy="22" fill="none" r="18" stroke="#C2415D" stroke-dasharray="113" stroke-dashoffset="17" stroke-linecap="round" stroke-width="5"></circle></svg><b>92</b></div><div><span class="temp hot"><span class="dot"></span>חם</span><div style="font-size:.78rem;color:var(--muted);margin-top:4px">רואים מיד למה</div></div></div></div>
-</div></div></section>
+<figure class="hero-product"><img class="hero-mobile-scene" src="assets/img/hero-rona-hoogi-mobile.webp" width="1448" height="1086" alt="רונה והוגי מציגים בנייד פנייה עם ציון וכפתורי קשר" data-en-alt="Rona and Hoogi presenting a mobile inquiry with a score and contact buttons" fetchpriority="high" style="display:block;width:100%;height:auto;border-radius:24px"><figcaption class="photo-note"><strong data-en="See the score. Read the answers. Contact the customer.">רואים את הציון, קוראים את התשובות וחוזרים ללקוח.</strong><br><span data-en="Product illustration with demonstration details.">המחשת המוצר עם פרטי הדגמה.</span></figcaption></figure>
+</div><div class="hero-foot"><span data-en="For service businesses that want to &lt;strong&gt;spend their time on the right customers.&lt;/strong&gt;">לעסקי שירות שמקבלים פניות ורוצים <strong>להשקיע את הזמן בלקוחות שמתאימים להם.</strong></span></div></div></section>
+<section class="section" id="how"><div class="wrap"><div class="section-head"><p data-en="How it works" class="eyebrow">איך זה עובד</p><h2 data-en="First, get to know your business.&lt;br&gt;Then ask the right questions.">קודם מכירים את העסק שלכם.<br>אחר כך יודעים מה לשאול.</h2><p data-en="The same answer can be a great fit for one business and a poor fit for another. Your priorities shape both the questions and the ranking.">אותה תשובה יכולה להיות מצוינת לעסק אחד ולא להתאים לאחר. לכן השאלות והדירוג מתחילים במה שחשוב לכם.</p></div>
+<div class="steps">
+<article class="step"><span class="step-number" aria-hidden="true">01</span><h3 data-en="Define a good fit inquiry">מכירים את העסק שלכם</h3><p data-en="Your services, goals and ideal customers become the foundation for the questions and ranking.">מספרים מה אתם מציעים ואילו לקוחות אתם מחפשים. לפי זה iHoogi מתאים את השאלות ואת הדירוג.</p></article>
+<article class="step"><span class="step-number" aria-hidden="true">02</span><h3 data-en="Share a link that asks the right questions">משתפים לינק ששואל נכון</h3><p data-en="Place your link on your website, in ads, in your bio or on WhatsApp. Customers answer questions about their needs and fit.">שמים את הלינק באתר, במודעה, בביו או בוואטסאפ. הלקוחות עונים על שאלות שמבררות צורך והתאמה לעסק.</p></article>
+<article class="step"><span class="step-number" aria-hidden="true">03</span><h3 data-en="Get an inquiry with clear priorities">רואים למי כדאי לחזור קודם</h3><p data-en="See the answers, ranking and explanation. Know who to contact first and what to discuss.">רואים את התשובות, הדירוג וההסבר להתאמה. יודעים למי לחזור קודם ועם מה לפתוח את השיחה.</p></article>
+</div><div class="question-strip"><strong data-en="The questions depend on your business.">השאלות משתנות לפי העסק.</strong><p data-en="For example: Which service do you need? When would you like to start? What matters to you? Beyond just a name and number.">למשל: איזה שירות מחפשים? מתי רוצים להתחיל? מה חשוב ללקוח? לא רק ״איך קוראים לך?״</p></div></div></section>
+<section class="section soft" id="features"><div class="wrap split"><div><p data-en="From inquiry to action" class="eyebrow">הפניות מגיעות ישר אליכם</p><h2 data-en="Even when you’re busy,&lt;br&gt;know who reached out and what they need.">גם כשאתם עסוקים,<br>אתם יודעים מי פנה ומה הוא צריך.</h2>
+<ul class="action-list"><li><strong data-en="The context comes to you">המידע מגיע אליכם</strong><p data-en="Receive mobile or email alerts with the inquiry details and answers, even when you’re away from your desk.">התראה בנייד או במייל, עם התשובות והמידע על הפנייה, גם כשאתם מחוץ למשרד.</p></li><li><strong data-en="Take the next step">חוזרים ללקוח בלחיצה</strong><p data-en="Call, open WhatsApp or email from the inquiry. Route it to a team member and update its status.">פותחים שיחה, וואטסאפ או מייל מתוך הפנייה. אפשר להעביר לאיש צוות ולעדכן סטטוס.</p></li><li><strong data-en="Keep track of what’s next">זוכרים לחזור גם בהמשך</strong><p data-en="Follow up reminders help you get back in time. You can also configure replies and next steps for the customer.">תזכורות למעקב עוזרות לחזור בזמן. אפשר להגדיר גם תשובות והמשך תהליך ללקוח.</p></li></ul></div>
+<figure style="margin:0"><img class="brand-photo" src="assets/img/product_leads_scene.jpg" alt="רונה והינשוף של iHoogi לצד מחשב" data-en-alt="Rona and the iHoogi owl beside a laptop" width="800" height="714" loading="lazy"><figcaption data-en="Knowing what the customer needs helps you start the conversation." class="photo-note">כשתדעו מה הלקוח מחפש, תוכלו להתחיל את השיחה מהמקום הנכון.</figcaption></figure></div></section>
+<section class="section" id="why"><div class="wrap"><div class="section-head"><p data-en="Why choose iHoogi" class="eyebrow">למה לבחור ב־iHoogi</p><h2 data-en="How does iHoogi help in your working day?">מה iHoogi נותן לכם ביום העבודה?</h2></div>
+<div class="difference-grid"><article class="difference-card"><p data-en="01 · Tailored to your business" class="small-label">01 · התאמה לעסק</p><h3 data-en="A good fit means a good fit for you">הדירוג מתאים לעסק שלכם</h3><p data-en="Your business profile guides the questions and answer analysis. You don’t have to start from scratch with every new contact.">iHoogi בודק את התשובות לפי השירותים שלכם והלקוחות שאתם מחפשים. כך אתם יודעים אם הפנייה מתאימה לכם.</p></article>
+<article class="difference-card"><p data-en="02 · Priorities with context" class="small-label">02 · ציון והסבר</p><h3 data-en="Understand why an inquiry fits">רואים למה הפנייה מתאימה</h3><p data-en="Answers and an explanation accompany the ranking. Use your judgment and start an informed conversation, rather than relying on a score alone.">לצד הדירוג יש תשובות והסבר. כך אפשר להפעיל שיקול דעת ולהתחיל שיחה עניינית, במקום לנחש לפי ציון בלבד.</p></article>
+<article class="difference-card"><p data-en="03 · Part of your working day" class="small-label">03 · טיפול בפניות</p><h3 data-en="Turn understanding into action">כל מה שצריך כדי לחזור ללקוח</h3><p data-en="Alerts, contact actions, team routing and follow ups keep the information useful after the customer finishes answering.">מקבלים התראה, חוזרים ללקוח, מעבירים לאיש צוות או קובעים תזכורת להמשך. פרטי הפנייה והתשובות נשארים מולכם.</p></article>
+<article class="difference-card"><p data-en="04 · Setup with Rona" class="small-label">04 · הקמה עם רונה</p><h3 data-en="Get started with someone who understands business">מתחילים עם מישהי שמבינה עסקים</h3><p data-en="I set up your link and tailor it to your business. You share it and see how it works with your own inquiries.">אני מקימה עבורכם את הלינק ומתאימה אותו לעסק שלכם. אתם משתפים אותו ורואים איך הוא עובד עם הפניות שמגיעות אליכם.</p></article></div></div></section>
+<section class="section soft" id="insight"><div class="wrap split"><div><p data-en="Bring clarity to your marketing, too" class="eyebrow">רואים איזה פרסום עובד בשבילכם</p><h2 data-en="Which source brings&lt;br&gt;the right customers?">איזה מקור מביא<br>לקוחות שמתאימים לכם?</h2><p data-en="Inquiry volume is only part of the picture. See which sources and campaigns bring good fit inquiries, and filter by answers to understand what customers need." class="lead">מספר הפניות הוא רק חלק מהתמונה. רואים מאילו מקורות וקמפיינים הגיעו פניות מתאימות, ואפשר לסנן גם לפי תשובות כדי להבין מה הלקוחות מחפשים.</p>
+<p data-en="With the appropriate connection and measurement settings, lead and qualified lead events can be sent back to Meta, adding inquiry quality signals to campaign measurement." class="meta-note">אחרי שמחברים ומגדירים את המדידה, אפשר להעביר למטא מידע על הפניות שהתקבלו ועל אלו שמתאימות לעסק. כך מדידת הקמפיין כוללת גם מידע על איכות הפניות.</p></div>
+<div class="source-box"><h3 data-en="More inquiries ≠ a better fit">יותר פניות ≠ יותר התאמה</h3><p data-en="Illustrative numbers only · Not customer results" class="example-label">מספרים להמחשה בלבד · לא תוצאות לקוח</p>
+<div class="source-row"><div class="source-title"><span data-en="Source A · 20 inquiries">מקור א׳ · 20 פניות</span><b data-en="5 good fit inquiries">5 מתאימות</b></div><div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width:25%"></div></div></div>
+<div class="source-row"><div class="source-title"><span data-en="Source B · 12 inquiries">מקור ב׳ · 12 פניות</span><b data-en="9 good fit inquiries">9 מתאימות</b></div><div class="bar-track" aria-hidden="true"><div class="bar-fill strong" style="width:75%"></div></div></div>
+<p data-en="Bars show good fit inquiries as a share of each source’s total inquiries. Fit is assessed against your business settings." class="source-note">הפס מציג את שיעור הפניות המתאימות מתוך כלל הפניות של כל מקור. ההתאמה נבחנת לפי הגדרות העסק.</p></div></div></section>
+<section class="section proof" id="proof"><div class="wrap"><div class="proof-grid"><div><p data-en="From the field" class="eyebrow">מהשטח</p><h2 data-en="Reach the right customer&lt;br&gt;while they’re still waiting for you.">להגיע ללקוח המתאים<br>כשהוא עוד מחכה לכם.</h2></div><div><div class="quote-mark" aria-hidden="true">“</div><blockquote class="quote"><p data-en="I used to struggle to get back to every inquiry, even with an external phone answering service. Still, sometimes a customer who was a good fit signed up elsewhere before I reached them.">פעם לא תמיד הספקתי לחזור לכל הפניות, ואפילו נעזרתי במענה טלפוני חיצוני. ועדיין, לפעמים דווקא לקוח שהתאים לי נרשם במקום אחר לפני שהגעתי אליו.</p><p data-en="With iHoogi, I know in advance who is a good fit and contact them first. I no longer needed the external answering service, I miss fewer opportunities, and my community has tripled.">עם iHoogi אני יודעת מראש מי מתאים וחוזרת קודם אליו. כבר לא הייתי צריכה את המענה הטלפוני החיצוני, אני מפספסת פחות הזדמנויות, והקהילה שלי שילשה את עצמה.</p><cite class="quote-credit"><span data-en="Ris · Risport, senior fitness and retreats">ריס · ריספורט, אימון לגיל השלישי וריטריטים</span></cite></blockquote></div></div>
+<div class="founder"><img src="assets/img/founder_still.jpg" width="108" height="108" alt="רונה ארביסמן, מייסדת iHoogi" data-en-alt="Rona Arbisman, founder of iHoogi" loading="lazy"><div><h3 data-en="Hi, I’m Rona.">נעים להכיר, אני רונה.</h3><p data-en="I’m an industrial and management engineer, systems analyst and entrepreneur with over 25 years of experience. Working with businesses, I kept seeing the same problem: marketing brings inquiries, but it’s hard to know where to focus your time. I built iHoogi for that moment, and I’m here to help you get started.">אני מהנדסת תעשייה וניהול, מנתחת מערכות ויזמת עם יותר מ־25 שנות ניסיון. בליווי עסקים פגשתי שוב ושוב את אותו כאב: משקיעים בשיווק, הפניות מגיעות, אבל קשה לדעת במי להשקיע את הזמן. בשביל הרגע הזה בניתי את iHoogi, ואני גם כאן כדי לעזור לכם להתחיל.</p></div></div></div></section>
+<section class="section" id="start"><div class="wrap"><div class="start"><p class="eyebrow" data-en="Choose how you want to start">איך נוח לכם להתחיל?</p><h2 data-en="Try iHoogi with your first 50 inquiries ranked free">בואו להכיר את iHoogi עם דירוג 50 הפניות הראשונות במתנה</h2><p data-en="I can set up your link, or you can try it yourself. Both options include the same free ranking offer, with no credit card or commitment.">אפשר לתת לי להקים עבורכם את הלינק, ואפשר להתנסות לבד. בשתי האפשרויות מקבלים את אותה מתנה, ללא כרטיס אשראי וללא התחייבות.</p><div class="start-grid" style="margin-top:30px"><div><h3 data-en="I’ll set it up for you">אני אקים עבורכם</h3><p data-en="Answer a few questions about your business. I’ll set up your smart link and tailor the questions to the customers you want to reach.">ממלאים שאלון היכרות קצר. אני מקימה עבורכם לינק חכם ומתאימה את השאלות לעסק וללקוחות שאתם מחפשים.</p><div class="cta-row"><a class="button primary" data-url="GUIDED_SETUP_URL" href="https://ihoogi.com/q/d_klHh3Uxoj6ys/chat"><span data-en="Build my link">בנו לי לינק</span></a></div></div><div><h3 data-en="Prefer to try it yourself?">מעדיפים לנסות לבד?</h3><p data-en="Sign up, tell iHoogi about your business and build your own link. Your first 50 incoming inquiries will be ranked free here too.">נרשמים למערכת, מספרים על העסק ובונים את הלינק בעצמכם. גם כאן, דירוג 50 הפניות הראשונות שייכנסו דרך הלינק הוא במתנה.</p><div class="cta-row"><a class="button secondary" data-url="TRY_IHOOGI_URL" href="https://ihoogi.com/landing"><span data-en="I want to try it myself">רוצה לנסות בעצמי</span></a></div></div></div></div><aside class="company-contact"><h3 data-en="Does your company receive a large volume of inquiries?">החברה שלכם מקבלת הרבה פניות?</h3><p data-en="Tell me about your needs and we’ll discuss how iHoogi could work for your team.">כתבו לי מה אתם צריכים ונבדוק יחד איך iHoogi יכול להתאים לצוות שלכם.</p><a href="mailto:office@ihoogi.com" dir="ltr">office@ihoogi.com</a></aside></div></section>
+<section class="section" id="faq" style="padding-top:0"><div class="wrap faq-wrap"><h2 data-en="Before you get started">רגע לפני שמתחילים</h2>
+<details><summary><span data-en="Does iHoogi bring me new customers?">האם iHoogi מביא לי לקוחות חדשים?</span></summary><p data-en="iHoogi helps you understand and manage inquiries received through the link you share. It is not a lead supply service. The offer covers setup and ranking for the first 50 incoming inquiries.">iHoogi עוזר להבין ולטפל בפניות שמגיעות דרך הלינק שאתם משתפים. הוא לא שירות שמספק לידים. המתנה היא ההקמה ודירוג 50 הפניות הראשונות שייכנסו דרך הלינק.</p></details>
+<details><summary><span data-en="Who is it for?">למי זה מתאים?</span></summary><p data-en="Service businesses that need to understand a customer’s needs and fit before a conversation, for example, consultants, clinics, studios and teams. Suitability depends on your process and the information you need.">לעסקי שירות שמקבלים פניות וצריכים לברר צורך והתאמה לפני שיחה: למשל יועצים, קליניקות, סטודיו ועסקים שעובדים עם צוות. ההתאמה תלויה בתהליך שלכם ובמידע שחשוב לכם לברר.</p></details>
+<details><summary><span data-en="I already have a form or CRM. Why add iHoogi?">יש לי כבר טופס או CRM. למה להוסיף את iHoogi?</span></summary><p data-en="The value is in qualifying and prioritizing before the conversation: questions based on your business profile, ranking and explanations based on the answers, followed by actions and follow ups. Use iHoogi on its own or alongside your tools; I’ll review the fit with you during setup.">הערך הוא בבירור ובתעדוף לפני השיחה: שאלות לפי פרופיל העסק, דירוג והסבר לפי התשובות, ואז פעולות ומעקב. אפשר להשתמש ב־iHoogi בפני עצמו או לצד הכלים שלכם; בהקמה אבדוק איתכם מה מתאים לתהליך הקיים.</p></details>
+<details><summary><span data-en="Does the ranking decide for me?">האם הדירוג מחליט בשבילי?</span></summary><p data-en="No. It helps you prioritize based on the information supplied and your business settings. Read the answers and explanation and decide who to contact, including lower ranked inquiries.">לא. הוא עוזר לתעדף לפי המידע שנמסר והגדרות העסק. אפשר לקרוא את התשובות וההסבר ולהחליט למי לחזור, גם כשפנייה קיבלה דירוג נמוך יותר.</p></details>
+<details><summary><span data-en="What happens after 50 inquiries?">מה קורה אחרי 50 הפניות?</span></summary><p data-en="Plans start at ₪299 per month, excluding VAT. The free offer requires no credit card and no commitment to continue.">מסלולים החל מ־299 ₪ לחודש, לפני מע״מ. ההתנסות ללא כרטיס אשראי וללא התחייבות להמשיך.</p></details>
+</div></section></main>
+<footer class="footer"><div class="wrap footer-row"><p>© <span id="yr">2026</span> iHoogi · <span data-en="by Ligro">מבית ליגרו</span></p><div class="footer-links"><a href="https://ihoogi.com/landing"><span data-en="Log in">כניסה למערכת</span></a><a href="mailto:office@ihoogi.com"><span data-en="Contact us">דברו איתנו</span></a><a href="https://ihoogi.com/privacy"><span data-en="Privacy">פרטיות</span></a><a href="https://ihoogi.com/terms"><span data-en="Terms">תנאי שימוש</span></a><a href="https://ihoogi.com/accessibility"><span data-en="Accessibility">נגישות</span></a><button class="cookie-settings" type="button"><span data-en="Cookie preferences">העדפות עוגיות</span></button></div></div></footer>
+<div class="mobile-cta" id="mobileCta"><a class="button primary" href="#start"><span data-en="I want to try iHoogi">רוצה להתנסות</span></a><p data-en="50 inquiries ranked free">דירוג 50 פניות במתנה</p></div>
 
-<!-- ============ VALUE IN ONE SECTION ============ -->
-<section class="section value" id="how"><div class="wrap">
-<div class="center reveal"><span class="eyebrow">מותאמת לעסק שלכם</span>
-<h2 class="h2">אתם מכירים את העסק.<br><span class="hl">iHoogi לומדת מכם.</span></h2>
-</div>
-<div class="tri tri3">
-<div class="cell reveal"><div class="ic">01</div><h3>לומדת</h3><p>מה חשוב לכם, מי הלקוחות שאתם מחפשים ומה נכון לברר לפני השיחה.</p></div>
-<div class="cell reveal"><div class="ic">02</div><h3>מבינה ומתעדפת</h3><p>כל פנייה מגיעה עם המידע החשוב, ו־iHoogi מנתחת ומדרגת את מידת ההתאמה לעסק שלכם.</p></div>
-<div class="cell reveal"><div class="ic">03</div><h3>מקדמת מיד</h3><p>הפנייה מגיעה מיד לנייד עם המידע, הדירוג וההסבר. יש צוות? iHoogi מנתבת אותה לאדם הנכון. משם אפשר לפעול מיד — או לתת ל־iHoogi להוביל את הלקוח אוטומטית לצעד הבא שהגדרתם.</p></div>
-</div>
-<p class="north-star reveal"><strong>הלקוח משקיע שניות. אתם חוסכים שעות.</strong></p><p class="lead center reveal" style="margin:18px auto 0;font-size:1rem"><strong>כבר עובדים עם CRM או מערכת אחרת?</strong> לא צריך להחליף. iHoogi יכולה לעבוד בפני עצמה או לצד מה שכבר עובד אצלכם.</p>
-</div></section>
-
-<!-- ============ BONUS INSIGHT ============ -->
-<section class="section" id="insight" style="padding-block:42px;background:var(--soft)"><div class="wrap"><div class="center reveal">
-<span class="eyebrow">לא רק כמה פניות הגיעו</span>
-<h2 class="h2"><span class="hl">20 פניות</span> לא בהכרח שוות יותר מ־12.</h2>
-<p class="lead center" style="margin-inline:auto">iHoogi עוזרת לראות אילו מקורות מביאים לעסק פניות רלוונטיות יותר — ולא רק מאיפה הגיעו יותר פניות.</p>
-<p class="lead center" style="margin:10px auto 0;font-size:1rem">רוצים למצוא את כל מי שענה תשובה מסוימת? בלחיצת כפתור מגיעים בדיוק לפניות שמעניינות אתכם.</p>
-</div></div></section>
-
-<!-- ============ FOUNDER ============ -->
-<section class="section video-band" id="proof"><div class="wrap">
-<div class="center reveal"><span class="eyebrow">מוצר שכבר עובד בשטח</span><h2 class="h2">iHoogi נבנתה סביב פניות ותהליכי עבודה אמיתיים.</h2></div>
-<div class="testimonial-card reveal"><blockquote>פעם לא תמיד הספקתי לחזור לכל הפניות, ואפילו נעזרתי במענה טלפוני חיצוני. ועדיין, לפעמים דווקא לקוח שהתאים לי נרשם במקום אחר לפני שהגעתי אליו.<br><br>עם iHoogi אני יודעת מראש מי מתאים וחוזרת קודם אליו. כבר לא הייתי צריכה את המענה הטלפוני החיצוני, אני מפספסת פחות הזדמנויות — והקהילה שלי שילשה את עצמה.</blockquote><div class="who">ריס · ריספורט — אימון לגיל השלישי וריטריטים</div></div>
-</div></section>
-
-<!-- ============ START ============ -->
-<section class="section final-cta" id="start"><div class="wrap"><div class="center reveal">
-<span class="eyebrow">לרגל ההשקה</span>
-<h2 class="h2">הפנייה הבאה יכולה להגיע בעוד דקה.<br><span class="hl">הפעם תדעו עליה הרבה יותר.</span></h2>
-<a class="btn btn-primary btn-lg" data-url="GUIDED_SETUP_URL" href="https://ihoogi.com/q/d_klHh3Uxoj6ys/chat">מתחילים בחינם</a>
-<p class="cta-micro">הפניות שכבר מגיעות לעסק שלכם • ללא כרטיס אשראי • ללא התחייבות</p>
-<p class="login-note">כבר יש לכם חשבון? <a data-url="LOGIN_URL" href="https://ihoogi.com/landing">כניסה</a></p>
-</div></div></section>
-
-<!-- ============ FAQ ============ -->
-<section class="section" id="faq" style="background:var(--soft)"><div class="wrap"><div class="center reveal"><span class="eyebrow">שאלות נפוצות</span><h2 class="h2">לפני שמתחילים.</h2></div><div class="faq-list"><div class="faq-item"><button class="faq-q" type="button">האם iHoogi מספקת לידים חדשים?<span>+</span></button><div class="faq-a"><p>לא. iHoogi עובדת עם הפניות שכבר מגיעות לעסק שלכם מהשיווק ומהערוצים הקיימים — ועוזרת להבין ולקדם אותן נכון יותר.</p></div></div>
-<details class="faq reveal"><summary><span>מה זה iHoogi?</span><span class="pm">+</span></summary><div class="ans">iHoogi היא סוכן אישי שמותאם לעסק שלכם. היא לומדת מה חשוב לכם, אוספת את המידע הנכון מכל פנייה, מנתחת ומתעדפת — כדי שתדעו במי כדאי לטפל קודם ומה נכון לעשות הלאה.</div></details>
-<details class="faq reveal"><summary><span>האם צריך לבנות את זה לבד?</span><span class="pm">+</span></summary><div class="ans">לא. אנחנו מתאימים את iHoogi לעסק שלכם — מה חשוב לזהות, איך לנתח ומה נכון לעשות בהמשך. אתם מקבלים לינק חכם ומחברים אותו למקומות שבהם כבר מגיעות הפניות.</div></details>
-<details class="faq reveal"><summary><span>האם צריך להחליף את מה שכבר קיים בעסק?</span><span class="pm">+</span></summary><div class="ans">לא. אפשר לעבוד עם iHoogi בפני עצמה או לצד הכלים שכבר קיימים בעסק.</div></details>
-<details class="faq reveal"><summary><span>איפה אפשר לשים את הלינק?</span><span class="pm">+</span></summary><div class="ans">באתר, בדף נחיתה, בקמפיינים, ברשתות החברתיות, ב־WhatsApp, ב־QR — ובכל מקום שבו לקוחות משאירים לכם פרטים.</div></details>
-<details class="faq reveal"><summary><span>מה קורה אחרי דירוג 50 הפניות הראשונות?</span><span class="pm">+</span></summary><div class="ans">דירוג 50 הפניות הראשונות הוא הטבת ההשקה. לאחר מכן תוכלו לבחור את המסלול שמתאים להיקף הפניות ולצרכים של העסק שלכם לפני כל חיוב.</div></details>
-</div></div></section>
-
-<!-- ============ FOOTER ============ -->
-<a class="floating-login" data-url="LOGIN_URL" href="https://ihoogi.com/landing" aria-label="כניסה למערכת iHoogi">כניסה וניסיון ב־iHoogi ←</a>
-<div class="mobile-sticky-cta"><a class="btn btn-primary btn-lg" data-url="GUIDED_SETUP_URL" href="https://ihoogi.com/q/d_klHh3Uxoj6ys/chat">50 פניות במתנה · ללא אשראי וללא התחייבות</a></div>
-<footer>
-<div class="wrap">
-<div class="foot">
-<div class="brand-col">
-<span class="chip"><img alt="iHoogi" decoding="async" src="assets/img/ihoogi_logo.png"/></span>
-<p data-i18n="k73">דעו על מי לענות קודם. דעו יותר, עוד לפני שאמרתם שלום.</p>
-</div>
-<div><h4 data-i18n="k74">מוצר</h4><ul>
-<li><a data-i18n="k89" href="#features">יכולות</a></li>
-<li><a data-i18n="k20" href="#proof">מהמייסדת</a></li>
-</ul></div>
-<div><h4 data-i18n="k75">מידע</h4><ul>
-<li><a data-i18n="k87" href="#onelink">איך זה עובד</a></li>
-<li><a data-i18n="k91" href="#start">איך מתחילים</a></li>
-<li><a data-i18n="k82" href="#faq">שאלות נפוצות</a></li>
-</ul></div>
-<div><h4 data-i18n="k76">חשבון</h4><ul>
-<li><a data-url="GUIDED_SETUP_URL" href="https://ihoogi.com/q/d_klHh3Uxoj6ys/chat">קבלו את המתנה</a></li>
-<li><a data-i18n="k332" data-url="TRY_IHOOGI_URL" href="https://ihoogi.com/landing" target="_blank" rel="noopener noreferrer">כניסה ל־iHoogi</a></li>
-<li><a data-i18n="k86" data-url="CONTACT" href="mailto:office@ihoogi.com">צור קשר</a></li>
-</ul></div>
-</div>
-<div class="foot-bottom">
-<span>© <span id="yr"></span> iHoogi · <span data-i18n="k58">דעו על מי לענות קודם</span><span class="company-name">ליגרו פתרונות חכמים בע״מ</span></span>
-<span class="legal-links"><a href="https://ihoogi.com/privacy" target="_blank" rel="noopener noreferrer">מדיניות פרטיות</a><span>•</span><a href="https://ihoogi.com/terms" target="_blank" rel="noopener noreferrer">תנאי שימוש</a><span>•</span><a href="https://ihoogi.com/accessibility" target="_blank" rel="noopener noreferrer">הצהרת נגישות</a><span>•</span><button class="cookie-settings" type="button">הגדרות עוגיות</button></span>
-</div>
-</div>
-</footer>
-<aside aria-live="polite" class="cookie-banner" id="cookieBanner" role="dialog" aria-label="העדפות עוגיות">
-<div class="cookie-inner"><div class="cookie-copy"><strong>הפרטיות שלכם חשובה לנו</strong><span>אנחנו משתמשים בעוגיות הכרחיות ובכלי מדידה, כולל Meta Pixel, רק לאחר אישורכם. אפשר לשנות את הבחירה בכל עת. </span><a href="https://ihoogi.com/privacy" target="_blank" rel="noopener noreferrer">למדיניות הפרטיות</a></div>
-<div class="cookie-actions"><button class="btn btn-secondary" data-cookie="essential" type="button">רק הכרחי</button><button class="btn btn-primary" data-cookie="all" type="button">אישור</button></div></div>
-</aside>
 <script>
-/* =========================================================
-   SITE_CONFIG — כתובות במקום אחד. החליפו את ה-# בכתובות האמיתיות.
-   ========================================================= */
 const SITE_CONFIG = {
   SIGNUP_URL:       "https://ihoogi.com/landing",
   TRY_IHOOGI_URL:   "https://ihoogi.com/landing",
@@ -936,8 +315,8 @@ document.querySelectorAll('[data-url]').forEach(el=>{
 /* Keep campaign attribution when moving from ihoogi.co.il to the questionnaire. */
 const ATTRIBUTION_PARAMS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'];
 const incomingParams = new URLSearchParams(window.location.search);
-document.querySelectorAll('[data-url="GUIDED_SETUP_URL"]').forEach(el=>{
-  const target = new URL(SITE_CONFIG.GUIDED_SETUP_URL);
+document.querySelectorAll('[data-url="GUIDED_SETUP_URL"], [data-url="TRY_IHOOGI_URL"]').forEach(el=>{
+  const target = new URL(SITE_CONFIG[el.dataset.url]);
   ATTRIBUTION_PARAMS.forEach(key=>{
     const value = incomingParams.get(key);
     if(value) target.searchParams.set(key,value);
@@ -965,7 +344,9 @@ function loadMetaPixel(){
 
 const CONSENT_KEY = 'ihoogi_cookie_consent_v1';
 const cookieBanner = document.getElementById('cookieBanner');
+let marketingConsent = false;
 function setCookieConsent(value){
+  marketingConsent = value === 'all';
   try{ localStorage.setItem(CONSENT_KEY,value); }catch(e){}
   cookieBanner.classList.remove('show');
   if(value === 'all'){
@@ -977,173 +358,53 @@ function setCookieConsent(value){
 }
 let savedConsent = null;
 try{ savedConsent = localStorage.getItem(CONSENT_KEY); }catch(e){}
-if(savedConsent === 'all') loadMetaPixel();
+marketingConsent = savedConsent === 'all';
+if(marketingConsent) loadMetaPixel();
 else if(savedConsent !== 'essential') cookieBanner.classList.add('show');
 document.querySelectorAll('[data-cookie]').forEach(button=>button.addEventListener('click',()=>setCookieConsent(button.dataset.cookie)));
-document.querySelector('.cookie-settings').addEventListener('click',()=>cookieBanner.classList.add('show'));
+document.querySelector('.cookie-settings').addEventListener('click',()=>{cookieBanner.classList.add('show');cookieBanner.scrollIntoView({behavior:'smooth',block:'start'});cookieBanner.querySelector('button').focus({preventScroll:true});});
 
 /* A CTA click is an intent signal, not a completed lead. Lead is reported only
    after the contact flow is submitted in the product. */
 document.addEventListener('click',event=>{
   const cta = event.target.closest('[data-url="GUIDED_SETUP_URL"]');
-  if(cta && typeof window.fbq === 'function'){
+  if(cta && marketingConsent && typeof window.fbq === 'function'){
     window.fbq('trackCustom','StartQuestionnaire',{source:'marketing_site'});
   }
 });
 
-/* year */
+
 document.getElementById('yr').textContent = new Date().getFullYear();
-
-/* sticky nav shadow */
-const nav = document.getElementById('nav');
-const onScroll = ()=> nav.classList.toggle('scrolled', window.scrollY > 8);
-onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
-
-/* mobile menu */
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('navLinks');
-burger.addEventListener('click', ()=>{
-  const open = navLinks.classList.toggle('open');
-  burger.setAttribute('aria-expanded', open);
-});
-navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-  navLinks.classList.remove('open'); burger.setAttribute('aria-expanded','false');
-}));
-
-/* scroll reveal */
-const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if(!reduce && 'IntersectionObserver' in window){
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
-  }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-} else {
-  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+function closeMenu(){navLinks.classList.remove('open');burger.setAttribute('aria-expanded','false');}
+burger.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');burger.setAttribute('aria-expanded',String(open));});
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+document.addEventListener('keydown',event=>{if(event.key==='Escape' && navLinks.classList.contains('open')){closeMenu();burger.focus();}});
+const translatedNodes = [...document.querySelectorAll('[data-en]')].map(el=>({el,he:el.innerHTML,en:el.dataset.en}));
+const translatedAttrs = ['alt','aria-label'].flatMap(attr=>[...document.querySelectorAll(attr==='alt'?'[data-en-alt]':'[data-en-aria]')].map(el=>({el,attr,he:el.getAttribute(attr),en:el.getAttribute(attr==='alt'?'data-en-alt':'data-en-aria')})));
+const languageButton = document.getElementById('langToggle');
+let currentLanguage = 'he';
+function setLanguage(lang){
+  currentLanguage = lang;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==='he'?'rtl':'ltr';
+  translatedNodes.forEach(item=>{item.el.innerHTML=item[lang];});
+  translatedAttrs.forEach(item=>item.el.setAttribute(item.attr,item[lang]));
+  languageButton.textContent=lang==='he'?'EN':'עברית';
+  languageButton.lang=lang==='he'?'en':'he';
+  languageButton.setAttribute('aria-label',lang==='he'?'Switch to English':'מעבר לעברית');
+  document.title=lang==='he'?'iHoogi · דעו למי לחזור קודם, ולמה':'iHoogi · Know who to call first, and why';
+  try{localStorage.setItem('ihoogi_lang',lang);}catch(e){}
 }
-
-
-/* ============ i18n engine ============ */
-const PAGE_I18N_EN = {
-  '.hero-gift':['A gift for businesses that receive inquiries'],
-  '.hero-title':['We will build you a <span class="hl">smart link</span><br>tailored precisely to your business'],
-  '.hero-lead':['iHoogi asks the questions you repeat every day, analyzes and scores each inquiry, and shows you on your phone who to contact first.'],
-  '#hero .launch-offer strong':['Your first 50 inquiries through the link will be ranked as our gift'],
-  '#hero .launch-offer span':['Spend less time repeating questions. Spend more time with the customers who have the highest sales potential.'],
-  '#hero .launch-offer small':['We tailor the questions and process to your business'],
-  '[data-url="GUIDED_SETUP_URL"]':['Claim the gift','Claim the gift','Claim the gift','Claim the gift','Claim the gift'],
-  '#hero .text-link':['How it works ↓'],
-  '.cta-micro':['No commitment • No credit card','No commitment • No credit card'],
-  '.float-chip .temp':['Hot'],
-  '.float-chip.a > div:last-child > div:last-child':['Know why. Act now.'],
-  '#why .pain-block .eyebrow':['What happens after an inquiry comes in?'],
-  '#why .pain-block .h2':['You already invested to bring in the inquiry.<br><span class="hl">Now know what to do with it.</span>'],
-  '#why .pain-block .lead':['Instead of repeating the same questions on every call, iHoogi collects the answers that matter to your business in advance. You spend less time clarifying and identify the inquiries worth advancing faster.'],
-  '#why .before-after b':['Without iHoogi','With iHoogi'],
-  '#why .before-after span':['Name + phone → call → ask → clarify → understand','Need + answers + fit + urgency → know what to do'],
-  '#why .bridge-line':['iHoogi changes the starting point. Know more first, then decide where to invest your time.'],
-  '#why .value-head .h2':['Your customer spends seconds. You save hours.'],
-  '#why .tri h3':['A smart system that knows exactly what and how to ask','Know who to handle first','Not every inquiry needs the same next step'],
-  '#why .tri p':['Understanding an inquiry starts with the right questions. iHoogi tailors what matters to your business and how to ask it, so you get the information needed to understand fit and intent.','Every inquiry arrives with a score, temperature and explanation, so you do not have to call everyone in order and discover the best fit too late.','Based on the answers and fit, iHoogi can move the customer to the next step you defined, including WhatsApp, booking, a follow-up form, relevant information or another path.'],
-  '#why .journey-line span':['Details submitted','🔥 Relevant inquiry','Next step'],
-  '#onelink .center .eyebrow':['Start without a project or a headache'],
-  '#onelink .center .h2':['You do not need to build a system.<br><span class="hl">We do it for you.</span>'],
-  '#onelink .center .lead':['You know your business. We turn that knowledge into a process that works for you.'],
-  '#onelink .step h3':['Tell us what matters to you','We build iHoogi for your business','Get one link','Inquiries arrive with meaning','The customer continues to the right next step'],
-  '#onelink .step p':['What you offer, which customers you want, and what matters before the call.','Questions, flow, response and next step are tailored to what you want to achieve.','Connect it to your website, campaigns, Facebook, Instagram, WhatsApp, landing pages or QR.','Answers, score, temperature and reasoning are already waiting for you.','Based on the answers and fit, the customer continues to the next step you defined.'],
-  '#onelink .north-star':['You do not change how you bring in inquiries.<br><strong>You change what happens after they arrive.</strong><span style="display:block;margin-top:12px;font-weight:600">A regular system manages the inquiry after it arrives. iHoogi works one moment earlier by understanding it, prioritizing it and moving it to the right next step before the first call.</span>'],
-  '#features .mobile-beat .eyebrow':['Everything in your hand'],
-  '#features .mobile-beat .h2':['An inquiry came in? Everything you need is already on your phone.'],
-  '#features .mobile-facts span':['Who contacted you.','What they want.','What they answered.','How well they fit.','And why.'],
-  '#features .mobile-beat .lead':['Call, WhatsApp or email, add a reminder, update status and continue follow-up without searching for who contacted you and where they came from.'],
-  '#features .mobile-beat .bridge-line':['Less time understanding the inquiry. More time moving it forward.'],
-  '#features .business-beat .eyebrow':['From one inquiry to the business picture'],
-  '#features .business-beat .h2':['Not only know what to do with an inquiry.<br>Understand what is happening in the business.'],
-  '#features .business-beat .lead':['All inquiries come together in one place, so you can see what is waiting, what is being handled and what needs attention.'],
-  '#features .system-row h3':['Already have a CRM? Great.'],
-  '#features .system-row p':['You do not have to replace it. Your system can keep managing customers as usual. iHoogi works before it and passes along an inquiry that already includes answers, fit and context.'],
-  '#features .source-intel .eyebrow':['Quality before quantity'],
-  '#features .source-intel .h2':['20 inquiries are not necessarily worth more than 12.'],
-  '#features .source-intel .lead':['<strong>See at a glance which sources bring the best fit for your business.</strong><br>Not only how many inquiries each source produced, but which inquiries it produced, so you can make better advertising decisions.'],
-  '#features .qq h3':['Inquiry volume','Relevant inquiries'],
-  '#features .qq .bar span:first-child':['Source A','Source B','Source A','Source B'],
-  '#features .intel-punch':['Count fewer inquiries. <strong>Understand more about the inquiries you receive.</strong>'],
-  '#features .disclaimer':['Illustrative data only.'],
-  '#proof > .wrap > .center .eyebrow':['A product already working in the field'],
-  '#proof > .wrap > .center .h2':['iHoogi was built around real inquiries and real workflows.'],
-  '#proof blockquote':['I could not always get back to every inquiry and even used an external answering service. Still, sometimes a customer who was right for me registered elsewhere before I reached them.<br><br>With iHoogi I know in advance who is a fit and contact them first. I no longer needed the external answering service, I miss fewer opportunities, and my community has tripled.'],
-  '#proof .testimonial-card .who':['Ris · Risport, senior fitness and retreats'],
-  '#proof .founder-mini .eyebrow':['From the founder'],
-  '#proof .founder-mini h3':['Why did I build iHoogi?'],
-  '#proof .founder-mini p':['In my work with businesses I saw the same situation repeatedly: they invest time and money to get customers to leave details, then receive only a name and phone number at the most important moment.','After dozens of conversations with business owners, I asked myself why wait for the phone call to understand who contacted the business?','At the moment of inquiry, we can already ask the right questions, understand the answers and give the business far more information for deciding what to do.','That is where iHoogi was born.','<strong>Rona Arbissman · Founder of iHoogi</strong>'],
-  '#start .eyebrow':['Launch offer'],
-  '#start .h2':['Your next inquiry could arrive in a minute.<br><span class="hl">This time you will know much more about it.</span>'],
-  '#start > .wrap .lead':['We build iHoogi around your business. You connect one link wherever inquiries already arrive and start seeing them differently.'],
-  '#start .launch-offer strong':['Your first 50 inquiries through the link will be ranked as our gift'],
-  '#start .launch-offer span':['We tailor the questions and process precisely to your business.'],
-  '#start .launch-offer small':['Fewer repeated questions. More time to advance the right inquiries.'],
-  '#start .login-link':['Already have an account? Log in'],
-  '#faq .center .eyebrow':['Frequently asked questions'],
-  '#faq .center .h2':['Before you start.'],
-  '#faq summary span:first-child':['What is iHoogi?','Do I need to build it myself?','Do I need to replace my current system?','Where can I place the link?','What happens after the first 50 inquiries?'],
-  '#faq .ans':['iHoogi turns a basic inquiry into useful information before the first call. It asks the questions that matter to your business, brings the answers together, shows who to handle first and can move the customer to the next step you defined.','No. We set up iHoogi for your business, including the questions, flow and next step. You receive a link and connect it wherever inquiries already arrive.','No. Use iHoogi on its own or alongside the system already in your business.','On your website, landing page, campaigns, social media, WhatsApp, QR and anywhere customers leave their details.','Ranking the first 50 inquiries is the launch gift. Afterwards you can choose a plan that fits your inquiry volume and business needs before any charge.'],
-  '.stats-at-end .trust-strip strong':['2,000+','Real inquiries','One link'],
-  '.stats-at-end .trust-strip span':['Inquiries have already passed through iHoogi','From real businesses and workflows','Connects wherever inquiries already arrive'],
-  '.company-name':['Ligro Smart Solutions Ltd.'],
-  '.legal-links a':['Privacy Policy','Terms of Use','Accessibility Statement'],
-  '.cookie-settings':['Cookie settings'],
-  '.cookie-copy strong':['Your privacy matters to us'],
-  '.cookie-copy span':['We use essential cookies and measurement tools, including Meta Pixel, only after your approval. You can change your choice at any time. '],
-  '.cookie-copy a':['Privacy Policy'],
-  '[data-cookie="essential"]':['Essential only'],
-  '[data-cookie="all"]':['Accept']
-};
-const PAGE_I18N_ORIGINAL = new Map();
-Object.keys(PAGE_I18N_EN).forEach(selector=>{
-  PAGE_I18N_ORIGINAL.set(selector,Array.from(document.querySelectorAll(selector),el=>el.innerHTML));
-});
-function applyPageLang(lang){
-  Object.entries(PAGE_I18N_EN).forEach(([selector,translations])=>{
-    const elements = document.querySelectorAll(selector);
-    const originals = PAGE_I18N_ORIGINAL.get(selector) || [];
-    elements.forEach((el,index)=>{
-      const value = lang === 'en' ? translations[index] : originals[index];
-      if(value != null) el.innerHTML = value;
-    });
-  });
-  const navLabel = lang === 'he' ? 'ניווט ראשי' : 'Primary navigation';
-  document.getElementById('navLinks').setAttribute('aria-label',navLabel);
-  document.getElementById('burger').setAttribute('aria-label',lang === 'he' ? 'תפריט' : 'Menu');
-  cookieBanner.setAttribute('aria-label',lang === 'he' ? 'העדפות עוגיות' : 'Cookie preferences');
+languageButton.addEventListener('click',()=>setLanguage(currentLanguage==='he'?'en':'he'));
+try{if(localStorage.getItem('ihoogi_lang')==='en')setLanguage('en');}catch(e){}
+// Keep the mobile action available while reading; avoid duplicating it over the hero or final offer.
+if('IntersectionObserver' in window){
+  const visibleSections = new Set();
+  const mobileCta = document.getElementById('mobileCta');
+  new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)visibleSections.add(entry.target.id);else visibleSections.delete(entry.target.id);});mobileCta.hidden=visibleSections.size>0;},{threshold:0}).observe(document.getElementById('top'));
+  new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)visibleSections.add(entry.target.id);else visibleSections.delete(entry.target.id);});mobileCta.hidden=visibleSections.size>0;},{threshold:0}).observe(document.getElementById('start'));
 }
-const I18N = {"he":{"k1":"הלינק החכם שמחברים לכל מקום<br>שבו הלקוחות שלכם משאירים פרטים.","k2":"אתם מגדירים מה אתם רוצים להשיג. iHoogi יודעת מה נכון לשאול, מבינה מה הלקוח מחפש, מדרגת את הפנייה — ועוזרת לכם לדעת במי לטפל קודם.","k329":"מה שבעבר דרש מערכות מורכבות, תקציבים גדולים ואנשי אוטומציה, היום נגיש גם לעסק שלכם.","k340":"iHoogi מייצרת לכם<br>לינק חכם","k341":"מחברים אותו בכל מקום<br>שבו הלקוחות משאירים פרטים","k342":"כל הפניות והמידע<br>במקום אחד","k343":"iHoogi מנתחת,<br>מדרגת ומתעדפת","k344":"הפניות שכדאי לטפל בהן קודם<br>עולות לראש הרשימה","k3":"נסו את iHoogi","k6":"נסו את השאלון","k7":"ראו איך זה עובד","k8":"עובדת לבד או לצד המערכות שכבר יש לכם","k10":"הלקוח משיב בשניות","k11":"לא עוד טופס שמשאיר אתכם רק עם שם וטלפון.","k12":"הערך בקצרה","k14":"לפני שממשיכים","k15":"היכולות","k19":"איך מתחילים","k20":"מהמייסדת","k21":"שאלות נפוצות","k22":"הלקוח משקיע שניות. אתם חוסכים שעות.","k24":"הלקוח הבא שלכם יכול כבר להיות בין הפניות שנכנסו.","k25":"iHoogi יכולה להיות המערכת המרכזית לניהול הפניות שלכם — או לעבוד לצד המערכת שכבר יש לכם.","k356":"אפשר לרכז ולנהל את הפניות ב־iHoogi, או לעבוד לצד המערכת הקיימת ולהוסיף לה מידע, ניתוח ותעדוף.","k354":"iHoogi כמערכת המרכזית לניהול הפניות","k354c":"מרכזת ומנהלת את הפניות, מנתחת ומתעדפת, מתריעה, מזכירה ועוקבת אחרי הטיפול — וגם מנתחת את התוצאות כדי להבין מה עובד ומה כדאי לשפר.","k355":"כבר יש לכם מערכת? iHoogi מוסיפה לה שכבת מודיעין","k355c":"iHoogi מנתחת את הפניות והתשובות, מדרגת ומתעדפת אותן ומוסיפה את המידע שעוזר לדעת במי לטפל קודם ומה עובד טוב יותר בשיווק ובמכירה.","k29":"להתחיל עם iHoogi זה פשוט.","k320":"אפשר לעבוד עם iHoogi בפני עצמה או לצד הכלים שכבר נמצאים בעסק.","k326":"היא מוסיפה את המידע, התעדוף והמעקב שעוזרים לקבל החלטה על כל פנייה.","k328":"התאימו לי את iHoogi","k328b":"ספרו לנו על העסק ונעזור לכם להתחיל.","k330":"אני רוצה לינק חכם לעסק שלי","k331":"נתאים לכם אישית את הלינק החכם של iHoogi לעסק שלכם.","k332":"כניסה ל־iHoogi","k333":"דירוג 50 פניות במתנה · ללא עלות · ללא כרטיס אשראי","k30":"למה הקמתי את iHoogi?","k30b":"אחרי עשרות שיחות עם בעלי ובעלות עסקים, אותה בעיה חזרה שוב ושוב:","k31":"כל מה שרציתם לדעת.","k35":"אחרי כל הכסף, הזמן והאנרגיה שהשקעתם כדי להביא אותו, השאלה היא אם תזהו אותו ותגיעו אליו בזמן.","k38":"רגע אנושי קצר. למה נולדה הפלטפורמה, ומה חשוב לי שתראו לפני שמתחילים.","k49":"כמות פניות","k50":"פניות רלוונטיות","k51":"מספר גדול לא אומר שהפניות מתאימות.","k52":"פחות להסתכל רק על כמות. יותר להבין מה באמת עובד.","k58":"דעו על מי לענות קודם","k60":"כבר יש לכם חשבון? כניסה","k61":"מה זה iHoogi?","k62":"האם iHoogi מחליף את הכלים שכבר יש לי?","k63":"כמה זמן לוקח ללקוח לענות?","k64":"אפשר להשתמש ב-iHoogi בכמה מקורות פרסום?","k65":"אפשר למצוא פניות לפי תשובה מסוימת?","k66":"אפשר לעקוב אחרי טיפול וזמני תגובה?","k67":"iHoogi מתחילה בלינק חכם שמחברים לכל מקום שבו הלקוחות שלכם משאירים פרטים. היא עוזרת לשאול את השאלות הנכונות, מרכזת ומנתחת את המידע, מדרגת ומתעדפת את הפניות — וממשיכה לעזור בניהול, מעקב ותובנות.","k68":"לא. iHoogi לא באה במקום הכלים שלכם. אפשר לעבוד איתה לבד או לצד מה שכבר יש בעסק. היא מוסיפה מידע, תעדוף ומעקב שמחברים בין השיווק למכירות.","k69":"שניות. השאלות קצרות וממוקדות בכוונה. הלקוח לא אמור להרגיש שהוא ממלא שאלון ארוך, והעסק עדיין מקבל את המידע החשוב.","k70":"כן. iHoogi מרכזת פניות ממקורות ופרסומים שונים במקום אחד, ועוזרת להבין לא רק מאיפה הגיעו הכי הרבה פניות, אלא מאיפה מגיעות הפניות הרלוונטיות יותר לעסק שלכם.","k71":"בהחלט. אפשר לרדת עד רמת השאלה והתשובה, למשל להציג את כל מי שבחר בשירות מסוים, או לזהות דפוסים שחוזרים אצל הפניות החזקות.","k72":"כן. יש התראות, תזכורות, סטטוס לכל פנייה, שיוך צוות ומעקב אחרי זמני תגובה, כדי שאף פנייה חמה לא תיפול בין הכיסאות.","k73":"דעו על מי לענות קודם. דעו יותר, עוד לפני שאמרתם שלום.","k74":"מוצר","k75":"מידע","k76":"חשבון","k82":"שאלות נפוצות","k85":"כניסה","k86":"צור קשר","k87":"איך זה עובד","k88":"למה iHoogi","k89":"יכולות","k91":"איך מתחילים","k92":"שאלות נפוצות","k93":"כניסה","k353":"הפנייה נשלחה. מכאן הכול מתחיל לזוז.","k114":"ליד נכנס? כל המידע כבר מולכם.","k117":"מקבלים מיד לנייד ולמייל את פרטי הלקוח, התשובות והציון, ויכולים להתקשר, לשלוח WhatsApp או מייל בלי להתחיל את השיחה מאפס.","k116":"גם הלקוח מקבל מענה מיד.","k116b":"המענה האוטומטי יכול לא רק לאשר שהפנייה התקבלה, אלא גם להמשיך את המכירה לפגישה ביומן, WhatsApp, שאלון המשך, אתר או הצעד הבא שתבחרו.","k145":"סרטון סקירה","k146":"חם","k147":"קר","k148":"לפנות עכשיו","k149":"מתאים למעקב מאוחר","k150":"מקור א׳","k151":"מקור ב׳","k152":"מקור א׳","k153":"מקור ב׳","k155":"כל הפניות במקום אחד","k156":"מידע","k157":"ניתוח ותעדוף","k158":"החלטה","k159":"מעקב","k323":"לדעת מה באמת עובד","k324":"דוגמה להמחשה. לא תוצאות לקוח אמיתיות.","k325":"לא רק מאיפה הגיעו הכי הרבה פניות. מאיפה הגיעו הפניות הכי רלוונטיות.","k160":"מתחילים בחינם · בלי כרטיס אשראי","k163":"פרטיות · תנאי שימוש","k180":"סוף סוף אני יודעת למי לחזור קודם, במקום לענות לפי הסדר ולגלות שהרצינית כבר הלכה.","k181":"בעלת עסק · לקוחת iHoogi","k182":"צפו בסרטון קצר","k183":"הפסקתי לבזבז חצי יום על פניות שרק בודקות מחיר. עכשיו אני רואה מיד מי באמת רוצה.","k184":"בעלת עסק · לקוחת iHoogi","k210":"לינק <span class=\"hl\">אחד</span>. וזהו.","k210e":"איך זה מתחבר","k211":"לא צריך להחליף כלום ולא צריך להיות טכניים.","k212":"מספרים ל־iHoogi מה אתם רוצים להשיג","k213":"מה אתם מציעים, מי הלקוחות שאתם מחפשים ומה באמת חשוב לכם לדעת לפני השיחה.","k214":"iHoogi יודעת מה נכון לשאול","k215":"היא עוזרת לבנות שאלות קצרות וממוקדות, שמאפשרות להבין יותר בלי להפוך את החוויה לשאלון מעיק.","k216":"מחברים את הלינק בכל מקום","k217":"באתר, בקמפיינים, ברשתות, ב־WhatsApp, בדפי נחיתה או ב־QR — בכל מקום שבו הלקוחות שלכם משאירים פרטים.","k300":"לא עוד שאלון. שאלות שעוזרות לכם להבין מי עומד מולכם.","k301":"iHoogi עוזרת לבנות עבורכם שאלון חכם וקצר, עם השאלות שבאמת חשובות לעסק שלכם, כדי לקבל את המידע שאתם צריכים עוד לפני השיחה הראשונה.","k302":"מנתחת, מדרגת ומתעדפת","k303":"iHoogi מנתחת את התשובות והמידע שנאסף, נותנת לכל פנייה ציון וטמפרטורה ומציגה למה היא דורגה כך — כדי שתדעו במי כדאי לטפל קודם.","k304":"עוזרת לוודא שמטפלים","k305":"התראות, תזכורות, סטטוס ופעולות המשך.","k306":"כל תשובה הופכת למידע שאפשר לעבוד איתו","k307":"רואים בדיוק מה כל לקוח ענה, אפשר למצוא ולסנן פניות לפי תשובות ולהבין מי ביקש שירות מסוים, מה חשוב לו ומה הוא מחפש.","k308":"מנתבת לאדם הנכון","k309":"בצוות, כל פנייה יכולה להגיע לאדם המתאים לטיפול.","k321":"כל הפניות. תמונה אחת.","k322":"פניות ממקורות ופרסומים שונים מתרכזות במקום אחד.","k310":"מספרים ל־iHoogi מה חשוב לכם","k311":"מה אתם מציעים, מי הלקוחות שאתם מחפשים ומה חשוב לכם לדעת לפני השיחה.","k312":"iHoogi בונה את התהליך","k313":"שאלות חכמות וקצרות, דף תודה ומענה אוטומטי שמותאמים לעסק ולקמפיין.","k314":"הפניות נכנסות. iHoogi כבר יודעת מה לעשות איתן.","k315":"המידע והתשובות מנותחים, כל פנייה מקבלת ציון וטמפרטורה — ואתם יודעים במי כדאי לטפל קודם.","k317":"\"לא תמיד מספיקים לחזור לכולם. לפעמים חוזרים מאוחר מדי ומפספסים לקוח פוטנציאלי, לפעמים משקיעים זמן דווקא בפניות שפחות מתאימות, וכשהפניות מגיעות מכמה מקומות כבר לא תמיד זוכרים מאיפה הגיעה הפנייה ומה הלקוח בכלל רצה.\"","k318":"משם נולדה iHoogi.","k319":"רציתי שברגע שנכנסת פנייה, יהיה לעסק במקום אחד מי פנה, מאיפה הגיע, מה הוא מחפש ועד כמה הוא מתאים — ובעיקר למי כדאי לחזור קודם.","k319b":"יכולות שבעבר דרשו מערכות מורכבות, תקציבים ואנשי אוטומציה — נגישות עכשיו גם לעסק שלכם.","k357":"עובדת בדרך שמתאימה לכם","k358":"iHoogi עוזרת לזהות אילו פניות דורשות תשומת לב קודם ולנתב אותן לאדם הנכון.","k359":"אפשר לרדת עד רמת השאלה והתשובה, לזהות דפוסים ולהבין אילו תשובות חוזרות אצל הפניות הרלוונטיות יותר.","k360":"iHoogi לא רק אוספת תשובות. היא הופכת אותן למידע שעוזר לקבל החלטה.","k218":"מכאן iHoogi כבר עובדת","k219":"התשובות והמידע נכנסים למערכת, הפנייה מנותחת ומקבלת ציון וטמפרטורה — ואתם יודעים הרבה יותר עוד לפני השיחה הראשונה.","k361":"לא רק לנהל פניות. להבין מה באמת עובד.","k362":"iHoogi מחברת בין מקורות הפנייה, השאלות, התשובות, הציונים והתוצאות — כדי להבין אילו מקורות מביאים פניות רלוונטיות יותר, מה מאפיין אותן, אילו שאלות נותנות מידע שימושי ומה אפשר לשפר לאורך הדרך.","k318b":"הבנתי שהבעיה מתחילה אפילו רגע קודם — בנקודה שבה הלקוח משאיר פרטים. במקום לקבל רק שם וטלפון, רציתי שהעסק יוכל להבין כבר שם הרבה יותר."},"en":{"k1":"The smart link you connect wherever<br>your customers leave their details.","k2":"You define what you want to achieve. iHoogi knows what to ask, understands what the customer is looking for, scores the inquiry — and helps you know who to handle first.","k329":"What once required complex systems, large budgets and automation specialists is now accessible to your business too.","k340":"iHoogi creates<br>your smart link","k341":"Connect it wherever<br>customers leave their details","k342":"All inquiries and information<br>in one place","k343":"iHoogi analyzes,<br>scores and prioritizes","k344":"Inquiries worth handling first<br>rise to the top","k3":"Try iHoogi","k6":"Try the questionnaire","k7":"See how it works","k8":"Works on its own or alongside your existing tools","k10":"Customers answer in seconds","k11":"Not another form that leaves you with only a name and phone number.","k12":"The value, in short","k14":"Before you continue","k15":"Capabilities","k19":"Getting started","k20":"From the founder","k21":"FAQ","k22":"Your customer spends seconds. You save hours.","k24":"Your next customer could already be among the inquiries that came in.","k25":"iHoogi can be your central system for managing inquiries — or work alongside the system you already use.","k356":"You can manage inquiries in iHoogi, or work alongside your existing system and add information, analysis and prioritization.","k354":"iHoogi as your central inquiry management system","k354c":"Brings inquiries together and manages them, analyzes and prioritizes, alerts, reminds and tracks follow-up — and also analyzes outcomes to understand what's working and what could be improved.","k355":"Already have a system? iHoogi adds an intelligence layer","k355c":"iHoogi analyzes inquiries and answers, scores and prioritizes them, and adds the information that helps you know who to handle first and what's working better in marketing and sales.","k29":"Getting started with iHoogi is simple.","k320":"You can use iHoogi on its own or alongside the tools already in your business.","k326":"It adds the information, prioritization and follow-up that help you decide on every inquiry.","k328":"Set up iHoogi for my business","k328b":"Tell us about your business and we'll help you get started.","k330":"Rank my first 50 inquiries free","k331":"We’ll tailor iHoogi’s smart link to your business","k332":"Log in to iHoogi","k333":"50 inquiries ranked free · no cost · no credit card","k30":"Why I founded iHoogi","k30b":"After dozens of conversations with business owners, the same problem kept coming up:","k31":"Everything you wanted to know.","k35":"After all the money, time and energy you invested to bring them in, the question is whether you'll identify them and reach them in time.","k38":"A short human moment. Why the platform was born, and what I want you to see before you start.","k49":"Inquiry volume","k50":"Relevant inquiries","k51":"A big number doesn't mean the inquiries are a fit.","k52":"Look beyond volume. Understand what actually works.","k58":"Know who to respond to first","k60":"Already have an account? Log in","k61":"What is iHoogi?","k62":"Does iHoogi replace the tools I already use?","k63":"How long does it take a customer to answer?","k64":"Can I use iHoogi across multiple ad sources?","k65":"Can I find inquiries by a specific answer?","k66":"Can I track handling and response times?","k67":"iHoogi starts with a smart link you connect wherever your customers leave their details. It helps ask the right questions, brings information together and analyzes it, scores and prioritizes inquiries — and continues to help with management, follow-up and insights.","k68":"No. iHoogi doesn't replace your tools. Use it on its own or alongside what you already have. It adds information, prioritization and follow-up that connect marketing and sales.","k69":"Seconds. The questions are deliberately short. The customer never feels like they're filling out a long form, and you still get what matters.","k70":"Yes. iHoogi brings inquiries from different sources and campaigns into one place, and helps you understand not just where the most inquiries came from, but where the more relevant ones came from.","k71":"Absolutely. Drill down to the question-and-answer level, spot patterns among your strongest inquiries.","k72":"Yes. Alerts, reminders, status for every inquiry, team assignment and response-time tracking, so no hot inquiry falls through the cracks.","k73":"Know who to respond to first. Know more, before you even say hello.","k74":"Product","k75":"Info","k76":"Account","k82":"FAQ","k85":"Log in","k86":"Contact","k87":"How it works","k88":"Why iHoogi","k89":"Capabilities","k91":"Getting started","k92":"FAQ","k93":"Log in","k353":"The inquiry is in. Everything starts moving.","k114":"A lead comes in? All the information is already in front of you.","k117":"Get immediate notification on mobile and email with the customer's details, answers and score — call, WhatsApp or email without starting the conversation from zero.","k116":"The customer gets an immediate response too.","k116b":"The automatic response can not only confirm the inquiry was received, but also continue the sale toward a meeting, WhatsApp, follow-up questionnaire, website or the next step you choose.","k145":"Overview video","k146":"Hot","k147":"Cold","k148":"Call now","k149":"Good for later follow-up","k150":"Source A","k151":"Source B","k152":"Source A","k153":"Source B","k155":"All inquiries in one place","k156":"Information","k157":"Analysis & prioritization","k158":"Decision","k159":"Follow-up","k323":"Know what actually works","k324":"Illustrative example. Not actual customer results.","k325":"Not just where the most inquiries came from. Where the most relevant ones came from.","k160":"Start free · no credit card","k163":"Privacy · Terms of use","k180":"Finally I know who to call back first, instead of answering in order and finding the serious one already left.","k181":"Business owner · iHoogi customer","k182":"Watch a short video","k183":"I stopped wasting half a day on price-check inquiries. Now I see immediately who really wants in.","k184":"Business owner · iHoogi customer","k210":"One <span class=\"hl\">link</span>. That's it.","k210e":"How it connects","k211":"No need to change anything or be technical.","k212":"Tell iHoogi what you want to achieve","k213":"What you offer, which customers you want, and what truly matters to know before the conversation.","k214":"iHoogi knows what to ask","k215":"It helps build short, focused questions that let you understand more without turning the experience into a heavy questionnaire.","k216":"Connect the link everywhere","k217":"On your website, in campaigns, on social, WhatsApp, landing pages or QR — wherever your customers leave their details.","k300":"Not just a form. Questions that help you understand who's on the other side.","k301":"iHoogi helps build a smart, short questionnaire around the information your business actually needs before the first conversation.","k302":"Analyzes, scores and prioritizes","k303":"iHoogi analyzes the answers and information collected, gives each inquiry a score and temperature, and shows why it was ranked that way — so you know who to handle first.","k304":"Helps make sure you follow through","k305":"Alerts, reminders, status and next actions.","k306":"Every answer becomes information you can work with.","k307":"See exactly what each customer answered, filter inquiries by their responses, and understand who asked for a specific service, what matters to them, and what they are looking for.","k308":"Routes to the right person","k309":"On a team, each inquiry can reach the right person to handle it.","k321":"All inquiries. One picture.","k322":"Inquiries from different sources and campaigns come together in one place.","k310":"Tell iHoogi what matters to you","k311":"What you offer, who your ideal customers are, and what matters to know before the conversation.","k312":"iHoogi builds the process","k313":"Smart short questions, a thank-you page and an automatic reply tailored to your business and campaign.","k314":"Inquiries come in. iHoogi already knows what to do with them.","k315":"Information and answers are analyzed, each inquiry gets a score and temperature — and you know who to handle first.","k317":"\"There isn't always time to get back to everyone. Sometimes responses come too late and a potential customer is missed, sometimes time goes to inquiries that aren't the right fit, and when inquiries come from multiple places it's easy to lose track of where an inquiry came from and what the customer wanted.\"","k318":"That's where iHoogi was born.","k319":"When an inquiry comes in, I wanted the business to have in one place who reached out, where they came from, what they're looking for and how good a fit they are — and above all, who to call back first.","k319b":"Capabilities that once required complex systems, budgets and automation professionals — now accessible to your business too.","k357":"Works the way that suits you","k358":"iHoogi helps identify which inquiries need attention first and route them to the right person.","k359":"Go down to the individual question and answer level, identify patterns, and see which responses repeat among more relevant inquiries.","k360":"iHoogi doesn't just collect answers. It turns them into information that helps you make better decisions.","k218":"From there, iHoogi is already working","k219":"Answers and information enter the system, the inquiry is analyzed and gets a score and temperature — and you know much more before the first conversation.","k361":"Not just managing inquiries. Understanding what actually works.","k362":"iHoogi connects inquiry sources, questions, answers, scores and results to help you understand which sources bring more relevant inquiries, what characterizes them, which questions provide useful information, and what can be improved over time.","k318b":"I realized the problem starts even a moment earlier — at the point where the customer leaves their details. Instead of getting only a name and phone number, I wanted the business to already understand much more there."}};
-const I18N_DOC = {"he":{"title":"iHoogi · דעו על מי לענות קודם","desc":"iHoogi מתחברת למקומות שבהם הלקוחות משאירים פרטים, מרכזת ומנתחת פניות ועוזרת לדעת באילו פניות כדאי לטפל קודם."},"en":{"title":"iHoogi · Know Who to Respond to First","desc":"iHoogi connects wherever customers leave their details, brings inquiries together, analyzes them, and helps you know which inquiries to handle first."}};
-
-function applyLang(lang){
-  const dict = I18N[lang] || {};
-  document.documentElement.lang = lang;
-  document.documentElement.dir  = (lang === 'he') ? 'rtl' : 'ltr';
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const k = el.getAttribute('data-i18n');
-    if(dict[k] != null) el.innerHTML = dict[k];
-  });
-  const d = I18N_DOC[lang];
-  if(d){ document.title = d.title;
-    const m=document.querySelector('meta[name=description]'); if(m) m.setAttribute('content', d.desc); }
-  document.querySelectorAll('.lang-toggle').forEach(b=> b.textContent = (lang==='he') ? 'English' : 'עברית');
-  applyPageLang(lang);
-  try{ localStorage.setItem('ihoogi_lang', lang); }catch(e){}
-}
-(function(){
-  let lang='he';
-  try{ const s=localStorage.getItem('ihoogi_lang'); if(s==='he'||s==='en') lang=s; }catch(e){}
-  document.querySelectorAll('.lang-toggle').forEach(b=>{
-    b.addEventListener('click', ()=>{
-      const next = (document.documentElement.lang==='he') ? 'en' : 'he';
-      applyLang(next);
-    });
-  });
-  applyLang(lang);
-})();
 </script>
-</body>
-</html>
+</body></html>
