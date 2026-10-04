@@ -42,7 +42,8 @@ a,button{touch-action:manipulation}
 .nav-links a:hover{text-decoration:underline;text-underline-offset:6px}
 .nav-tools{display:flex;align-items:center;gap:16px}
 .lang,.menu{background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 11px;min-height:44px}
-.login{font-size:16px;text-underline-offset:4px}
+.login{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 16px;border-radius:8px;background:var(--teal);color:#fff;font-size:16px;font-weight:700;text-decoration:none;white-space:nowrap}
+.login:hover{background:#064e48}
 .menu{display:none}
 .hero{padding:70px 0 48px}
 .hero-grid{display:grid;grid-template-columns:1.13fr 1fr;align-items:center;gap:64px}
@@ -167,12 +168,16 @@ section.section{padding:88px 0}
 
 @media(max-width:760px){body{font-size:18px}
 .wrap{width:calc(100% - 36px)}
-.nav-row{min-height:70px;gap:12px}
+.nav-row{min-height:70px;display:grid;grid-template-columns:1fr auto auto;gap:8px 10px;padding-block:8px}
+.logo{grid-column:1;grid-row:1}
+.nav-tools{display:contents}
+.lang{grid-column:2;grid-row:1}
+.menu{grid-column:3;grid-row:1}
 .logo img{width:94px;height:50px}
 .nav-tools{gap:10px}
-.login{display:none}
+.login{display:flex;grid-column:1 / -1;grid-row:2;width:100%;min-height:44px;font-size:17px}
 .menu{display:block;font-size:16px}
-.nav-links{display:none;position:absolute;top:70px;inset-inline:0;background:var(--paper);padding:18px 24px 24px;border-bottom:1px solid var(--line);box-shadow:0 8px 14px #123d3c0a}
+.nav-links{display:none;position:absolute;top:100%;inset-inline:0;background:var(--paper);padding:18px 24px 24px;border-bottom:1px solid var(--line);box-shadow:0 8px 14px #123d3c0a}
 .nav-links.open{display:flex;flex-direction:column;align-items:stretch;gap:0}
 .nav-links a{padding:10px}
 .hero{padding:34px 0 12px}
@@ -254,7 +259,7 @@ section.section{padding:56px 0}
 <a class="logo" href="#top" aria-label="iHoogi"><img src="assets/img/ihoogi_logo.png" width="116" height="57" alt="iHoogi"></a>
 <nav class="nav-links" id="navLinks" aria-label="ניווט ראשי" data-en-aria="Main navigation">
 <a href="#how"><span data-en="How it works">איך זה עובד</span></a><a href="#why"><span data-en="Why iHoogi">למה iHoogi</span></a><a href="#proof"><span data-en="Our story">מהשטח</span></a><a href="#start"><span data-en="Get started">מתחילים ביחד</span></a>
-</nav><div class="nav-tools"><a class="login" href="https://ihoogi.com/landing"><span data-en="Log in">כניסה למערכת</span></a><button class="lang" id="langToggle" type="button" aria-label="Switch to English" lang="en">EN</button><button class="menu" id="burger" type="button" aria-expanded="false" aria-controls="navLinks"><span data-en="Menu">תפריט</span></button></div></div></header>
+</nav><div class="nav-tools"><a class="login" href="https://ihoogi.com/login"><span data-en="Log in">כניסה למערכת</span></a><button class="lang" id="langToggle" type="button" aria-label="Switch to English" lang="en">EN</button><button class="menu" id="burger" type="button" aria-expanded="false" aria-controls="navLinks"><span data-en="Menu">תפריט</span></button></div></div></header>
 <main id="main">
 <section class="hero" id="top"><div class="wrap"><div class="hero-grid">
 <div class="hero-copy"><p data-en="iHoogi · Your business’s smart link" class="eyebrow">iHoogi · הלינק החכם של העסק שלכם</p>
@@ -295,7 +300,7 @@ section.section{padding:56px 0}
 <details><summary><span data-en="Does the ranking decide for me?">האם הדירוג מחליט בשבילי?</span></summary><p data-en="No. It helps you prioritize based on the information supplied and your business settings. Read the answers and explanation and decide who to contact, including lower ranked inquiries.">לא. הוא עוזר לתעדף לפי המידע שנמסר והגדרות העסק. אפשר לקרוא את התשובות וההסבר ולהחליט למי לחזור, גם כשפנייה קיבלה דירוג נמוך יותר.</p></details>
 <details><summary><span data-en="What happens after 50 inquiries?">מה קורה אחרי 50 הפניות?</span></summary><p data-en="Plans start at ₪299 per month, excluding VAT. The free offer requires no credit card and no commitment to continue.">מסלולים החל מ־299 ₪ לחודש, לפני מע״מ. ההתנסות ללא כרטיס אשראי וללא התחייבות להמשיך.</p></details>
 </div></section></main>
-<footer class="footer"><div class="wrap footer-row"><p>© <span id="yr">2026</span> iHoogi · <span data-en="by Ligro">מבית ליגרו</span></p><div class="footer-links"><a href="https://ihoogi.com/landing"><span data-en="Log in">כניסה למערכת</span></a><a href="mailto:office@ihoogi.com"><span data-en="Contact us">דברו איתנו</span></a><a href="https://ihoogi.com/privacy"><span data-en="Privacy">פרטיות</span></a><a href="https://ihoogi.com/terms"><span data-en="Terms">תנאי שימוש</span></a><a href="https://ihoogi.com/accessibility"><span data-en="Accessibility">נגישות</span></a><button class="cookie-settings" type="button"><span data-en="Cookie preferences">העדפות עוגיות</span></button></div></div></footer>
+<footer class="footer"><div class="wrap footer-row"><p>© <span id="yr">2026</span> iHoogi · <span data-en="by Ligro">מבית ליגרו</span></p><div class="footer-links"><a href="https://ihoogi.com/login"><span data-en="Log in">כניסה למערכת</span></a><a href="mailto:office@ihoogi.com"><span data-en="Contact us">דברו איתנו</span></a><a href="https://ihoogi.com/privacy"><span data-en="Privacy">פרטיות</span></a><a href="https://ihoogi.com/terms"><span data-en="Terms">תנאי שימוש</span></a><a href="https://ihoogi.com/accessibility"><span data-en="Accessibility">נגישות</span></a><button class="cookie-settings" type="button"><span data-en="Cookie preferences">העדפות עוגיות</span></button></div></div></footer>
 <div class="mobile-cta" id="mobileCta"><a class="button primary" href="#start"><span data-en="I want to try iHoogi">רוצה להתנסות</span></a><p data-en="50 inquiries ranked free">דירוג 50 פניות במתנה</p></div>
 
 <script>
