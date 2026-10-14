@@ -39,7 +39,7 @@ function render() {
   if(!choices.some(isOtherChoice))choices.push('אחר — במילים שלי');
   for(const [i,choice] of choices.entries()){
     const b=text('button',choice,'choice');b.type='button';
-    b.onclick=()=>{if(isOtherChoice(choice)){chooseOther();return;}
+    b.onclick=()=>{if(isOtherChoice(choice)||choice==='רוצה לתקן'){chooseOther();return;}
       answer(choice);};
     $('choices').append(b);
   }
