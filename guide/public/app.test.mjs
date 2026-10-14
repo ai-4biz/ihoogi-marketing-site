@@ -16,7 +16,7 @@ test('other asks for details without an AI call, then sends the custom business 
  const requests=[];
  const intro={stage:'intro',question:'במה העסק שלכם עוסק?',explanation:'נכיר את העסק.',reflection:'',choices:['מספרה','תחום אחר'],complete:false};
  const context=vm.createContext({document:{getElementById:node,createElement:()=>new Element(),querySelector:()=>node('color'),querySelectorAll:()=>[]},
-  window:{GUIDE_REMOTE_ENDPOINT:'https://guide.example/api'},sessionStorage:{getItem(){return '';},setItem(){}},AbortSignal,
+  FormData:class{get(k){return ({name:'בדיקה',email:'qa@example.com',phone:'0501234567',accepted:'on'})[k]||'';}},window:{GUIDE_REMOTE_ENDPOINT:'https://guide.example/api'},sessionStorage:{getItem(){return '';},setItem(){}},AbortSignal,
   fetch:async(_url,opts)=>{const body=JSON.parse(opts.body);requests.push(body);return {ok:true,json:async()=>({configured:true,turns:body.action==='start'?0:1,session:'a'.repeat(64),reply:body.action==='start'?intro:{...intro,stage:'goal',question:'מה תרצו להשיג עם החנות?'}})};}
  });
  vm.runInContext(readFileSync(new URL('./app.js',import.meta.url),'utf8'),context);
