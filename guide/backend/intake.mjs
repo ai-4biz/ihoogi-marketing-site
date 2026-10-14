@@ -1,11 +1,15 @@
 const fail=(status,message)=>Object.assign(new Error(message),{status});
 export function publicBusinessUrl(value){
- let u;try{u=new URL(value);}catch{throw fail(400,'הוסיפו כתובת אתר מלאה שמתחילה ב־https://.');}
+ const input=String(value||'').trim();
+ if(!input||/\s/.test(input))throw fail(400,'הדביקו קישור לעמוד העסק, למשל linkedin.com/in/your-name.');
+ const normalized=/^[a-z][a-z0-9+.-]*:/i.test(input)?input:'https://'+input.replace(/^\/\//,'');
+ let u;try{u=new URL(normalized);}catch{throw fail(400,'הוסיפו כתובת אתר מלאה שמתחילה ב־https://.');}
  const host=u.hostname.toLowerCase().replace(/\.$/,'');
  if(u.protocol!=='https:'||u.username||u.password||(u.port&&u.port!=='443')||
     !host.includes('.')||/^[\d.]+$|:|\[|\]/.test(host)||
     /(?:^|\.)(?:localhost|local|internal|invalid|test)$/.test(host))throw fail(400,'אפשר לצרף רק קישור ציבורי ב־https.');
- u.search='';u.hash='';return u.href;
+ const id=u.hostname.endsWith('facebook.com')&&u.pathname==='/profile.php'?u.searchParams.get('id'):null;
+ u.search='';if(id&&/^\d+$/.test(id))u.searchParams.set('id',id);u.hash='';return u.href;
 }
 export function validateIntake(body,requireContact=false){
  const c=body.contact||{};const name=String(c.name||'').trim(),email=String(c.email||'').trim().toLowerCase(),phone=String(c.phone||'').trim();
