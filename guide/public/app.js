@@ -16,6 +16,8 @@ function render() {
   if(r.complete){renderResult(r.result);show('result');$('result-title').focus();return;}
   show('conversation');$('conversation-title').textContent=stages[r.stage];$('stage-label').textContent=stages[r.stage];
   $('progress-fill').style.width=Math.max(5,(order.indexOf(r.stage)+1)/order.length*100)+'%';
+  const station=['intro','goal','service'].includes(r.stage)?0:['customer','boundaries'].includes(r.stage)?1:['questions','approval'].includes(r.stage)?2:3;
+  document.querySelectorAll('[data-station]').forEach(e=>{const n=Number(e.dataset.station);e.classList.toggle('current',n===station);e.classList.toggle('finished',n<station);if(n===station)e.setAttribute('aria-current','step');else e.removeAttribute('aria-current');});
   $('reflection').textContent=r.reflection;$('explanation').textContent=r.explanation;$('question').textContent=r.question;
   $('choices').replaceChildren();
   const choices=r.stage==='approval'?['מאשר/ת את השאלות וכללי ההתאמה','רוצה לתקן']:r.choices;
