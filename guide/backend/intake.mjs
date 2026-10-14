@@ -24,7 +24,7 @@ export async function readBusinessSources(links,fetcher=fetch){
  // follow redirects or send private contact information to the reader.
  return Promise.all(links.map(async url=>{
   try{
-   const r=await fetcher('https://r.jina.ai/'+url,{headers:{Accept:'application/json','X-Respond-With':'text'},redirect:'error',signal:AbortSignal.timeout(12000)});
+   const r=await fetcher('https://r.jina.ai/'+url,{headers:{Accept:'application/json','X-Respond-With':'text'},redirect:'error',signal:AbortSignal.timeout(20000)});
    if(!r.ok)throw Error('unavailable');
    const reader=r.body?.getReader();if(!reader)throw Error('no body');let bytes=0,raw='';const decoder=new TextDecoder();
    try{while(true){const {done,value}=await reader.read();if(done)break;bytes+=value.length;if(bytes>64000)throw Error('too large');raw+=decoder.decode(value,{stream:true});}}finally{await reader.cancel().catch(()=>{});}
