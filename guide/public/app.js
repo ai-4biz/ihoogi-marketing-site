@@ -32,6 +32,7 @@ function render() {
   const station=['intro','specialty','goal','service'].includes(r.stage)?0:['customer','need','boundaries'].includes(r.stage)?1:r.stage==='boundaries'?2:3;
   document.querySelectorAll('[data-station]').forEach(e=>{const n=Number(e.dataset.station);e.classList.toggle('current',n===station);e.classList.toggle('finished',n<station);if(n===station)e.setAttribute('aria-current','step');else e.removeAttribute('aria-current');});
   $('reflection').textContent=r.reflection;$('explanation').textContent=r.explanation;$('question').textContent=r.question;
+  $('choices').replaceChildren();
   const choices=[...r.choices];
   if(!choices.some(isOtherChoice))choices.push('אחר — במילים שלי');
   for(const [i,choice] of choices.entries()){
