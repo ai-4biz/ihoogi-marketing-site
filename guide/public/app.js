@@ -3,7 +3,7 @@ const $=id=>document.getElementById(id);
 let state=null, history=[], waiting=false, logo=null;
 let remoteSession='';
 try{remoteSession=sessionStorage.getItem('ihoogi-focus-session-v3')||'';}catch{}
-const stages={intro:'היכרות עם העסק',goal:'מה רוצים להשיג?',service:'במה מתמקדים?',customer:'למי השירות מתאים?',need:'איזה צורך מביא אותם אליכם?',boundaries:'מה חשוב בהתאמה?',done:'מפת המיקוד שלכם'};
+const stages={intro:'באיזה תחום העסק?',specialty:'מהו סוג העסק?',goal:'מה רוצים להשיג?',service:'במה מתמקדים?',customer:'למי השירות מתאים?',need:'איזה צורך מביא אותם אליכם?',boundaries:'מה חשוב בהתאמה?',done:'מפת המיקוד שלכם'};
 const order=Object.keys(stages);
 function text(tag,value,className){const e=document.createElement(tag);e.textContent=value;if(className)e.className=className;return e;}
 async function api(action,body={}) {
@@ -29,7 +29,7 @@ function render() {
   if(r.complete){renderResult(r.result);show('result');$('result-title').focus();return;}
   show('conversation');$('conversation-title').textContent=stages[r.stage];$('stage-label').textContent=stages[r.stage];
   $('progress-fill').style.width=Math.max(5,(order.indexOf(r.stage)+1)/order.length*100)+'%';
-  const station=['intro','goal','service'].includes(r.stage)?0:['customer','need','boundaries'].includes(r.stage)?1:r.stage==='boundaries'?2:3;
+  const station=['intro','specialty','goal','service'].includes(r.stage)?0:['customer','need','boundaries'].includes(r.stage)?1:r.stage==='boundaries'?2:3;
   document.querySelectorAll('[data-station]').forEach(e=>{const n=Number(e.dataset.station);e.classList.toggle('current',n===station);e.classList.toggle('finished',n<station);if(n===station)e.setAttribute('aria-current','step');else e.removeAttribute('aria-current');});
   $('reflection').textContent=r.reflection;$('explanation').textContent=r.explanation;$('question').textContent=r.question;
   const choices=[...r.choices];
@@ -48,7 +48,7 @@ function render() {
 }
 function isOtherChoice(choice){return /^(?:תחום\s+)?אחר(?:ת)?(?:$|\s|[—–:,-])/.test(choice.trim());}
 function chooseOther(){
-  const prompts={intro:'ספרו בכמה מילים מה העסק שלכם מציע.',goal:'מה הייתם רוצים להשיג בעסק עכשיו?',
+  const prompts={intro:'ספרו בכמה מילים מה העסק שלכם מציע.',specialty:'מהו סוג העסק או ההתמחות שלכם?',goal:'מה הייתם רוצים להשיג בעסק עכשיו?',
     service:'איזה מוצר או שירות תרצו לקדם?',customer:'מי הלקוחות שתרצו להגיע אליהם?',
     need:'איזה צורך או קושי מביא את הלקוחות האלה אליכם?',boundaries:'מה חשוב לכם בהתאמה של לקוח לעסק?',channels:'איפה תרצו לפנות ללקוחות האלה?'};
   const prompt=prompts[state.reply.stage]||'כתבו את האפשרות שמתאימה לכם.';
