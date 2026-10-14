@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {openStore,createGuide,validateReply,reserveCost,FIRST} from './server.mjs';
+import {openStore,createGuide,validateReply,reserveCost,FIRST,nextGuideStage,schemaForStage,parseGuideReply} from './server.mjs';
 const env={OPENROUTER_API_KEY:'test-only',GUIDE_MODEL:'test/pinned',PUBLIC_ORIGIN:'http://localhost:3080'};
 const mid={...FIRST,stage:'goal',question:'מה חשוב להשיג?',memory:'עסק: משרד עורכי דין, ליווי מעסיקים'};
 const result={goal:'יציבות הכנסה',service:'ליווי מעסיקים',ideal_customer:'עסק עם עובדים',customer_need:'ליווי שוטף',
@@ -12,13 +12,13 @@ const result={goal:'יציבות הכנסה',service:'ליווי מעסיקים'
  {label:'ב - הדגמה',answers:[{question_id:'q1',option_label:'נקודתי'}],explanation:'התאמה פחותה למטרה הנוכחית'}]};
 const done={...mid,stage:'done',question:'',complete:true,result};
 function approvalStage(db,id){
- db.prepare('UPDATE sessions SET reply=? WHERE id=?').run(JSON.stringify({...mid,stage:'approval'}),id);
+ db.prepare('UPDATE sessions SET reply=?,approved=1 WHERE id=?').run(JSON.stringify({...mid,stage:'channels'}),id);
 }
 function fixture(reply=mid,extra={},fetcher){
  const db=openStore(':memory:');let calls=0;
  const app=createGuide({db,env:{...env,...extra},fetcher:fetcher||(async(_url,opts)=>{
    calls++; const body=JSON.parse(opts.body);
-   assert.equal(body.provider.max_price.prompt,.5);assert.equal(body.provider.max_price.completion,3);
+   assert.equal(body.provider.max_price.prompt,.2);assert.equal(body.provider.max_price.completion,1);
    assert.equal(body.model,'test/pinned');
    return Response.json({choices:[{message:{content:JSON.stringify(reply)},finish_reason:'stop'}],usage:{cost:0.0001}});
  })});
@@ -68,11 +68,11 @@ test('long inputs rejected before reserving budget',async()=>{
 test('transfer requires approved result and explicit consent',async()=>{
  const f=fixture(done),s=await f.handle('start',{},null);
  approvalStage(f.db,s.id);
- await f.handle('answer',{answer:'מאשר',approvalAction:'approve_rules'},s.id);
+ await f.handle('answer',{answer:'אינסטגרם ווואטסאפ'},s.id);
  await assert.rejects(f.handle('transfer',{accepted:false},s.id),e=>e.status===400);assert.equal(f.calls(),1);
 });
 test('unconfigured handoff never claims success',async()=>{
- const f=fixture(done),s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'מאשר',approvalAction:'approve_rules'},s.id);
+ const f=fixture(done),s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'אינסטגרם ווואטסאפ'},s.id);
  await assert.rejects(f.handle('transfer',{accepted:true,contact:{name:'בדיקה',email:'test@example.com',phone:''}},s.id),e=>e.status===503);
 });
 test('verified handoff includes answers, branding, consent; duplicate does not resend',async()=>{
@@ -81,7 +81,7 @@ test('verified handoff includes answers, branding, consent; duplicate does not r
   if(String(url).includes('openrouter')) return Response.json({choices:[{message:{content:JSON.stringify(done)},finish_reason:'stop'}]});
   sent++;payload=JSON.parse(opts.body);return Response.json({url:'https://ihoogi.com/profile',status:'pending'});
  });
- const s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'מאשר',approvalAction:'approve_rules'},s.id);
+ const s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'אינסטגרם ווואטסאפ'},s.id);
  const body={accepted:true,marketing:false,contact:{name:'בדיקה',email:'test@example.com',phone:''},
  brand:{color:'#123456',websites:['https://example.com']}};
  await f.handle('transfer',body,s.id);await f.handle('transfer',body,s.id);
@@ -89,7 +89,7 @@ test('verified handoff includes answers, branding, consent; duplicate does not r
  assert.equal(payload.consent.marketing,false);assert.ok(payload.idempotency_key);
 });
 test('image disguised as png is blocked',async()=>{
- const f=fixture(done),s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'מאשר',approvalAction:'approve_rules'},s.id);
+ const f=fixture(done),s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'אינסטגרם ווואטסאפ'},s.id);
  await assert.rejects(f.handle('transfer',{accepted:true,contact:{name:'בדיקה',email:'test@example.com',phone:''},
   brand:{logo:{name:'logo.png',mime:'image/png',base64:Buffer.from('<html>').toString('base64')}}},s.id),e=>e.status===400);
 });
@@ -98,7 +98,7 @@ test('outbound redirects disabled and foreign returned URL rejected',async()=>{
   if(String(url).includes('openrouter'))return Response.json({choices:[{message:{content:JSON.stringify(done)},finish_reason:'stop'}]});
   assert.equal(opts.redirect,'error');return Response.json({url:'https://evil.example',status:'ready'});
  });
- const s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'מאשר',approvalAction:'approve_rules'},s.id);
+ const s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'אינסטגרם ווואטסאפ'},s.id);
  await assert.rejects(f.handle('transfer',{accepted:true,contact:{name:'בדיקה',email:'test@example.com',phone:''}},s.id),e=>e.status===502);
 });
 test('new-session abuse bounded independently of model calls',async()=>{
@@ -119,14 +119,15 @@ test('reservation includes multibyte Hebrew and output limit',()=>{
 });
 test('model cannot fabricate user approval',async()=>{
  const f=fixture(done),s=await f.handle('start',{},null);
- const response=await f.handle('answer',{answer:'אני ספר'},s.id);
- assert.equal(response.reply.result.rules_approved,false);
+ await assert.rejects(f.handle('answer',{answer:'אני ספר'},s.id),e=>e.status===502);
+ assert.equal(f.db.prepare('SELECT approved FROM sessions').get().approved,0);
  await assert.rejects(f.handle('transfer',{accepted:true},s.id),e=>e.status===400);
 });
 test('free-text assent does not substitute for the fixed approval action',async()=>{
- const f=fixture(done),s=await f.handle('start',{},null);approvalStage(f.db,s.id);
+ const f=fixture({...mid,draft_questions:result.screening_questions}),s=await f.handle('start',{},null);
+ f.db.prepare('UPDATE sessions SET reply=? WHERE id=?').run(JSON.stringify({...mid,stage:'approval',draft_questions:result.screening_questions}),s.id);
  const response=await f.handle('answer',{answer:'נשמע טוב'},s.id);
- assert.equal(response.reply.result.rules_approved,false);
+ assert.equal(response.reply.result,null);assert.equal(f.db.prepare('SELECT approved FROM sessions').get().approved,0);
 });
 test('approval action outside the approval stage is blocked before provider call',async()=>{
  const f=fixture(),s=await f.handle('start',{},null);
@@ -134,8 +135,37 @@ test('approval action outside the approval stage is blocked before provider call
  assert.equal(f.calls(),0);
 });
 test('revision revokes an earlier approval',async()=>{
- const f=fixture(done),s=await f.handle('start',{},null);approvalStage(f.db,s.id);
- f.db.prepare('UPDATE sessions SET approved=1 WHERE id=?').run(s.id);
+ const f=fixture({...mid,draft_questions:result.screening_questions}),s=await f.handle('start',{},null);
+ f.db.prepare('UPDATE sessions SET reply=?,approved=1 WHERE id=?').run(JSON.stringify({...mid,stage:'approval',draft_questions:result.screening_questions}),s.id);
  const response=await f.handle('answer',{answer:'רוצה לתקן',approvalAction:'revise_rules'},s.id);
- assert.equal(response.reply.result.rules_approved,false);
+ assert.equal(response.reply.result,null);assert.equal(f.db.prepare('SELECT approved FROM sessions').get().approved,0);
+});
+test('uncertain answer gets at most one follow-up before progressing',()=>{
+ const prior={...mid,stage:'customer'};
+ const history=[{role:'assistant',content:JSON.stringify(prior)}];
+ assert.equal(nextGuideStage(prior,history,'לא בטוח'), 'customer');
+ history.push({role:'assistant',content:JSON.stringify(prior)});
+ assert.equal(nextGuideStage(prior,history,'לא בטוח'), 'boundaries');
+});
+test('business criteria lead to proposed questions, not a customer questionnaire',()=>{
+ assert.equal(nextGuideStage({...mid,stage:'boundaries'},[],'הגעה לקדימה ושירות צבע'),'approval');
+ const s=schemaForStage('approval');
+ assert.deepEqual(s.properties.stage.enum,['approval']);
+ assert.equal(s.properties.draft_questions.minItems,3);
+});
+test('explicit approval proceeds to channels then summary',()=>{
+ assert.equal(nextGuideStage({...mid,stage:'approval',draft_questions:result.screening_questions},[],'מאשר','approve_rules'),'channels');
+ assert.equal(nextGuideStage({...mid,stage:'channels'},[],'וואטסאפ'),'done');
+ assert.deepEqual(schemaForStage('done').properties.complete.enum,[true]);
+});
+
+test('final questions and demo use exactly the approved rules',()=>{
+ const changed=structuredClone(done);changed.result.screening_questions[0].options[0].essential=true;
+ const parsed=parseGuideReply(JSON.stringify(changed),'done','',result.screening_questions);
+ assert.deepEqual(parsed.result.screening_questions,result.screening_questions);
+ assert.equal(parsed.result.demo[0].answers[0].option_label,'שוטף');
+ assert.equal(parsed.result.demo[1].answers[0].option_label,'נקודתי');
+});
+test('approval cannot present an empty or invalid proposal',()=>{
+ assert.throws(()=>parseGuideReply(JSON.stringify(mid),'approval'),/שאלות/);
 });
