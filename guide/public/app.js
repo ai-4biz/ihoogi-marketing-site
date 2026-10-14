@@ -3,7 +3,7 @@ const $=id=>document.getElementById(id);
 let state=null, history=[], waiting=false, logo=null;
 let remoteSession='';
 try{remoteSession=sessionStorage.getItem('ihoogi-guide-session')||'';}catch{}
-const stages={intro:'היכרות עם העסק',goal:'מה רוצים להשיג?',service:'במה מתמקדים?',customer:'למי השירות מתאים?',boundaries:'מה חשוב בהתאמה?',questions:'מה כדאי לברר?',approval:'בודקים יחד את השאלות',channels:'איפה תפיצו?',done:'מפת המיקוד שלכם'};
+const stages={intro:'היכרות עם העסק',goal:'מה רוצים להשיג?',service:'במה מתמקדים?',customer:'למי השירות מתאים?',need:'איזה צורך מביא אותם אליכם?',boundaries:'מה חשוב בהתאמה?',questions:'מה כדאי לברר?',approval:'בודקים יחד את השאלות',channels:'איפה תפיצו?',done:'מפת המיקוד שלכם'};
 const order=Object.keys(stages);
 function text(tag,value,className){const e=document.createElement(tag);e.textContent=value;if(className)e.className=className;return e;}
 async function api(action,body={}) {
@@ -29,7 +29,7 @@ function render() {
   if(r.complete){renderResult(r.result);show('result');$('result-title').focus();return;}
   show('conversation');$('conversation-title').textContent=stages[r.stage];$('stage-label').textContent=stages[r.stage];
   $('progress-fill').style.width=Math.max(5,(order.indexOf(r.stage)+1)/order.length*100)+'%';
-  const station=['intro','goal','service'].includes(r.stage)?0:['customer','boundaries'].includes(r.stage)?1:['questions','approval'].includes(r.stage)?2:3;
+  const station=['intro','goal','service'].includes(r.stage)?0:['customer','need','boundaries'].includes(r.stage)?1:['questions','approval'].includes(r.stage)?2:3;
   document.querySelectorAll('[data-station]').forEach(e=>{const n=Number(e.dataset.station);e.classList.toggle('current',n===station);e.classList.toggle('finished',n<station);if(n===station)e.setAttribute('aria-current','step');else e.removeAttribute('aria-current');});
   $('reflection').textContent=r.reflection;$('explanation').textContent=r.explanation;$('question').textContent=r.question;
   $('draft-questions').replaceChildren();
@@ -37,11 +37,29 @@ function render() {
     const tags=text('div','','tags');for(const o of q.options||[])tags.append(text('span',o.label+' · '+({preferred:'מועדף',neutral:'ניטרלי',unsuitable:'פחות מתאים'}[o.fit]||''),'tag'));
     card.append(tags);$('draft-questions').append(card);}
   $('choices').replaceChildren();
-  const choices=r.stage==='approval'?['מאשר/ת את השאלות וכללי ההתאמה','רוצה לתקן']:r.choices;
-  for(const [i,choice] of choices.entries()){const b=text('button',choice,'choice');b.type='button';b.onclick=()=>answer(choice,r.stage==='approval'?(i===0?'approve_rules':'revise_rules'):undefined);$('choices').append(b);}
+  const choices=r.stage==='approval'?['מאשר/ת את השאלות וכללי ההתאמה'] .concat(['רוצה לתקן']):[...r.choices];
+  if(r.stage!=='approval'&&!choices.some(isOtherChoice))choices.push('אחר — במילים שלי');
+  for(const [i,choice] of choices.entries()){
+    const b=text('button',choice,'choice');b.type='button';
+    b.onclick=()=>{if(isOtherChoice(choice)){chooseOther();return;}
+      answer(choice,r.stage==='approval'?(i===0?'approve_rules':'revise_rules'):undefined);};
+    $('choices').append(b);
+  }
+  $('answer-form').querySelector('label').textContent='אפשר גם לכתוב במילים שלכם';
+  $('answer').placeholder='מספיק כמה מילים כדי להתחיל…';
   $('history').replaceChildren();
   for(const item of history){const d=document.createElement('details');d.append(text('summary',item.answer),text('p',item.question));$('history').append(d);}
   $('answer').value='';$('question').setAttribute('tabindex','-1');$('question').focus();
+}
+function isOtherChoice(choice){return /^(?:תחום\s+)?אחר(?:ת)?(?:$|\s|[—–:,-])/.test(choice.trim());}
+function chooseOther(){
+  const prompts={intro:'ספרו בכמה מילים מה העסק שלכם מציע.',goal:'מה הייתם רוצים להשיג בעסק עכשיו?',
+    service:'איזה מוצר או שירות תרצו לקדם?',customer:'מי הלקוחות שתרצו להגיע אליהם?',
+    need:'איזה צורך או קושי מביא את הלקוחות האלה אליכם?',boundaries:'מה חשוב לכם בהתאמה של לקוח לעסק?',channels:'איפה תרצו לפנות ללקוחות האלה?'};
+  const prompt=prompts[state.reply.stage]||'כתבו את האפשרות שמתאימה לכם.';
+  $('answer-form').querySelector('label').textContent=prompt;
+  $('answer').placeholder=prompt;$('answer').focus();
+  $('answer-form').scrollIntoView({behavior:'smooth',block:'center'});
 }
 async function start(force=false){
   $('availability').textContent='פותחים את ההדרכה…';$('error').textContent='';$('start').disabled=true;
