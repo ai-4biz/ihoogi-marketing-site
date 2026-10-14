@@ -1,6 +1,6 @@
 import {validateIntake,readBusinessSources,intakeReply,validateLogo} from './intake.mjs';
 import {createClient} from 'https://esm.sh/@supabase/supabase-js@2.95.3';
-import {FIRST,PROMPT,nextGuideStage,parseGuideReply,reserveCost,approvedQuestionsFromHistory,schemaForStage} from './common.mjs';
+import {FIRST,PROMPT,nextGuideStage,parseGuideReply,reserveCost,approvedQuestionsFromHistory,schemaForStage,categoryReply} from './common.mjs';
 
 // Staging-only service. It never provisions users, submits leads or sends messages.
 const URL=Deno.env.get('SUPABASE_URL')||'';
@@ -70,6 +70,9 @@ Deno.serve(async(req:Request)=>{
   const answer=body.approvalAction==='approve_rules'?'מאשר/ת את השאלות וכללי ההתאמה':
    body.approvalAction==='revise_rules'?'רוצה לתקן את השאלות או כללי ההתאמה':body.answer.trim();
   const history=s.state.messages||[];
+  const category=prior.stage==='intro'?categoryReply(answer):null;
+  if(category){history.push({role:'user',content:answer},{role:'assistant',content:JSON.stringify(category)});const {error:saveError}=await db.from(TABLE).update({state:{...s.state,messages:history,reply:category}}).eq('id',id);if(saveError)throw error(503,'לא הצלחנו לשמור את התחום.');return send(200,view({...s,state:{...s.state,messages:history,reply:category}}));}
+
   const recent=history.slice(-2).map((m:any)=>m.role==='assistant'?{role:'assistant',content:JSON.stringify({
    stage:JSON.parse(m.content).stage,question:JSON.parse(m.content).question,choices:JSON.parse(m.content).choices,
    reflection:JSON.parse(m.content).reflection,draft_questions:JSON.parse(m.content).draft_questions})}:m);
