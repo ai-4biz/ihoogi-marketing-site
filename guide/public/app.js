@@ -2,9 +2,9 @@
 const $=id=>document.getElementById(id);
 let state=null, history=[], waiting=false, logo=null;
 let remoteSession='';
-try{remoteSession=sessionStorage.getItem('ihoogi-focus-session-v3')||'';}catch{}
-const stages={intro:'באיזה תחום העסק?',specialty:'מהו סוג העסק?',goal:'מה רוצים להשיג?',service:'במה מתמקדים?',customer:'למי השירות מתאים?',need:'איזה צורך מביא אותם אליכם?',boundaries:'מה חשוב בהתאמה?',done:'מפת המיקוד שלכם'};
-const order=Object.keys(stages);
+try{remoteSession=sessionStorage.getItem('ihoogi-focus-session-v4')||'';}catch{}
+const stages={intro:'באיזה תחום העסק?',specialty:'מהו סוג העסק?',offer:'מה ההצעה שלכם פותרת?',review:'בודקים את המיקוד יחד',goal:'מה רוצים להשיג?',service:'במה מתמקדים?',customer:'למי השירות מתאים?',need:'איזה צורך מביא אותם אליכם?',boundaries:'מה חשוב בהתאמה?',done:'מפת המיקוד שלכם'};
+const order=['intro','specialty','offer','goal','customer','need','boundaries','review','done'];
 function text(tag,value,className){const e=document.createElement(tag);e.textContent=value;if(className)e.className=className;return e;}
 async function api(action,body={}) {
   if(window.GUIDE_REMOTE_ENDPOINT){
@@ -15,7 +15,7 @@ async function api(action,body={}) {
       headers:{'Content-Type':'application/json',...(remoteSession&&action!=='start'?{'x-guide-session':remoteSession}:{})},
       body:JSON.stringify({action,...body}),signal:AbortSignal.timeout(60000)});
     const d=await r.json();if(!r.ok)throw new Error(d.error||'אירעה תקלה');
-    if(d.session){remoteSession=d.session;try{sessionStorage.setItem('ihoogi-focus-session-v3',remoteSession);}catch{}}
+    if(d.session){remoteSession=d.session;try{sessionStorage.setItem('ihoogi-focus-session-v4',remoteSession);}catch{}}
     return d;
   }
   const r=await fetch('/api/'+action,{method:action==='state'?'GET':'POST',
@@ -29,9 +29,11 @@ function render() {
   if(r.complete){renderResult(r.result);show('result');$('result-title').focus();return;}
   show('conversation');$('conversation-title').textContent=stages[r.stage];$('stage-label').textContent=stages[r.stage];
   $('progress-fill').style.width=Math.max(5,(order.indexOf(r.stage)+1)/order.length*100)+'%';
-  const station=['intro','specialty','goal','service'].includes(r.stage)?0:['customer','need','boundaries'].includes(r.stage)?1:r.stage==='boundaries'?2:3;
+  const station=['intro','specialty','offer','goal','service'].includes(r.stage)?0:['customer','need'].includes(r.stage)?1:r.stage==='boundaries'?2:3;
   document.querySelectorAll('[data-station]').forEach(e=>{const n=Number(e.dataset.station);e.classList.toggle('current',n===station);e.classList.toggle('finished',n<station);if(n===station)e.setAttribute('aria-current','step');else e.removeAttribute('aria-current');});
   $('reflection').textContent=r.reflection;$('explanation').textContent=r.explanation;$('question').textContent=r.question;
+  $('review-focus').replaceChildren();$('review-focus').classList.toggle('hidden',!r.review_focus);
+  if(r.review_focus)for(const [label,key] of [['מטרת העסק','goal'],['הקהל שרוצים להגיע אליו','audience'],['הצורך של הלקוחות','need']]){const value=r.review_focus[key];if(value){const card=text('article','','summary-card');card.append(text('h3',label),text('p',value));$('review-focus').append(card);}}
   $('choices').replaceChildren();
   const choices=[...r.choices];
   if(!choices.some(isOtherChoice))choices.push('אחר — במילים שלי');
@@ -49,7 +51,7 @@ function render() {
 }
 function isOtherChoice(choice){return /^(?:תחום\s+)?אחר(?:ת)?(?:$|\s|[—–:,-])/.test(choice.trim());}
 function chooseOther(){
-  const prompts={intro:'ספרו בכמה מילים מה העסק שלכם מציע.',specialty:'מהו סוג העסק או ההתמחות שלכם?',goal:'מה הייתם רוצים להשיג בעסק עכשיו?',
+  const prompts={intro:'ספרו בכמה מילים מה העסק שלכם מציע.',specialty:'מהו סוג העסק או ההתמחות שלכם?',offer:'ספרו על מצב שבו לקוח זקוק להצעה שלכם ומה היא נותנת לו.',review:'מה צריך לתקן במטרה או בקהל ששיקפנו?',goal:'מה הייתם רוצים להשיג בעסק עכשיו?',
     service:'איזה מוצר או שירות תרצו לקדם?',customer:'מי הלקוחות שתרצו להגיע אליהם?',
     need:'איזה צורך או קושי מביא את הלקוחות האלה אליכם?',boundaries:'מה חשוב לכם בהתאמה של לקוח לעסק?',channels:'איפה תרצו לפנות ללקוחות האלה?'};
   const prompt=prompts[state.reply.stage]||'כתבו את האפשרות שמתאימה לכם.';
@@ -72,7 +74,7 @@ async function answer(value,approvalAction){
 }
 function summaryText(r){
   return ['מפת המיקוד שלי','מטרה: '+r.goal,'שירות: '+r.service,'לקוחות מתאימים: '+r.ideal_customer,
-    'הצורך: '+r.customer_need,'חיוני: '+r.must_have.join(', '),'עדיף: '+r.nice_to_have.join(', '),
+    'הצורך: '+r.customer_need,
     r.insight?'מה התחדד: '+r.insight:'',
     r.points_to_refine.length?'לחידוד: '+r.points_to_refine.join(', '):''].filter(Boolean).join('\n\n');
 }
@@ -81,8 +83,7 @@ function renderResult(r){
   if(r.insight)$('insight').append(text('b','זה מה שהתחדד אצלכם'),text('p',r.insight));
   $('summary').replaceChildren();
   for(const [title,value] of [['המטרה',r.goal],['השירות לקידום',r.service],['הלקוחות שמתאימים',r.ideal_customer],
-    ['הצורך שלהם',r.customer_need],['מה חיוני',r.must_have.join(' · ')||'טרם הוגדר'],
-    ['מה עדיף',r.nice_to_have.join(' · ')||'טרם הוגדר']]){
+    ['הצורך שלהם',r.customer_need]]){
     const card=text('article','','summary-card');card.append(text('h3',title),text('p',value));$('summary').append(card);
   }
   $('refine').textContent=r.points_to_refine.length?'עדיין כדאי לחדד: '+r.points_to_refine.join(' · '):'אפשר לעדכן את המיקוד בהמשך לפי הפניות שתקבלו.';
