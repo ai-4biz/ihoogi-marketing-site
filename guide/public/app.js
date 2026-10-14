@@ -18,7 +18,8 @@ function render() {
   $('progress-fill').style.width=Math.max(5,(order.indexOf(r.stage)+1)/order.length*100)+'%';
   $('reflection').textContent=r.reflection;$('explanation').textContent=r.explanation;$('question').textContent=r.question;
   $('choices').replaceChildren();
-  for(const choice of r.choices){const b=text('button',choice,'choice');b.type='button';b.onclick=()=>answer(choice);$('choices').append(b);}
+  const choices=r.stage==='approval'?['מאשר/ת את השאלות וכללי ההתאמה','רוצה לתקן']:r.choices;
+  for(const [i,choice] of choices.entries()){const b=text('button',choice,'choice');b.type='button';b.onclick=()=>answer(choice,r.stage==='approval'?(i===0?'approve_rules':'revise_rules'):undefined);$('choices').append(b);}
   $('history').replaceChildren();
   for(const item of history){const d=document.createElement('details');d.append(text('summary',item.answer),text('p',item.question));$('history').append(d);}
   $('answer').value='';$('question').setAttribute('tabindex','-1');$('question').focus();
@@ -28,10 +29,10 @@ async function start(){
   try{state=await api('start');history=[];render();if(!state.configured)$('error').textContent='התצוגה מוכנה, אך שיחת ה־AI עדיין אינה מחוברת. אין חיוב או שליחת מידע למודל.';}
   catch(e){$('availability').textContent=e.message;}
 }
-async function answer(value){
+async function answer(value,approvalAction){
   if(waiting||!value.trim())return;busy(true);$('error').textContent='';
   const prev=state.reply.question;
-  try{state=await api('answer',{answer:value});history.push({question:prev,answer:value});render();}
+  try{state=await api('answer',{answer:value,...(approvalAction?{approvalAction}:{})});history.push({question:prev,answer:value});render();}
   catch(e){$('error').textContent=e.message;}
   finally{busy(false);}
 }
