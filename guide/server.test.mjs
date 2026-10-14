@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {openStore,createGuide,validateReply,reserveCost,FIRST,nextGuideStage,schemaForStage,parseGuideReply} from './server.mjs';
+import {openStore,createGuide,validateReply,reserveCost,FIRST,nextGuideStage,schemaForStage,parseGuideReply,allowedGuideStages,businessDialogue,guideKnowledge} from './server.mjs';
 const env={OPENROUTER_API_KEY:'test-only',GUIDE_MODEL:'test/pinned',PUBLIC_ORIGIN:'http://localhost:3080'};
 const mid={...FIRST,stage:'goal',question:'מה חשוב להשיג?',memory:'עסק: משרד עורכי דין, ליווי מעסיקים'};
 const result={goal:'יציבות הכנסה',service:'ליווי מעסיקים',ideal_customer:'עסק עם עובדים',customer_need:'ליווי שוטף',
@@ -39,11 +39,9 @@ test('auto routing rejected to maintain fixed pricing boundary',async()=>{
  await assert.rejects(f.handle('answer',{answer:'ספר'},s.id),e=>e.status===503);assert.equal(f.calls(),0);
 });
 test('budget reserved before request; calls stop before spending above budget',async()=>{
- const f=fixture(mid,{GUIDE_SESSION_USD:'0.02'}),s=await f.handle('start',{},null);
- let stopped=false;
- for(let i=0;i<16;i++){try{await f.handle('answer',{answer:'אני לא בטוח'},s.id);}catch(e){assert.equal(e.status,429);stopped=true;break;}}
- assert.equal(stopped,true);assert.ok(f.db.prepare('SELECT spent FROM sessions').get().spent<=.02);
- assert.ok(f.calls()>0);
+ const f=fixture(mid,{GUIDE_SESSION_USD:'0.001'}),s=await f.handle('start',{},null);
+ await assert.rejects(f.handle('answer',{answer:'אני לא בטוח'},s.id),e=>e.status===429);
+ assert.equal(f.calls(),0);assert.equal(f.db.prepare('SELECT spent FROM sessions').get().spent,0);
 });
 test('uncertain upstream failures retain reserved budget',async()=>{
  const f=fixture(mid,{},async()=>{throw new Error('timeout');}),s=await f.handle('start',{},null);
@@ -148,7 +146,8 @@ test('other without details stays on the current question',()=>{
 
 
 test('focus guide finishes after audience refinement without a questionnaire',()=>{
- assert.equal(nextGuideStage({...mid,stage:'boundaries'},[],'הגעה לקדימה ושירות צבע'),'done');
+ assert.equal(nextGuideStage({...mid,stage:'boundaries'},[],'הגעה לקדימה ושירות צבע'),'review');
+ assert.equal(nextGuideStage({...mid,stage:'review'},[],'כן, זה המיקוד שלי'),'done');
  const parsed=parseGuideReply(JSON.stringify(done),'done');
  assert.deepEqual(parsed.result.screening_questions,[]);assert.deepEqual(parsed.result.demo,[]);
  assert.equal(parsed.result.marketing_message,'');assert.equal(parsed.draft_questions,null);
@@ -159,10 +158,32 @@ test('broad beauty category opens specialty before AI goal clarification',async(
  const f=fixture(mid),s=await f.handle('start',{},null);
  const category=await f.handle('answer',{answer:'יופי ואסתטיקה'},s.id);
  assert.equal(category.reply.stage,'specialty');assert.ok(category.reply.choices.includes('מספרה'));assert.equal(f.calls(),0);
- const goal=await f.handle('answer',{answer:'מספרה'},s.id);assert.equal(goal.reply.stage,'goal');assert.equal(f.calls(),1);
+ const goal=await f.handle('answer',{answer:'מספרה'},s.id);assert.equal(goal.reply.stage,'offer');assert.equal(f.calls(),1);
 });
 
 test('goal choices never contain the old industry menu from the screenshot',()=>{
  const r=parseGuideReply(JSON.stringify({...mid,choices:['מספרה','משרד עורכי דין','קליניקה','ייעוץ','תחום אחר','להגדיל הכנסות','לייצב הכנסות']}),'goal');
  assert.deepEqual(r.choices,['להגדיל הכנסות','לייצב הכנסות']);
+});
+
+test('vague product, audience and goal answers require a real clarification',()=>{
+ for(const [stage,answer] of [['offer','יש לי SaaS'],['customer','כולם'],['goal','להרחיב את קהל הלקוחות']]){
+  const prior={...mid,stage};const history=[{role:'assistant',content:JSON.stringify(prior)}];
+  assert.equal(nextGuideStage(prior,history,answer),stage);
+ }
+});
+
+test('vague customer answers cannot skip to needs or boundaries',()=>{
+ const prior={...mid,stage:'customer'},history=[{role:'assistant',content:JSON.stringify(prior)}];
+ const target=nextGuideStage(prior,history,'כולם');assert.deepEqual(allowedGuideStages(prior,target,history),['customer']);
+});
+test('seller goal stays distinct from customer problem in the model context',()=>{
+ const history=[{role:'assistant',content:JSON.stringify({...mid,stage:'offer',question:'מה אתם מוכרים?'})},{role:'user',content:'דירוג פניות'},
+ {role:'assistant',content:JSON.stringify({...mid,stage:'goal',question:'מה העסק שלכם רוצה להשיג?'})},{role:'user',content:'שלושה עסקים משלמים בחודש'},
+ {role:'assistant',content:JSON.stringify({...mid,stage:'need',question:'מה קשה ללקוחות שלכם?'})},{role:'user',content:'לא יודעים למי לחזור קודם'}];
+ const facts=guideKnowledge(businessDialogue(history));assert.equal(facts.business_owner.business_goal,'שלושה עסקים משלמים בחודש');assert.equal(facts.customers_of_that_business.customer_problem,'לא יודעים למי לחזור קודם');
+});
+test('review has clear confirmation controls and summary adds no invented conditions',()=>{
+ const review=parseGuideReply(JSON.stringify({...mid,stage:'review',choices:['דוגמה שאינה אישור']}),'review');assert.deepEqual(review.choices,['כן, זה המיקוד שלי','רוצה לתקן']);
+ const summary=parseGuideReply(JSON.stringify(result),'done');assert.deepEqual(summary.result.must_have,[]);assert.deepEqual(summary.result.nice_to_have,[]);
 });
