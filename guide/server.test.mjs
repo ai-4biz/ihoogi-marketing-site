@@ -187,3 +187,13 @@ test('review has clear confirmation controls and summary adds no invented condit
  const review=parseGuideReply(JSON.stringify({...mid,stage:'review',choices:['דוגמה שאינה אישור']}),'review');assert.deepEqual(review.choices,['כן, זה המיקוד שלי','רוצה לתקן']);
  const summary=parseGuideReply(JSON.stringify(result),'done');assert.deepEqual(summary.result.must_have,[]);assert.deepEqual(summary.result.nice_to_have,[]);
 });
+
+test('explicit focus corrections remain available to the final analysis',()=>{
+ const context=guideKnowledge([{topic:'goal',answer:'שלושה עסקים משלמים'},{topic:'review',answer:'תיקון: המטרה היא עשרה עסקים משלמים'},{topic:'review',answer:'כן, זה המיקוד שלי'}]);
+ assert.deepEqual(context.review_corrections,['תיקון: המטרה היא עשרה עסקים משלמים']);
+});
+
+test('yes followed by a correction does not confirm the old focus',()=>{
+ assert.equal(nextGuideStage({...mid,stage:'review'},[],'כן אבל המטרה היא עשרה עסקים'),'review');
+ const facts=guideKnowledge([{topic:'review',answer:'כן אבל המטרה היא עשרה עסקים'}]);assert.equal(facts.review_corrections.length,1);
+});
