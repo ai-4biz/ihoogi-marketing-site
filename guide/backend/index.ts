@@ -1,13 +1,13 @@
 import {validateIntake,readBusinessSources,intakeReply,validateLogo} from './intake.mjs';
 import {createClient} from 'https://esm.sh/@supabase/supabase-js@2.95.3';
-import {FIRST,PROMPT,nextGuideStage,parseGuideReply,reserveCost,approvedQuestionsFromHistory,schemaForStage,categoryReply} from './common.mjs';
+import {FIRST,PROMPT,nextGuideStage,parseGuideReply,reserveCost,approvedQuestionsFromHistory,schemaForStage,categoryReply,addGuideRouting,businessDialogue,guideKnowledge,applyReviewFocus} from './common.mjs';
 
 // Staging-only service. It never provisions users, submits leads or sends messages.
 const URL=Deno.env.get('SUPABASE_URL')||'';
 const SERVICE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')||'';
 const db=createClient(URL,SERVICE,{auth:{persistSession:false,autoRefreshToken:false}});
 const TABLE='focus_guide_sessions';
-const MODEL='google/gemini-2.5-flash-lite';
+const MODEL='openai/gpt-5-mini';
 const origins=new Set(['https://ihoogi-focus-guide-check.funamber16.chatgpt.site','https://yyiksyufktgndonldbhn.supabase.co','null','http://localhost:3080','https://ihoogi.com','https://www.ihoogi.com',
  'https://ihoogi.co.il','https://www.ihoogi.co.il','https://chatgpt.com']);
 const hash=async(s:string)=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s))))
@@ -77,14 +77,17 @@ Deno.serve(async(req:Request)=>{
    stage:JSON.parse(m.content).stage,question:JSON.parse(m.content).question,choices:JSON.parse(m.content).choices,
    reflection:JSON.parse(m.content).reflection,draft_questions:JSON.parse(m.content).draft_questions})}:m);
   const messages=[{role:'system',content:PROMPT+(s.turns>=14?' השלם סיכום חלקי אם לא אושרו כללים.':'')},
-   {role:'user',content:JSON.stringify({business_sources:s.state.sources||[],session_notes:prior.memory||'',business_answers:history.filter((m:any)=>m.role==='user').map((m:any)=>m.content),remaining_turns:16-s.turns})},
+   {role:'user',content:JSON.stringify({business_sources:s.state.sources||[],session_notes:prior.memory||'',business_dialogue:businessDialogue(history).slice(-6),role_context:guideKnowledge(businessDialogue([...history,{role:'user',content:answer}])),remaining_turns:16-s.turns})},
    ...(recent.length?recent:[{role:'assistant',content:JSON.stringify(FIRST)}]),{role:'user',content:answer}];
-  const targetStage=nextGuideStage(prior,history,answer,body.approvalAction);
-  messages[0].content+=' השלב הבא שלך הוא '+targetStage+'. אל תחזור על נושא קודם. אם חסר מידע, סמן לחידוד והמשך. כאשר done החזר אובייקט מיקוד בלבד עם goal,service,ideal_customer,customer_need,must_have,nice_to_have,insight,points_to_refine — ללא מעטפת result, ללא שאלון וללא שיווק.';
-  const output=['approval','done'].includes(targetStage)?3600:1100;
-  const review=['approval','done'].includes(targetStage);
-  const prices=review?{prompt:.5,completion:3}:{prompt:.2,completion:1};
-  const amount=reserveCost(messages,output,prices);
+  const partial=Number(s.spent_usd)>.095;
+  const targetStage=partial?'done':nextGuideStage(prior,history,answer,body.approvalAction);
+  if(partial)messages[0].content+=' נדרש סיכום ראשוני במסגרת התקציב. אל תמציא החלטות או אישור. ציין ב-points_to_refine מה עדיין חסר.';
+  const allowed=addGuideRouting(messages,prior,targetStage,history);
+  const output=targetStage==='done'?2200:1800;
+  const review=true;
+  const prices={prompt:.3,completion:2.5};
+  const schema=schemaForStage(targetStage,allowed);
+  const amount=reserveCost(messages,output,prices,schema);
   const {data:reservation,error:re}=await db.rpc('focus_guide_reserve',{p_id:id,p_amount:amount});
   if(re)throw error(503,'לא ניתן לבדוק את תקציב השיחה.');
   if(reservation?.error)throw error(reservation.error==='busy'?409:429,
@@ -94,16 +97,18 @@ Deno.serve(async(req:Request)=>{
    if(ke||typeof key!=='string'||!key)throw error(503,'חיבור ה־AI חסר.');
    const response=await fetch('https://openrouter.ai/api/v1/chat/completions',{method:'POST',
     headers:{'Content-Type':'application/json',Authorization:'Bearer '+key,'X-OpenRouter-Title':'iHoogi Focus Guide'},
-    body:JSON.stringify({model:review?'openai/gpt-4.1-mini':MODEL,messages,max_tokens:output,temperature:.4,
-     response_format:review?{type:'json_schema',json_schema:{name:'guide_reply',strict:true,schema:schemaForStage(targetStage)}}:{type:'json_object'},plugins:[{id:'response-healing'}],
-     usage:{include:true},provider:{sort:'price',require_parameters:true,data_collection:'deny',max_price:prices}}),
+    body:JSON.stringify({model:MODEL,messages,max_tokens:output,reasoning:{effort:'low',exclude:true},
+     response_format:review?{type:'json_schema',json_schema:{name:'guide_reply',strict:true,schema}}:{type:'json_object'},plugins:[{id:'response-healing'}],
+     usage:{include:true},provider:{sort:'latency',require_parameters:true,data_collection:'deny',max_price:prices}}),
     signal:AbortSignal.timeout(45000)});
    const data=await response.json().catch(()=>null);
    if(!response.ok||data?.error)throw error(502,'החיבור ל־AI לא הצליח. אפשר לנסות שוב.');
    if(data.choices?.[0]?.finish_reason==='length')throw error(502,'התשובה נקטעה. אפשר לנסות שוב.');
    let reply:any;
    try{reply=parseGuideReply(data.choices?.[0]?.message?.content,targetStage,
-    ((prior.memory||'')+' | '+answer).slice(-900),s.approved?approvedQuestionsFromHistory(history):null);}catch{throw error(502,'התקבלה תשובה לא תקינה. אפשר לנסות שוב.');}
+    ((prior.memory||'')+' | '+answer).slice(-900),null,allowed);}catch{throw error(502,'התקבלה תשובה לא תקינה. אפשר לנסות שוב.');}
+   applyReviewFocus(reply,history,answer);
+   if(reply.complete&&partial)reply.result.points_to_refine.unshift('סיכום ראשוני: המיקוד טרם נבדק ואושר עם בעל העסק.');
    if(!reply.complete&&(typeof reply.memory!=='string'||reply.memory.length>900||!reply.memory.trim()))
     throw error(502,'חסר סיכום להמשך השיחה. אפשר לנסות שוב.');
    const actual=Number(data.usage?.cost||0);
