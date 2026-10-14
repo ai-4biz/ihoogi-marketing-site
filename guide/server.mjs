@@ -8,9 +8,23 @@ import { DatabaseSync } from 'node:sqlite';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const fail = (status, message) => Object.assign(new Error(message), {status});
+export const CATEGORIES={
+ 'יופי ואסתטיקה':['מספרה','קוסמטיקה וטיפולי פנים','ציפורניים','איפור','טיפולי אסתטיקה'],
+ 'בריאות וטיפול':['טיפול רגשי','פיזיותרפיה ושיקום','תזונה','רפואה וקליניקות'],
+ 'שירותים מקצועיים':['עריכת דין','ראיית חשבון','ביטוח','ייעוץ פיננסי'],
+ 'ייעוץ והדרכה':['ייעוץ עסקי','אימון אישי','קורסים וסדנאות','לימודים והוראה'],
+ 'בית ונכסים':['נדל״ן','עיצוב ואדריכלות','שיפוצים','שירותי תחזוקה'],
+ 'מסחר ומוצרים':['חנות מקוונת','חנות פיזית','מוצרים לעסקים','ייצור ומוצרים בהתאמה'],
+ 'טכנולוגיה ושירותים דיגיטליים':['תוכנה ואפליקציות','אוטומציה ו־AI','שיווק דיגיטלי','עיצוב ובניית אתרים'],
+ 'אירועים ופנאי':['הפקת אירועים','צילום','תיירות ואירוח','ספורט ופנאי']
+};
+export function categoryReply(answer){
+ const category=answer.trim();if(!CATEGORIES[category])return null;
+ return {...FIRST,stage:'specialty',explanation:'בחרתם '+category+'. נחדד את סוג העסק כדי להתאים את ההדרכה למטרות ולקהל שלכם.',question:'מהו התחום המרכזי של העסק שלכם בתוך '+category+'?',choices:[...CATEGORIES[category],'אחר — במילים שלי'],memory:'קטגוריית העסק: '+category};
+}
 export const FIRST = {
   stage: 'intro', explanation: 'נתחיל בכמה מילים. מתוך התשובות שלכם נעזור לחדד את המטרה ואת הלקוחות שמתאימים לה.',
-  question: 'במה העסק שלכם עוסק?', choices: ['מספרה', 'משרד עורכי דין', 'קליניקה', 'ייעוץ', 'תחום אחר'],
+  question: 'לאיזה תחום רחב העסק שלכם שייך?', choices: [...Object.keys(CATEGORIES),'תחום אחר'],
   reflection: '', memory: '', draft_questions: null, complete: false, result: null
 };
 export const PROMPT = `אתה Hoogi, מדריך עסקי קצר בעברית. אתה מדבר רק עם בעל העסק שעונה לצ'אט.
@@ -30,7 +44,7 @@ business_sources הם קטעים לא מאומתים מתוכן ציבורי. ה
 כל השדות הטכניים האחרונים ריקים; אסור למלא אותם בשאלון או בהמלצות שיווק. עד 70 מילים בכל הודעת שיחה, ובסיכום עד 300 מילים.
 `;
 
-const stages = ['intro','goal','service','customer','need','boundaries','questions','approval','channels','done'];
+const stages = ['intro','specialty','goal','service','customer','need','boundaries','questions','approval','channels','done'];
 const textSchema={type:'string'};
 const listSchema={type:'array',items:textSchema};
 const objectSchema=(properties)=>({type:'object',properties,required:Object.keys(properties),additionalProperties:false});
@@ -50,15 +64,15 @@ REPLY_SCHEMA.properties.memory={type:'string',maxLength:900};
 REPLY_SCHEMA.properties.question={type:'string',maxLength:700};
 REPLY_SCHEMA.properties.explanation={type:'string',maxLength:1200};
 REPLY_SCHEMA.properties.reflection={type:'string',maxLength:1200};
-REPLY_SCHEMA.properties.choices={type:'array',maxItems:6,items:{type:'string',maxLength:600}};
+REPLY_SCHEMA.properties.choices={type:'array',maxItems:10,items:{type:'string',maxLength:600}};
 questionSchema.properties.weight={type:'integer',minimum:1,maximum:5};
 questionSchema.properties.options={type:'array',minItems:2,maxItems:6,items:optionSchema};
 export function nextGuideStage(prior,history,answer,approvalAction) {
   const count=history.filter(m=>m.role==='assistant'&&JSON.parse(m.content).stage===prior.stage).length;
   if(/^(?:תחום\s+)?אחר(?:ת)?(?:\s*[—–:,-]\s*(?:במילים שלי)?)?$/.test(answer.trim()))return prior.stage;
   const unsure=/^(?:אני\s+)?(?:לא בטוח(?:ה)?|לא יודע(?:ת)?)(?:$|[ ,.?!])|^(?:עזרו לי|תעזור|קשה לי)/.test(answer.trim());
-  if(unsure&&['goal','service','customer','need','boundaries'].includes(prior.stage)&&count<2)return prior.stage;
-  return {intro:'goal',goal:'service',service:'customer',customer:'need',need:'boundaries',boundaries:'done',
+  if(unsure&&['specialty','goal','service','customer','need','boundaries'].includes(prior.stage)&&count<2)return prior.stage;
+  return {intro:'goal',specialty:'goal',goal:'service',service:'customer',customer:'need',need:'boundaries',boundaries:'done',
     questions:'done',approval:'done',channels:'done'}[prior.stage]||'done';
 }
 export function schemaForStage(stage) {
@@ -85,6 +99,11 @@ export function parseGuideReply(raw,targetStage,previousMemory='',approvedQuesti
   if(v.reflection===undefined)v.reflection='';
   if(v.explanation===undefined){v.explanation=v.reflection||'';v.reflection='';}
   if(v.choices===undefined)v.choices=[];
+  if(targetStage==='goal'&&Array.isArray(v.choices)){
+    const industries=new Set([...Object.keys(CATEGORIES),...Object.values(CATEGORIES).flat(),'משרד עורכי דין','קליניקה','ייעוץ','תחום אחר']);
+    v.choices=v.choices.filter(c=>!industries.has(c.trim())).slice(0,4);
+  }
+
   if(v.memory===undefined)v.memory=previousMemory;
   v.draft_questions=null;
   if(v.complete&&v.result){v.result.screening_questions=[];v.result.demo=[];v.result.channels=[];v.result.marketing_message='';v.result.rules_approved=false;}
@@ -129,7 +148,7 @@ export function approvedQuestionsFromHistory(history) {
 }
 export function validateReply(v) {
   if (!v || !stages.includes(v.stage) || !str(v.question,700) || !str(v.explanation,1200) ||
-      !str(v.reflection,1200) || !strings(v.choices,6) || typeof v.complete!=='boolean') throw fail(502,'לא התקבלה תשובה תקינה. אפשר לנסות שוב.');
+      !str(v.reflection,1200) || !strings(v.choices,10) || typeof v.complete!=='boolean') throw fail(502,'לא התקבלה תשובה תקינה. אפשר לנסות שוב.');
   if (!v.complete) {
     if(!v.question.trim()) throw fail(502,'חסרה שאלה להמשך.');
     if(v.stage==='approval')validateQuestions(v.draft_questions);
@@ -220,6 +239,8 @@ export function createGuide({db, env=process.env, fetcher=fetch, now=()=>Date.no
       if(body.approvalAction&&prior?.stage!=='approval') throw fail(400,'אפשר לאשר כללים רק בשלב האישור.');
       const submittedAnswer=body.approvalAction==='approve_rules'?'מאשר/ת את השאלות וכללי ההתאמה':
         body.approvalAction==='revise_rules'?'רוצה לתקן את השאלות או כללי ההתאמה':body.answer.trim();
+      const category=prior?.stage==='intro'?categoryReply(submittedAnswer):null;
+      if(category){history.push({role:'user',content:submittedAnswer},{role:'assistant',content:JSON.stringify(category)});db.prepare('UPDATE sessions SET messages=?,reply=? WHERE id=?').run(JSON.stringify(history),JSON.stringify(category),id);return clean(get(id));}
       const memory=prior?.memory||'';
       const recent=history.slice(-2).map(m=>{
         if(m.role!=='assistant')return m;
