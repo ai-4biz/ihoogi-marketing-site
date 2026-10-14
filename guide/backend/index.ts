@@ -7,7 +7,7 @@ const SERVICE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')||'';
 const db=createClient(URL,SERVICE,{auth:{persistSession:false,autoRefreshToken:false}});
 const TABLE='focus_guide_sessions';
 const MODEL='google/gemini-2.5-flash-lite';
-const origins=new Set(['null','http://localhost:3080','https://ihoogi.com','https://www.ihoogi.com',
+const origins=new Set(['https://ihoogi-focus-guide-check.funamber16.chatgpt.site','https://yyiksyufktgndonldbhn.supabase.co','null','http://localhost:3080','https://ihoogi.com','https://www.ihoogi.com',
  'https://ihoogi.co.il','https://www.ihoogi.co.il','https://chatgpt.com']);
 const hash=async(s:string)=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s))))
  .map(n=>n.toString(16).padStart(2,'0')).join('');
