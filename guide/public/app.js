@@ -1,10 +1,23 @@
 'use strict';
 const $=id=>document.getElementById(id);
 let state=null, history=[], waiting=false, logo=null;
+let remoteSession='';
+try{remoteSession=sessionStorage.getItem('ihoogi-guide-session')||'';}catch{}
 const stages={intro:'היכרות עם העסק',goal:'מה רוצים להשיג?',service:'במה מתמקדים?',customer:'למי השירות מתאים?',boundaries:'מה חשוב בהתאמה?',questions:'מה כדאי לברר?',approval:'בודקים יחד את השאלות',channels:'איפה תפיצו?',done:'מפת המיקוד שלכם'};
 const order=Object.keys(stages);
 function text(tag,value,className){const e=document.createElement(tag);e.textContent=value;if(className)e.className=className;return e;}
 async function api(action,body={}) {
+  if(window.GUIDE_REMOTE_ENDPOINT){
+    if(action==='state'&&!remoteSession)return {configured:true,transferConfigured:false,turns:0,
+      reply:{stage:'intro',explanation:'נתחיל בכמה מילים. מתוך התשובות שלכם נעזור לחדד את המטרה ואת הלקוחות שמתאימים לה.',
+      question:'במה העסק שלכם עוסק?',choices:['מספרה','משרד עורכי דין','קליניקה','ייעוץ','תחום אחר'],reflection:'',complete:false,result:null}};
+    const r=await fetch(window.GUIDE_REMOTE_ENDPOINT,{method:'POST',
+      headers:{'Content-Type':'application/json',...(remoteSession&&action!=='start'?{'x-guide-session':remoteSession}:{})},
+      body:JSON.stringify({action,...body})});
+    const d=await r.json();if(!r.ok)throw new Error(d.error||'אירעה תקלה');
+    if(d.session){remoteSession=d.session;try{sessionStorage.setItem('ihoogi-guide-session',remoteSession);}catch{}}
+    return d;
+  }
   const r=await fetch('/api/'+action,{method:action==='state'?'GET':'POST',
     headers:{'Content-Type':'application/json'},...(action==='state'?{}:{body:JSON.stringify(body)})});
   const d=await r.json();if(!r.ok)throw new Error(d.error||'אירעה תקלה');return d;
@@ -19,6 +32,10 @@ function render() {
   const station=['intro','goal','service'].includes(r.stage)?0:['customer','boundaries'].includes(r.stage)?1:['questions','approval'].includes(r.stage)?2:3;
   document.querySelectorAll('[data-station]').forEach(e=>{const n=Number(e.dataset.station);e.classList.toggle('current',n===station);e.classList.toggle('finished',n<station);if(n===station)e.setAttribute('aria-current','step');else e.removeAttribute('aria-current');});
   $('reflection').textContent=r.reflection;$('explanation').textContent=r.explanation;$('question').textContent=r.question;
+  $('draft-questions').replaceChildren();
+  for(const q of r.draft_questions||[]){const card=text('article','','screening');card.append(text('h3',q.question),text('p',q.reason));
+    const tags=text('div','','tags');for(const o of q.options||[])tags.append(text('span',o.label+' · '+({preferred:'מועדף',neutral:'ניטרלי',unsuitable:'פחות מתאים'}[o.fit]||''),'tag'));
+    card.append(tags);$('draft-questions').append(card);}
   $('choices').replaceChildren();
   const choices=r.stage==='approval'?['מאשר/ת את השאלות וכללי ההתאמה','רוצה לתקן']:r.choices;
   for(const [i,choice] of choices.entries()){const b=text('button',choice,'choice');b.type='button';b.onclick=()=>answer(choice,r.stage==='approval'?(i===0?'approve_rules':'revise_rules'):undefined);$('choices').append(b);}
