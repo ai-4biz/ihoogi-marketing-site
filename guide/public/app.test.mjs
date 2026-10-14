@@ -25,4 +25,6 @@ test('other asks for details without an AI call, then sends the custom business 
  other.onclick();assert.equal(requests.length,1);assert.ok(node('answer').focused);assert.match(node('answer').placeholder,/העסק/);
  await vm.runInContext("answer('אני מוכר מוצרים בחנות אינטרנטית')",context);
  assert.equal(requests[1].answer,'אני מוכר מוצרים בחנות אינטרנטית');assert.equal(node('question').textContent,'מה תרצו להשיג עם החנות?');
+ assert.equal(node('choices').children.filter(c=>c.textContent==='תחום אחר').length,1);
+ assert.equal(node('choices').children.length,2); // old question buttons were replaced, not appended
 });
