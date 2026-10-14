@@ -68,11 +68,11 @@ test('long inputs rejected before reserving budget',async()=>{
 test('transfer requires approved result and explicit consent',async()=>{
  const f=fixture(done),s=await f.handle('start',{},null);
  approvalStage(f.db,s.id);
- await f.handle('answer',{answer:'מאשר'},s.id);
+ await f.handle('answer',{answer:'מאשר',approvalAction:'approve_rules'},s.id);
  await assert.rejects(f.handle('transfer',{accepted:false},s.id),e=>e.status===400);assert.equal(f.calls(),1);
 });
 test('unconfigured handoff never claims success',async()=>{
- const f=fixture(done),s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'מאשר'},s.id);
+ const f=fixture(done),s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'מאשר',approvalAction:'approve_rules'},s.id);
  await assert.rejects(f.handle('transfer',{accepted:true,contact:{name:'בדיקה',email:'test@example.com',phone:''}},s.id),e=>e.status===503);
 });
 test('verified handoff includes answers, branding, consent; duplicate does not resend',async()=>{
@@ -81,7 +81,7 @@ test('verified handoff includes answers, branding, consent; duplicate does not r
   if(String(url).includes('openrouter')) return Response.json({choices:[{message:{content:JSON.stringify(done)},finish_reason:'stop'}]});
   sent++;payload=JSON.parse(opts.body);return Response.json({url:'https://ihoogi.com/profile',status:'pending'});
  });
- const s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'מאשר'},s.id);
+ const s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'מאשר',approvalAction:'approve_rules'},s.id);
  const body={accepted:true,marketing:false,contact:{name:'בדיקה',email:'test@example.com',phone:''},
  brand:{color:'#123456',websites:['https://example.com']}};
  await f.handle('transfer',body,s.id);await f.handle('transfer',body,s.id);
@@ -89,7 +89,7 @@ test('verified handoff includes answers, branding, consent; duplicate does not r
  assert.equal(payload.consent.marketing,false);assert.ok(payload.idempotency_key);
 });
 test('image disguised as png is blocked',async()=>{
- const f=fixture(done),s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'מאשר'},s.id);
+ const f=fixture(done),s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'מאשר',approvalAction:'approve_rules'},s.id);
  await assert.rejects(f.handle('transfer',{accepted:true,contact:{name:'בדיקה',email:'test@example.com',phone:''},
   brand:{logo:{name:'logo.png',mime:'image/png',base64:Buffer.from('<html>').toString('base64')}}},s.id),e=>e.status===400);
 });
@@ -98,7 +98,7 @@ test('outbound redirects disabled and foreign returned URL rejected',async()=>{
   if(String(url).includes('openrouter'))return Response.json({choices:[{message:{content:JSON.stringify(done)},finish_reason:'stop'}]});
   assert.equal(opts.redirect,'error');return Response.json({url:'https://evil.example',status:'ready'});
  });
- const s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'מאשר'},s.id);
+ const s=await f.handle('start',{},null);approvalStage(f.db,s.id);await f.handle('answer',{answer:'מאשר',approvalAction:'approve_rules'},s.id);
  await assert.rejects(f.handle('transfer',{accepted:true,contact:{name:'בדיקה',email:'test@example.com',phone:''}},s.id),e=>e.status===502);
 });
 test('new-session abuse bounded independently of model calls',async()=>{
@@ -122,4 +122,20 @@ test('model cannot fabricate user approval',async()=>{
  const response=await f.handle('answer',{answer:'אני ספר'},s.id);
  assert.equal(response.reply.result.rules_approved,false);
  await assert.rejects(f.handle('transfer',{accepted:true},s.id),e=>e.status===400);
+});
+test('free-text assent does not substitute for the fixed approval action',async()=>{
+ const f=fixture(done),s=await f.handle('start',{},null);approvalStage(f.db,s.id);
+ const response=await f.handle('answer',{answer:'נשמע טוב'},s.id);
+ assert.equal(response.reply.result.rules_approved,false);
+});
+test('approval action outside the approval stage is blocked before provider call',async()=>{
+ const f=fixture(),s=await f.handle('start',{},null);
+ await assert.rejects(f.handle('answer',{answer:'מאשר',approvalAction:'approve_rules'},s.id),e=>e.status===400);
+ assert.equal(f.calls(),0);
+});
+test('revision revokes an earlier approval',async()=>{
+ const f=fixture(done),s=await f.handle('start',{},null);approvalStage(f.db,s.id);
+ f.db.prepare('UPDATE sessions SET approved=1 WHERE id=?').run(s.id);
+ const response=await f.handle('answer',{answer:'רוצה לתקן',approvalAction:'revise_rules'},s.id);
+ assert.equal(response.reply.result.rules_approved,false);
 });
