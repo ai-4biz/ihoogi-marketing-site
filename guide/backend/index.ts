@@ -1,3 +1,4 @@
+import {validateIntake,readBusinessSources,intakeReply,validateLogo} from './intake.mjs';
 import {createClient} from 'https://esm.sh/@supabase/supabase-js@2.95.3';
 import {FIRST,PROMPT,nextGuideStage,parseGuideReply,reserveCost,approvedQuestionsFromHistory,schemaForStage} from './common.mjs';
 
@@ -14,7 +15,7 @@ const hash=async(s:string)=>Array.from(new Uint8Array(await crypto.subtle.digest
 const token=()=>Array.from(crypto.getRandomValues(new Uint8Array(32))).map(n=>n.toString(16).padStart(2,'0')).join('');
 const error=(status:number,message:string)=>Object.assign(new Error(message),{status});
 const view=(s:any)=>({reply:s?.state?.reply||FIRST,turns:s?.turns||0,maxTurns:16,configured:true,
- spentUsd:Number(s?.spent_usd||0),actualUsd:Number(s?.actual_usd||0),transferConfigured:false});
+ spentUsd:Number(s?.spent_usd||0),actualUsd:Number(s?.actual_usd||0),transferConfigured:false,contact:s?.state?.intake?.contact||null,links:s?.state?.intake?.links||[]});
 
 Deno.serve(async(req:Request)=>{
  const origin=req.headers.get('origin')||'null';
@@ -28,9 +29,10 @@ Deno.serve(async(req:Request)=>{
  if(!URL.includes('yyiksyufktgndonldbhn'))return send(503,{error:'המדריך מוגדר לבדיקות בלבד.'});
  try {
   if(!req.headers.get('content-type')?.startsWith('application/json'))throw error(415,'בקשה לא תקינה.');
-  const raw=await req.text();if(raw.length>6000)throw error(413,'הבקשה גדולה מדי.');
+  const raw=await req.text();if(raw.length>1500000)throw error(413,'הבקשה גדולה מדי.');
   let body:any;try{body=JSON.parse(raw);}catch{throw error(400,'בקשה לא תקינה.');}
   if(body.action==='start'){
+   const intake=validateIntake(body);
    // Public session issuance is the only unauthenticated operation.
    // Later calls require a 256-bit capability; only its hash is stored.
    const capability=token(),id=await hash(capability);
@@ -38,7 +40,10 @@ Deno.serve(async(req:Request)=>{
    const {data,error:e}=await db.rpc('focus_guide_start',{p_id:id,p_ip:await hash(ip)});
    if(e)throw error(503,'לא הצלחנו לפתוח שיחה.');
    if(data!==true)throw error(429,'כבר התחלתם כמה שיחות היום. אפשר להמשיך בשיחה הקיימת.');
-   return send(200,{...view(null),session:capability});
+   const sources=await readBusinessSources(intake.links);const reply=intakeReply(FIRST,sources);
+   const {error:saveError}=await db.from(TABLE).update({state:{intake,sources,messages:[],reply}}).eq('id',id);
+   if(saveError)throw error(503,'לא הצלחנו לשמור את פתיחת ההדרכה.');
+   return send(200,{...view({state:{intake,sources,reply}}),session:capability});
   }
   const capability=req.headers.get('x-guide-session')||'';
   if(!/^[0-9a-f]{64}$/.test(capability))throw error(401,'נדרש להתחיל שיחה.');
@@ -46,6 +51,15 @@ Deno.serve(async(req:Request)=>{
   const {data:s,error:se}=await db.from(TABLE).select('*').eq('id',id).maybeSingle();
   if(se||!s||Date.now()-Date.parse(s.created_at)>86400000)throw error(401,'השיחה הסתיימה. אפשר להתחיל מחדש.');
   if(body.action==='state')return send(200,view(s));
+  if(body.action==='contact'){
+   if(!s.state.reply?.complete)throw error(400,'צריך להשלים את מפת המיקוד.');
+   const intake=validateIntake({...body,links:s.state.intake?.links||[]},true);
+   if(body.interested===true)intake.logo=validateLogo(body.logo);
+   const request={summary_requested:true,interested:body.interested===true,received_at:new Date().toISOString(),delivery_status:'pending_manual'};
+   const {error:saveError}=await db.from(TABLE).update({state:{...s.state,intake,request}}).eq('id',id);
+   if(saveError)throw error(503,'לא הצלחנו לשמור את הפרטים.');
+   return send(200,{status:'recorded',interested:request.interested,deliveryConfigured:false});
+  }
   if(body.action==='transfer')return send(503,{error:'שיחת ה־AI פעילה. החיבור ליצירת שאלון ב־iHoogi עדיין בהכנה; אפשר לשמור את הסיכום.'});
   if(body.action!=='answer')throw error(404,'לא נמצא');
   if(s.state.reply?.complete)throw error(409,'השיחה הושלמה.');
@@ -60,10 +74,10 @@ Deno.serve(async(req:Request)=>{
    stage:JSON.parse(m.content).stage,question:JSON.parse(m.content).question,choices:JSON.parse(m.content).choices,
    reflection:JSON.parse(m.content).reflection,draft_questions:JSON.parse(m.content).draft_questions})}:m);
   const messages=[{role:'system',content:PROMPT+(s.turns>=14?' השלם סיכום חלקי אם לא אושרו כללים.':'')},
-   {role:'user',content:JSON.stringify({session_notes:prior.memory||'',business_answers:history.filter((m:any)=>m.role==='user').map((m:any)=>m.content),remaining_turns:16-s.turns})},
+   {role:'user',content:JSON.stringify({business_sources:s.state.sources||[],session_notes:prior.memory||'',business_answers:history.filter((m:any)=>m.role==='user').map((m:any)=>m.content),remaining_turns:16-s.turns})},
    ...(recent.length?recent:[{role:'assistant',content:JSON.stringify(FIRST)}]),{role:'user',content:answer}];
   const targetStage=nextGuideStage(prior,history,answer,body.approvalAction);
-  messages[0].content+=' השלב הבא שלך הוא '+targetStage+'. אל תחזור על נושא קודם. אם חסר מידע, סמן לחידוד והמשך. כאשר approval הצג שלוש שאלות לפונים וכללים לאישור. כאשר done הפק סיכום מלא והדגמה.';
+  messages[0].content+=' השלב הבא שלך הוא '+targetStage+'. אל תחזור על נושא קודם. אם חסר מידע, סמן לחידוד והמשך. כאשר done החזר אובייקט מיקוד בלבד עם goal,service,ideal_customer,customer_need,must_have,nice_to_have,insight,points_to_refine — ללא מעטפת result, ללא שאלון וללא שיווק.';
   const output=['approval','done'].includes(targetStage)?3600:1100;
   const review=['approval','done'].includes(targetStage);
   const prices=review?{prompt:.5,completion:3}:{prompt:.2,completion:1};
@@ -80,7 +94,7 @@ Deno.serve(async(req:Request)=>{
     body:JSON.stringify({model:review?'openai/gpt-4.1-mini':MODEL,messages,max_tokens:output,temperature:.4,
      response_format:review?{type:'json_schema',json_schema:{name:'guide_reply',strict:true,schema:schemaForStage(targetStage)}}:{type:'json_object'},plugins:[{id:'response-healing'}],
      usage:{include:true},provider:{sort:'price',require_parameters:true,data_collection:'deny',max_price:prices}}),
-    signal:AbortSignal.timeout(35000)});
+    signal:AbortSignal.timeout(45000)});
    const data=await response.json().catch(()=>null);
    if(!response.ok||data?.error)throw error(502,'החיבור ל־AI לא הצליח. אפשר לנסות שוב.');
    if(data.choices?.[0]?.finish_reason==='length')throw error(502,'התשובה נקטעה. אפשר לנסות שוב.');
@@ -96,11 +110,11 @@ Deno.serve(async(req:Request)=>{
    if(body.approvalAction==='revise_rules'||(['questions','approval'].includes(reply.stage)&&!explicit))approved=false;
    if(reply.complete)reply.result.rules_approved=reply.result.rules_approved&&approved;
    history.push({role:'user',content:answer},{role:'assistant',content:JSON.stringify(reply)});
-   const {error:saveError}=await db.from(TABLE).update({state:{messages:history,reply},approved,
+   const {error:saveError}=await db.from(TABLE).update({state:{...s.state,messages:history,reply},approved,
     actual_usd:Number(s.actual_usd)+actual}).eq('id',id);
    if(saveError)throw error(503,'התשובה לא נשמרה. אפשר לנסות שוב.');
    return send(200,{...view({...s,spent_usd:Number(s.spent_usd)+amount,turns:s.turns+1,
-    actual_usd:Number(s.actual_usd)+actual,state:{reply}})});
+    actual_usd:Number(s.actual_usd)+actual,state:{...s.state,reply}})});
   }finally{await db.from(TABLE).update({busy:false}).eq('id',id);}
  }catch(e:any){return send(e.status||500,{error:e.status?e.message:'אירעה תקלה. נסו שוב.'});}
 });
