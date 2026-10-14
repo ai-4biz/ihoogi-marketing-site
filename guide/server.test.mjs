@@ -145,7 +145,7 @@ test('uncertain answer gets at most one follow-up before progressing',()=>{
  const history=[{role:'assistant',content:JSON.stringify(prior)}];
  assert.equal(nextGuideStage(prior,history,'לא בטוח'), 'customer');
  history.push({role:'assistant',content:JSON.stringify(prior)});
- assert.equal(nextGuideStage(prior,history,'לא בטוח'), 'boundaries');
+ assert.equal(nextGuideStage(prior,history,'לא בטוח'), 'need');
 });
 test('business criteria lead to proposed questions, not a customer questionnaire',()=>{
  assert.equal(nextGuideStage({...mid,stage:'boundaries'},[],'הגעה לקדימה ושירות צבע'),'approval');
@@ -168,4 +168,18 @@ test('final questions and demo use exactly the approved rules',()=>{
 });
 test('approval cannot present an empty or invalid proposal',()=>{
  assert.throws(()=>parseGuideReply(JSON.stringify(mid),'approval'),/שאלות/);
+});
+
+test('customer description leads to understanding the need before criteria',()=>{
+ assert.equal(nextGuideStage({...mid,stage:'customer'},[],'בעלי עסקים בתחילת הדרך'),'need');
+ assert.equal(nextGuideStage({...mid,stage:'need'},[],'לא יודעים איך להגיע לקהל שלהם'),'boundaries');
+});
+test('other without details stays on the current question',()=>{
+ assert.equal(nextGuideStage(FIRST,[],'תחום אחר'),'intro');
+ assert.equal(nextGuideStage({...mid,stage:'customer'},[],'אחר'),'customer');
+});
+
+test('approval always presents the fixed review question',()=>{
+ const reply=parseGuideReply(JSON.stringify({...mid,question:'',draft_questions:result.screening_questions}),'approval');
+ assert.match(reply.question,/המיקוד/);assert.deepEqual(reply.draft_questions,result.screening_questions);
 });
