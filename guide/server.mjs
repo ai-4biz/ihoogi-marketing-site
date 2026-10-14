@@ -29,6 +29,7 @@ export const PROMPT = `אתה מדריך עסקי קצר בעברית לעסקי
 אל תשאל את המשתמש לנסח שאלון. הצע בעצמך 3 שאלות בחירה קצרות (עד 5 אם חיוני).
 לכל שאלה: למה חשובה, אפשרויות תשובה, מה חיוני/מועדף/ניטרלי ומה העדיפות היחסית.
 בקש אישור לשאלות ולכללי ההתאמה לפני השלמת השיחה. אם דרוש תיקון, עדכן ובקש אישור.
+בשלב approval הצג רק שתי אפשרויות: "מאשר/ת את השאלות וכללי ההתאמה" ו"רוצה לתקן".
 אין לייחס סיכויי מכירה או לתת ציון מספרי ללא מנגנון מאומת. התאמה אינה הבטחה לקנייה.
 ברר ערוצים בסוף עם אפשרויות: אינסטגרם, וואטסאפ, אתר, פייסבוק, המלצות, אחר.
 אל תזכיר iHoogi עד שהתוצר מוכן. אל תבקש פרטי קשר, סיסמאות, שמות לקוחות או מידע רפואי/משפטי אישי.
@@ -151,6 +152,10 @@ export function createGuide({db, env=process.env, fetcher=fetch, now=()=>Date.no
       if(!str(body.answer,1000)||!body.answer.trim()) throw fail(400,'כתבו תשובה קצרה, עד 1,000 תווים.');
       const history=JSON.parse(s.messages);
       const prior=s.reply?JSON.parse(s.reply):null;
+      if(body.approvalAction&&!['approve_rules','revise_rules'].includes(body.approvalAction)) throw fail(400,'פעולת האישור אינה תקינה.');
+      if(body.approvalAction&&prior?.stage!=='approval') throw fail(400,'אפשר לאשר כללים רק בשלב האישור.');
+      const submittedAnswer=body.approvalAction==='approve_rules'?'מאשר/ת את השאלות וכללי ההתאמה':
+        body.approvalAction==='revise_rules'?'רוצה לתקן את השאלות או כללי ההתאמה':body.answer.trim();
       const memory=prior?.memory||'';
       const recent=history.slice(-2).map(m=>{
         if(m.role!=='assistant')return m;
@@ -160,7 +165,7 @@ export function createGuide({db, env=process.env, fetcher=fetch, now=()=>Date.no
       const messages=[{role:'system',content:PROMPT},
         {role:'user',content:JSON.stringify({session_notes:memory,remaining_turns:maxTurns-s.turns})},
         ...(recent.length?recent:[{role:'assistant',content:JSON.stringify(FIRST)}]),
-        {role:'user',content:body.answer.trim()}];
+        {role:'user',content:submittedAnswer}];
       if(s.turns>=maxTurns-2) messages[0].content+=' השיחה מתקרבת לסיום. השלם אישור או הפק תוצאה חלקית בלי להמציא מידע.';
       const maxOutput=['approval','channels'].includes(prior?.stage)||s.turns>=maxTurns-2?2600:1100;
       const amount=reserveCost(messages,maxOutput);
@@ -205,12 +210,13 @@ export function createGuide({db, env=process.env, fetcher=fetch, now=()=>Date.no
         }
         // A model assertion is not proof of user approval. Track explicit approval
         // of rules in a dedicated approval stage, then retain it through channels.
-        const explicitlyApproved=prior?.stage==='approval'&&/^(מאשר|מאשרת|כן|השאלות מתאימות|הכללים מתאימים)/.test(body.answer.trim());
+        const explicitlyApproved=prior?.stage==='approval'&&body.approvalAction==='approve_rules';
         let approved=Boolean(s.approved||explicitlyApproved);
+        if(body.approvalAction==='revise_rules') approved=false;
         if(['questions','approval'].includes(reply.stage)&&!explicitlyApproved) approved=false;
         if(reply.complete) reply.result.rules_approved=reply.result.rules_approved&&approved;
         db.prepare('UPDATE sessions SET approved=? WHERE id=?').run(approved?1:0,id);
-        history.push({role:'user',content:body.answer.trim()},{role:'assistant',content:JSON.stringify(reply)});
+        history.push({role:'user',content:submittedAnswer},{role:'assistant',content:JSON.stringify(reply)});
         db.prepare('UPDATE sessions SET messages=?,reply=? WHERE id=?').run(JSON.stringify(history),JSON.stringify(reply),id);
         return clean(get(id));
       } finally {db.prepare('UPDATE sessions SET busy=0 WHERE id=?').run(id);}
@@ -275,6 +281,10 @@ export function createGuide({db, env=process.env, fetcher=fetch, now=()=>Date.no
     const url=new URL(req.url,origin);
     const cookie=(req.headers.cookie||'').split(';').map(x=>x.trim()).find(x=>x.startsWith('guide_session='))?.slice(14);
     try {
+      if(req.method==='GET'&&['/assets/img/hoogi_mascot.png','/assets/img/ihoogi_logo.png'].includes(url.pathname)) {
+        res.setHeader('Content-Type','image/png');res.setHeader('Cache-Control','public, max-age=3600');
+        res.end(readFileSync(join(root,'..',url.pathname.slice(1))));return;
+      }
       if(req.method==='GET'&&['/','/guide/','/app.js','/style.css'].includes(url.pathname)) {
         const file=url.pathname.endsWith('.js')?'app.js':url.pathname.endsWith('.css')?'style.css':'index.html';
         res.setHeader('Content-Type',file.endsWith('.js')?'text/javascript; charset=utf-8':file.endsWith('.css')?'text/css; charset=utf-8':'text/html; charset=utf-8');
