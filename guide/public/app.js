@@ -13,7 +13,7 @@ async function api(action,body={}) {
       question:'במה העסק שלכם עוסק?',choices:['מספרה','משרד עורכי דין','קליניקה','ייעוץ','תחום אחר'],reflection:'',complete:false,result:null}};
     const r=await fetch(window.GUIDE_REMOTE_ENDPOINT,{method:'POST',
       headers:{'Content-Type':'application/json',...(remoteSession&&action!=='start'?{'x-guide-session':remoteSession}:{})},
-      body:JSON.stringify({action,...body})});
+      body:JSON.stringify({action,...body}),signal:AbortSignal.timeout(45000)});
     const d=await r.json();if(!r.ok)throw new Error(d.error||'אירעה תקלה');
     if(d.session){remoteSession=d.session;try{sessionStorage.setItem('ihoogi-guide-session',remoteSession);}catch{}}
     return d;
@@ -43,10 +43,11 @@ function render() {
   for(const item of history){const d=document.createElement('details');d.append(text('summary',item.answer),text('p',item.question));$('history').append(d);}
   $('answer').value='';$('question').setAttribute('tabindex','-1');$('question').focus();
 }
-async function start(){
-  $('availability').textContent='';$('error').textContent='';
-  try{state=await api('start');history=[];render();if(!state.configured)$('error').textContent='התצוגה מוכנה, אך שיחת ה־AI עדיין אינה מחוברת. אין חיוב או שליחת מידע למודל.';}
-  catch(e){$('availability').textContent=e.message;}
+async function start(force=false){
+  $('availability').textContent='פותחים את ההדרכה…';$('error').textContent='';$('start').disabled=true;
+  try{state=await api(!force&&remoteSession?'state':'start');history=[];render();if(!state.configured)$('error').textContent='התצוגה מוכנה, אך שיחת ה־AI עדיין אינה מחוברת. אין חיוב או שליחת מידע למודל.';}
+  catch(e){$('availability').textContent=e.name==='TimeoutError'?'השרת לא ענה בזמן. לחצו שוב כדי לנסות.':e.message;}
+  finally{$('start').disabled=false;}
 }
 async function answer(value,approvalAction){
   if(waiting||!value.trim())return;busy(true);$('error').textContent='';
@@ -88,8 +89,8 @@ function renderResult(r){
   for(const q of r.screening_questions){$('preview-questions').append(text('p',q.question));
     for(const o of q.options)$('preview-questions').append(text('span',o.label,'preview-option'));}
 }
-$('start').onclick=start;$('restart').onclick=()=>{if(confirm('להתחיל שיחה חדשה? אפשר לשמור קודם את הסיכום הקיים.'))start();};
-$('edit').onclick=()=>{if(confirm('להתחיל שיחה חדשה לחידוד? שמרו קודם את המפה הקיימת.'))start();};
+$('start').onclick=()=>start();$('restart').onclick=()=>{if(confirm('להתחיל שיחה חדשה? אפשר לשמור קודם את הסיכום הקיים.'))start(true);};
+$('edit').onclick=()=>{if(confirm('להתחיל שיחה חדשה לחידוד? שמרו קודם את המפה הקיימת.'))start(true);};
 $('answer-form').onsubmit=e=>{e.preventDefault();answer($('answer').value);};
 $('help').onclick=()=>answer('קשה לי לנסח, עזרו לי עם דוגמאות שמתאימות לעסק שלי.');
 $('copy').onclick=async()=>{try{await navigator.clipboard.writeText(summaryText(state.reply.result));$('copy').textContent='הועתק';}catch{$('copy').textContent='אפשר לשמור בקובץ במקום';}};
