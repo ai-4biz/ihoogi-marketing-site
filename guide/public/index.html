@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08675f">
+<meta name="description" content="מדריך AI חינמי שעוזר לחדד את המטרה ואת הלקוחות שמתאימים לעסק שלכם.">
+<title>מי מתאים לעסק שלכם? | iHoogi</title>
+<link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+<header><a class="wordmark" href="https://ihoogi.com" dir="ltr">iHoogi<span>✦</span></a><span class="header-note">מתחילים במיקוד. ממשיכים בעשייה.</span><a class="login" href="https://ihoogi.com">למערכת</a></header>
+<main>
+<section id="landing" class="landing">
+<div class="hero-copy"><span class="eyebrow">מדריך אישי עם AI · ללא עלות</span>
+<h1>איזה לקוחות<br>אתם <em>באמת</em><br>רוצים למשוך?</h1>
+<p class="lead">אתם יודעים מה אתם מציעים.<br>בואו נדייק יחד למי זה מתאים — ומה חשוב לדעת לפני שמקדישים זמן לשיחה.</p>
+<button id="start" class="primary">בואו נעשה סדר <span aria-hidden="true">←</span></button>
+<p class="micro">בלי הרשמה להתחלה · בקצב שלכם · עם דוגמאות מהעסק שלכם</p>
+<p id="availability" class="notice" role="status"></p>
+</div>
+<aside class="hero-card"><span class="small-label">מה יוצא לכם מזה?</span><h2>מחשבה ברורה.<br>צעד הבא ברור.</h2>
+<ol><li><b>מטרה אחת</b><span>מה חשוב לכם להשיג בעסק עכשיו</span></li><li><b>לקוחות שמתאימים לכם</b><span>הצורך, המצב ומה חשוב לכם בעבודה יחד</span></li><li><b>שאלות שאפשר להשתמש בהן</b><span>מה כדאי לברר בפנייה, עוד לפני השיחה</span></li></ol>
+<div class="note">ה־AI שואל, מסביר ועוזר לנסח.<br>אתם בוחרים מה נכון לעסק שלכם.</div></aside>
+</section>
+<section id="conversation" class="hidden workspace" aria-labelledby="conversation-title">
+<div class="session-top"><div><span class="eyebrow">המיקוד שלכם, צעד אחר צעד</span><h1 id="conversation-title">בואו נכיר את העסק</h1></div><button id="restart" class="quiet">התחלה חדשה</button></div>
+<div class="progress" aria-label="התקדמות במדריך"><span id="progress-fill"></span></div>
+<div class="chat-layout"><div class="chat-main">
+<div id="history" class="history" aria-label="השיחה עד עכשיו"></div>
+<article id="question-card" class="question-card">
+<span id="stage-label" class="small-label"></span><p id="reflection" class="reflection"></p><p id="explanation"></p>
+<h2 id="question"></h2><div id="choices" class="choices"></div>
+<form id="answer-form"><label for="answer">אפשר גם לכתוב במילים שלכם</label><textarea id="answer" maxlength="1000" rows="3" placeholder="מספיק כמה מילים כדי להתחיל…"></textarea>
+<div class="form-actions"><button id="send" class="primary" type="submit">ממשיכים <span aria-hidden="true">←</span></button><button id="help" class="quiet" type="button">קשה לי לנסח, עזרו לי</button></div></form>
+</article><p id="error" class="notice error" role="alert"></p><p id="busy" class="hidden" role="status">חושבים על העסק שלכם…</p>
+</div><aside class="sidebar"><span class="small-label">למה מתחילים כאן?</span><h3>מיקוד עוזר לבחור.</h3><p>כשהמטרה ברורה, קל יותר להבין מה לשאול ואילו פניות מתאימות לה.</p><div class="note">אין תשובה מושלמת.<br>אפשר להתלבט, לבקש דוגמה ולתקן.</div><p class="micro">לא צריך לשתף שמות לקוחות או מידע אישי עליהם.</p></aside></div>
+</section>
+<section id="result" class="hidden result" aria-labelledby="result-title">
+<span class="eyebrow">מה שהגדרתם, במקום אחד</span><h1 id="result-title">מפת המיקוד שלכם</h1>
+<p class="lead">בסיס ברור שאפשר לשמור, לדייק ולהתחיל לעבוד איתו.</p>
+<div id="insight" class="insight"></div><div id="summary" class="summary-grid"></div>
+<div id="refine" class="note"></div>
+<div class="result-actions"><button id="download" class="quiet">שמירת הסיכום</button><button id="copy" class="quiet">העתקת הסיכום</button><button id="edit" class="quiet">חידוד נוסף בשיחה חדשה</button></div>
+<h2>מה כדאי לברר לפני השיחה?</h2><p>השאלות וההיגיון שמאחוריהן, לפי מה שהגדרתם.</p><div id="questions"></div>
+<section class="demo"><span class="eyebrow">הדגמה בלבד · פניות בדויות</span><h2>למי הייתם חוזרים קודם?</h2><p>שתי פניות, אותן שאלות. בחרו לפי מה שחשוב לעסק שלכם.</p><div id="demo-cards" class="demo-grid"></div><p id="demo-feedback" class="note hidden" role="status"></p></section>
+<section class="bridge"><span class="eyebrow">מהמיקוד לפניות שלכם</span><h2>עכשיו אפשר להשתמש בזה<br>בכל פנייה חדשה.</h2><p>הלינק החכם של iHoogi אוסף תשובות בשפה ובצבעים של העסק שלכם, ועוזר לדרג ולתעדף פניות לפי מה שחשוב לכם.</p><ul><li>שאלון עם השפה, הלוגו והצבעים שלכם</li><li>מידע מקדים שחוסך בירורים חוזרים</li><li>דירוג והתראות שעוזרים לבחור למי לחזור קודם</li></ul>
+<button id="open-transfer" class="primary">הפכו את המיקוד שלי לשאלון לעסק <span aria-hidden="true">←</span></button><p class="offer"><b>50 פניות מדורגות במתנה</b> · ללא התחייבות וללא אשראי</p><p class="micro">את הלינק מפיצים בערוצי השיווק שלכם. הוא אינו מביא פניות בעצמו.</p></section>
+<section id="transfer" class="hidden question-card"><h2>הפרטים שלכם והסגנון של העסק</h2><p>הסיכום והשאלות יעברו יחד, כדי שלא תצטרכו להתחיל מחדש.</p>
+<form id="transfer-form"><div class="fields"><label>שם<input name="name" required maxlength="100" autocomplete="name"></label><label>מייל<input name="email" type="email" maxlength="254" autocomplete="email"></label><label>טלפון<input name="phone" type="tel" maxlength="30" autocomplete="tel"></label><label>אתר או עמוד העסק (לא חובה)<input name="website" type="url" maxlength="1000" placeholder="https://" dir="ltr"></label><label>צבע העסק<input name="color" type="color" value="#08675f"></label><label>לוגו (לא חובה, עד 2MB)<input id="logo" type="file" accept="image/png,image/jpeg,image/webp"></label></div>
+<div id="preview" class="brand-preview"><img id="logo-preview" class="hidden" alt="הלוגו שצירפתם"><h3 id="preview-title">תצוגה מקדימה לשאלון שלכם</h3><div id="preview-questions"></div><button type="button" class="preview-button" disabled>שליחת הפנייה</button><small>הדמיית עיצוב בלבד; אפשר לערוך את השאלון במערכת לפני ההפצה.</small></div>
+<label class="check"><input type="checkbox" name="accepted" required> אני מאשר/ת להעביר ל־iHoogi את התשובות, פרטי הקשר והמיתוג שצירפתי לצורך הכנת השאלון.</label>
+<label class="check"><input type="checkbox" name="marketing"> אשמח לקבל גם טיפים ועדכונים שיווקיים (לא חובה).</label>
+<button id="transfer-submit" class="primary" type="submit">העברת המיקוד שלי ל־iHoogi</button><p id="transfer-status" class="notice" role="status"></p></form>
+</section></section>
+</main><footer><span dir="ltr">iHoogi</span> · יותר בהירות. פחות בירורים חוזרים.<a href="https://ihoogi.com">לאתר המערכת</a></footer>
+</body></html>
