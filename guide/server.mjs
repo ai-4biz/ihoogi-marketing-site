@@ -38,6 +38,12 @@ export const PROMPT = `אתה מדריך עסקי קצר בעברית לעסקי
 הכר את השירותים ואת הקושי. ברר את המטרה לפני בחירה סופית של שירות.
 כשיש כמה תחומים או "לא בטוח", עזור לבחור דרך ניסיון או מטרה כגון יציבות הכנסה, רווחיות, שליטה ביומן.
 אין להסיק רווחיות מהמקצוע או להמציא סתירה. שירות נקודתי עשוי ליצור לקוח חוזר.
+מטרת ההדרכה המרכזית: לעזור לבעל העסק לחדד מטרה עסקית וקהל יעד, להבין איזה צורך המוצר שלו פותר ולנסח מסר שיווקי מדויק. שאלות לפניות הן יישום מאוחר של המיקוד, לא מרכז ההדרכה. לפני שמציעים שאלות לפונים חייבים לברר צורך ומצב של הלקוחות. אין להוביל ישר לשאלון או לתיעדוף לפני שהמיקוד הזה ברור.
+בשלב goal ברר מה בעל העסק רוצה לשנות או להשיג, בלי להניח שהמטרה היא יותר פניות. הצע אפשרויות מותאמות לתשובתו.
+בשלב service חבר את השירות או המוצר למטרה שנבחרה, בלי להניח שזה עסק שירות בלבד.
+בשלב customer עזור לתאר לקוחות שיוכלו להפיק ערך מההצעה ושמתאימים למטרה. הימנע מהסתפקות בגיל, אזור או מקצוע.
+בשלב need ברר מצב ממשי או קושי שבגללו הלקוח מחפש פתרון. הסבר בקצרה איך הצורך הזה יכול לחדד את המסר. אין להתקדם לשאלות סינון בשלב זה.
+בחירה באחר אינה תשובה על העסק: בקש פירוט והמשך לפי הפירוט, בלי להמציא ענף או מטרה.
 שלבים: היכרות; מטרה עסקית; שירות אחד לקידום; דוגמה ללקוח מתאים ללא פרטי זיהוי;
 צורך ומצב הלקוח; פנייה פחות מתאימה וגבולות; מה חשוב לדעת לפני שיחה.
 תן הסבר אחד או שניים לפני כל שאלה. שקף מה התחדד בקצרה. בקש תיקון כשצריך.
@@ -53,7 +59,7 @@ export const PROMPT = `אתה מדריך עסקי קצר בעברית לעסקי
 אל תזכיר iHoogi עד שהתוצר מוכן. אל תבקש פרטי קשר, סיסמאות, שמות לקוחות או מידע רפואי/משפטי אישי.
 שיחה קצרה, עד 16 תשובות שלך. לקראת מגבלה הצע סיכום חלקי עם points_to_refine, אל תמציא החלטות.
 בפלט תן JSON בלבד לפי הצורה:
-{"stage":"intro|goal|service|customer|boundaries|questions|approval|channels|done",
+{"stage":"intro|goal|service|customer|need|boundaries|questions|approval|channels|done",
 "explanation":"משפט או שניים","question":"שאלה אחת או מחרוזת ריקה בסיום",
 "choices":["אפשרות"],"reflection":"שיקוף קצר","memory":"עד 900 תווים: עובדות, בחירות, נקודות פתוחות וכללים שכבר אושרו; ללא המצאות",
 "draft_questions":null,"complete":false,
@@ -74,7 +80,7 @@ rules_approved=true רק אחרי אישור מפורש. אם לא אושרו, �
 החזר עד 70 מילים בכל הודעת שיחה; התוצאה הסופית עד 500 מילים.
 `;
 
-const stages = ['intro','goal','service','customer','boundaries','questions','approval','channels','done'];
+const stages = ['intro','goal','service','customer','need','boundaries','questions','approval','channels','done'];
 const textSchema={type:'string'};
 const listSchema={type:'array',items:textSchema};
 const objectSchema=(properties)=>({type:'object',properties,required:Object.keys(properties),additionalProperties:false});
@@ -99,9 +105,10 @@ questionSchema.properties.weight={type:'integer',minimum:1,maximum:5};
 questionSchema.properties.options={type:'array',minItems:2,maxItems:6,items:optionSchema};
 export function nextGuideStage(prior,history,answer,approvalAction) {
   const count=history.filter(m=>m.role==='assistant'&&JSON.parse(m.content).stage===prior.stage).length;
-  const unsure=/לא בטוח|לא יודע|לא יודעת|עזרו לי|תעזור|קשה לי/.test(answer);
-  if(unsure&&['goal','service','customer','boundaries'].includes(prior.stage)&&count<2)return prior.stage;
-  return {intro:'goal',goal:'service',service:'customer',customer:'boundaries',boundaries:'approval',
+  if(/^(?:תחום\s+)?אחר(?:ת)?(?:\s*[—–:,-]\s*(?:במילים שלי)?)?$/.test(answer.trim()))return prior.stage;
+  const unsure=/^(?:אני\s+)?(?:לא בטוח(?:ה)?|לא יודע(?:ת)?)(?:$|[ ,.?!])|^(?:עזרו לי|תעזור|קשה לי)/.test(answer.trim());
+  if(unsure&&['goal','service','customer','need','boundaries'].includes(prior.stage)&&count<2)return prior.stage;
+  return {intro:'goal',goal:'service',service:'customer',customer:'need',need:'boundaries',boundaries:'approval',
     questions:'approval',approval:approvalAction==='approve_rules'?'channels':'approval',channels:'done'}[prior.stage]||'done';
 }
 export function schemaForStage(stage) {
@@ -118,6 +125,7 @@ export function parseGuideReply(raw,targetStage,previousMemory='',approvedQuesti
   // Normalize optional bookkeeping, never invent questions, facts or a final result.
   // The server owns navigation; model-provided stage labels are not authoritative.
   v.stage=targetStage;
+  if(targetStage==='approval')v.question='האם השאלות וכללי ההתאמה האלה משקפים את המיקוד שבנינו לעסק שלכם?';
   v.complete=targetStage==='done';
   if(v.result===undefined)v.result=null;
   if(v.draft_questions===undefined)v.draft_questions=null;
