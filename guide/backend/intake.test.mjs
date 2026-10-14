@@ -47,3 +47,10 @@ test('contact is saved after the summary and trial choice is explicit',async()=>
  await handle('contact',{...intake,interested:true},s.id);
  assert.equal(JSON.parse(db.prepare('SELECT intake FROM sessions WHERE id=?').get(s.id).intake).request.interested,true);
 });
+
+test('accepts pasted LinkedIn and social links without a scheme',()=>{
+ assert.equal(publicBusinessUrl(' linkedin.com/in/my-business '),'https://linkedin.com/in/my-business');
+ assert.equal(publicBusinessUrl('www.instagram.com/my-business'),'https://www.instagram.com/my-business');
+ assert.equal(publicBusinessUrl('https://www.facebook.com/profile.php?id=1234&token=secret'),'https://www.facebook.com/profile.php?id=1234');
+ assert.throws(()=>publicBusinessUrl('לינקדין'),/ציבורי/);
+});
