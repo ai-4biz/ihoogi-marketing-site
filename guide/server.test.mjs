@@ -123,22 +123,10 @@ test('model cannot fabricate user approval',async()=>{
  assert.equal(f.db.prepare('SELECT approved FROM sessions').get().approved,0);
  await assert.rejects(f.handle('transfer',{accepted:true},s.id),e=>e.status===400);
 });
-test('free-text assent does not substitute for the fixed approval action',async()=>{
- const f=fixture({...mid,draft_questions:result.screening_questions}),s=await f.handle('start',{},null);
- f.db.prepare('UPDATE sessions SET reply=? WHERE id=?').run(JSON.stringify({...mid,stage:'approval',draft_questions:result.screening_questions}),s.id);
- const response=await f.handle('answer',{answer:'נשמע טוב'},s.id);
- assert.equal(response.reply.result,null);assert.equal(f.db.prepare('SELECT approved FROM sessions').get().approved,0);
-});
 test('approval action outside the approval stage is blocked before provider call',async()=>{
  const f=fixture(),s=await f.handle('start',{},null);
  await assert.rejects(f.handle('answer',{answer:'מאשר',approvalAction:'approve_rules'},s.id),e=>e.status===400);
  assert.equal(f.calls(),0);
-});
-test('revision revokes an earlier approval',async()=>{
- const f=fixture({...mid,draft_questions:result.screening_questions}),s=await f.handle('start',{},null);
- f.db.prepare('UPDATE sessions SET reply=?,approved=1 WHERE id=?').run(JSON.stringify({...mid,stage:'approval',draft_questions:result.screening_questions}),s.id);
- const response=await f.handle('answer',{answer:'רוצה לתקן',approvalAction:'revise_rules'},s.id);
- assert.equal(response.reply.result,null);assert.equal(f.db.prepare('SELECT approved FROM sessions').get().approved,0);
 });
 test('uncertain answer gets at most one follow-up before progressing',()=>{
  const prior={...mid,stage:'customer'};
@@ -147,28 +135,7 @@ test('uncertain answer gets at most one follow-up before progressing',()=>{
  history.push({role:'assistant',content:JSON.stringify(prior)});
  assert.equal(nextGuideStage(prior,history,'לא בטוח'), 'need');
 });
-test('business criteria lead to proposed questions, not a customer questionnaire',()=>{
- assert.equal(nextGuideStage({...mid,stage:'boundaries'},[],'הגעה לקדימה ושירות צבע'),'approval');
- const s=schemaForStage('approval');
- assert.deepEqual(s.properties.stage.enum,['approval']);
- assert.equal(s.properties.draft_questions.minItems,3);
-});
-test('explicit approval proceeds to channels then summary',()=>{
- assert.equal(nextGuideStage({...mid,stage:'approval',draft_questions:result.screening_questions},[],'מאשר','approve_rules'),'channels');
- assert.equal(nextGuideStage({...mid,stage:'channels'},[],'וואטסאפ'),'done');
- assert.deepEqual(schemaForStage('done').properties.complete.enum,[true]);
-});
 
-test('final questions and demo use exactly the approved rules',()=>{
- const changed=structuredClone(done);changed.result.screening_questions[0].options[0].essential=true;
- const parsed=parseGuideReply(JSON.stringify(changed),'done','',result.screening_questions);
- assert.deepEqual(parsed.result.screening_questions,result.screening_questions);
- assert.equal(parsed.result.demo[0].answers[0].option_label,'שוטף');
- assert.equal(parsed.result.demo[1].answers[0].option_label,'נקודתי');
-});
-test('approval cannot present an empty or invalid proposal',()=>{
- assert.throws(()=>parseGuideReply(JSON.stringify(mid),'approval'),/שאלות/);
-});
 
 test('customer description leads to understanding the need before criteria',()=>{
  assert.equal(nextGuideStage({...mid,stage:'customer'},[],'בעלי עסקים בתחילת הדרך'),'need');
@@ -179,7 +146,11 @@ test('other without details stays on the current question',()=>{
  assert.equal(nextGuideStage({...mid,stage:'customer'},[],'אחר'),'customer');
 });
 
-test('approval always presents the fixed review question',()=>{
- const reply=parseGuideReply(JSON.stringify({...mid,question:'',draft_questions:result.screening_questions}),'approval');
- assert.match(reply.question,/המיקוד/);assert.deepEqual(reply.draft_questions,result.screening_questions);
+
+test('focus guide finishes after audience refinement without a questionnaire',()=>{
+ assert.equal(nextGuideStage({...mid,stage:'boundaries'},[],'הגעה לקדימה ושירות צבע'),'done');
+ const parsed=parseGuideReply(JSON.stringify(done),'done');
+ assert.deepEqual(parsed.result.screening_questions,[]);assert.deepEqual(parsed.result.demo,[]);
+ assert.equal(parsed.result.marketing_message,'');assert.equal(parsed.draft_questions,null);
+ assert.equal(parsed.result.goal,result.goal);
 });
