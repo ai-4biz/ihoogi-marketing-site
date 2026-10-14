@@ -154,3 +154,15 @@ test('focus guide finishes after audience refinement without a questionnaire',()
  assert.equal(parsed.result.marketing_message,'');assert.equal(parsed.draft_questions,null);
  assert.equal(parsed.result.goal,result.goal);
 });
+
+test('broad beauty category opens specialty before AI goal clarification',async()=>{
+ const f=fixture(mid),s=await f.handle('start',{},null);
+ const category=await f.handle('answer',{answer:'יופי ואסתטיקה'},s.id);
+ assert.equal(category.reply.stage,'specialty');assert.ok(category.reply.choices.includes('מספרה'));assert.equal(f.calls(),0);
+ const goal=await f.handle('answer',{answer:'מספרה'},s.id);assert.equal(goal.reply.stage,'goal');assert.equal(f.calls(),1);
+});
+
+test('goal choices never contain the old industry menu from the screenshot',()=>{
+ const r=parseGuideReply(JSON.stringify({...mid,choices:['מספרה','משרד עורכי דין','קליניקה','ייעוץ','תחום אחר','להגדיל הכנסות','לייצב הכנסות']}),'goal');
+ assert.deepEqual(r.choices,['להגדיל הכנסות','לייצב הכנסות']);
+});
